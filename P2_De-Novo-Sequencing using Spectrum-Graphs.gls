@@ -1,0 +1,23 @@
+\newglossaryentry{gls:DeNovo}
+{
+    name=
+    {
+        De-Novo-Peptidsequenzierung
+    },
+    description=
+    {
+        Eine Methode zur Peptidsequenzierung \dashAndSpace also zur Bestimmung der Aminosäuresequenz von Proteinen. Mit \gerquot{De-Novo} wird ausgedrückt, dass diese Methode nicht auf Datenbanken angewiesen ist, sondern direkt mit den Daten einer\gls{gls:TMassSpek} arbeitet.
+    }
+}
+
+\newglossaryentry{gls:TMassSpek}
+{
+    name=
+    {
+        Tandem-Massenspektrometrie
+    },
+    description=
+    {
+        Analyseverfahren zur Aufklärung von unbekannten biochemischen Strukturen.
+    }
+}
