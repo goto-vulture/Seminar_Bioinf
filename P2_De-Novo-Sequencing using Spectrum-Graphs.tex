@@ -1,0 +1,112 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc} % UTF-8 Kodierung verwenden
+\usepackage[backend=biber, sorting=none]{biblatex}
+\usepackage[total={6.5in, 9in}]{geometry}
+% \usepackage[onehalfspacing]{setspace} % 1.5 Spacing 
+\usepackage[singlespacing]{setspace} % 1 Spacing 
+\usepackage[T1]{fontenc}    % Fonts mit westeuropäischer Codierung verwenden
+\usepackage[ngerman]{babel} % Neue deutsche Sprache
+\usepackage{fancyhdr}       % Kopf- und Fusszeilen
+\usepackage{tikz}           % Fuer das Erstellen von einfachen Grafiken
+\usepackage{float}          % Fuer den Positionierungsbefehl '[H]'
+\usepackage{fancyhdr}       % Angepasste Header und Footer
+\usepackage{titling}        % Fuer Befehle wie \thetitle
+% \usepackage{showframe}     % Boxen mit Rand visualisieren (nur für das Schreiben des Dokuments brauchbar!)
+\usepackage{csquotes}
+\usepackage{translator}
+\usepackage[
+nonumberlist, %keine Seitenzahlen anzeigen
+%acronym,      %ein Abkürzungsverzeichnis erstellen
+toc,          %Einträge im Inhaltsverzeichnis
+section,      %im Inhaltsverzeichnis auf section-Ebene erscheinen
+nopostdot     %Den Punkt am Ende jeder Beschreibung deaktivieren
+]{glossaries}
+\makenoidxglossaries
+ 
+% \setlength{\abovecaptionskip}{1ex}
+% \setlength{\belowcaptionskip}{1ex}
+\setlength{\floatsep}{24pt}
+\setlength{\textfloatsep}{24pt}
+\setlength{\headheight}{15pt}
+
+\setcounter{tocdepth}{1}
+
+\title{De-Novo-Sequencing using Spectrum-Graphs, enabling Open Searches}
+\author{Dominik Habermann}
+\date{\today}
+
+% Kopf- und Fussnoten anpassen
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\thetitle}
+%\fancyhead[R]{\thetitle} 
+\fancyfoot[C]{\thepage}
+
+
+
+\addbibresource{P2_De-Novo-Sequencing using Spectrum-Graphs.bib}
+\input{P2_De-Novo-Sequencing using Spectrum-Graphs.gls}
+\input{P2_De-Novo-Sequencing using Spectrum-Graphs.acr}
+
+\newcommand{\gerquot}[1]{\glqq#1\grqq}
+\newcommand{\dashAndSpace}{\textendash \space}
+\newcommand{\DeNovo}{De-Novo-Peptidsequenzierung \space}
+
+\renewcommand{\floatpagefraction}{0.8}
+% Workaround um die Überschrift des Glossars anzupassen
+% Siehe: https://tex.stackexchange.com/questions/426390/how-can-i-rename-the-header-titles-of-the-glossary
+\addto\captionsngerman{%
+\renewcommand*{\glossaryname}{Begriffserklärungen}%
+}
+
+
+ 
+%%%%% %%%%% %%%%% %%%%% %%%%% \begin{document} %%%%% %%%%% %%%%% %%%%% %%%%%
+\begin{document}
+
+\maketitle
+
+\section{Einleitung}
+Im ersten Kapitel findet zu Beginn eine Erklärung der wichtigsten Begriffe und Abkürzungen statt. Dazu wird die Ausgangssituation geschildert sowie eine Themenabgrenzung durchgeführt.
+
+\printnoidxglossaries
+
+\subsection{Ausgangssituation}
+Mit Hilfe der\gls{gls:DeNovo} 
+\subsection{Themenabgrenzung}
+
+
+
+
+\section{De-Novo-Peptidsequenzierung und Spektrums-Graphen im Detail}
+\subsection{Datengewinnung}
+\subsection{Datenauswertung}
+ 
+
+\section{Ergebnisse/Evaluierung}
+\subsection{Probleme in der Praxis}
+\subsection{Lösungsansätze}
+
+
+\section{Zusammenfassung}
+\subsection{Ungelöste Probleme}
+\subsection{Kritische Betrachtung}
+
+
+\section{Section}
+\cite{OpenPNovo}
+\cite{pNovoPlus}
+
+\begingroup
+\setlength{\emergencystretch}{.5em}
+\printbibliography
+\endgroup
+
+\appendix
+\section{Appendix Section}
+Appendix
+
+
+
+\end{document}
+%%%%% %%%%% %%%%% %%%%% %%%%% \end{document} %%%%% %%%%% %%%%% %%%%% %%%%%
