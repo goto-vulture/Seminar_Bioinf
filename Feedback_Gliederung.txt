@@ -1,0 +1,47 @@
+Hallo Dominik,
+
+Die Seminararbeit sowie der Vortrag soll so aufbereitet werden, dass andere
+Studierende ebenfalls in das Thema einsteigen (oder zumindest verstehen)
+können. "Grundsätzliches zur Themenwahl" würde ich als Punkt aus diesem Grund
+entfernen.
+
+Bitte mit der Einleitung anfangen. Die "Begriffserklärungen" passen ebenfalls
+gut in die Einleitung (am Anfang), um Fachfremde in das Thema mit einzuleiten.
+Hier könnte man auch gut den Rahmen der Arbeit mit abspicken und die Punkte
+aus "Themenabgrenzung-->Welche Schwerpunkte werden behandelt?" könnten hier
+auch untergebracht werden. Ich würde die Punkte in eine Sektion (eventuell mit
+wenigen weiteren Untersektionen) unterbringen, um mehr Platz beim Schreiben zu
+haben, da die Überschriften der Sektion recht viel Platz in Anspruch nehmen
+könnten.
+
+Die Punkte in "Themenabgrenzung-->Welche Schwerpunkte werden nicht behandelt?"
+sollten eventuell aus Platzgründen auch entfernt werden, da diese nicht der
+Fokus der Arbeit sind.
+
+Die Sektion und auch die Punkte in "De-Novo-Peptidsequenzierung und Spektrums-
+Graphen im Detail-->Datenauswertung" passen gut als nächste Sektion. Hier
+vielleicht indirekt mit einem Fokus auf die gestellten Fragen zur Orientierung
+um in den Methoden etwas tiefer eingehen zu können. Der Punkt
+"Datenauswertung" würde ich ans Ende der Sektion hier anstellen, um eine
+Überleitung auf die Ergebnisse zu haben.
+
+Die Sektion Ergebnisse/Evaluierung fehlt hier. Hier passen die Punkte aus:
+"De-Novo-Peptidsequenzierung und Spektrums-Graphen im Detail-->Probleme in der
+Praxis|Lösungansätze". Auch kann man hier erwähnen, was und wie, die Autoren
+evaluieren und ob die Autoren ihrer Evaluierung trauen.
+
+Die Punkte "De-Novo-Peptidsequenzierung und Spektrums-Graphen im Detail--
+Ungelöste Probleme" würde ich in die Zusammenfassung nehmen. Die letzte
+Sektion sollte die Diskussion sein und hier darf auch (kritisch?) hinterfragt,
+verglichen und auch Methoden oder Unstimmigkeiten infrage gestellt werden.
+
+Bitte auch das Literaturverzeichnis am Ende nicht vergessen. Ich hoffe, die
+Kommentare helfen beim Schreiben der Ausarbeitung. Diese sind angelehnt an die
+"Seminar-Guidelines.pdf" aus Moodle in das Schema: Einleitung --> Material und
+Methoden --> Ergebnisse --> Diskussion.
+
+Ein Treffen heute wäre nicht kurzfristig möglich. Dafür bräuchte ich leider
+etwas mehr Vorlaufzeit.
+
+Viele Grüße
+Dominik Lux
