@@ -1,23 +1,59 @@
 \newglossaryentry{gls:DeNovo}
 {
-    name=
-    {
-        De-Novo-Peptidsequenzierung
-    },
+    name={De-Novo-Peptidsequenzierung},
+    plural={De-Novo-Peptidsequenzierungen},
     description=
     {
-        Eine Methode zur Peptidsequenzierung \dashAndSpace also zur Bestimmung der Aminosäuresequenz von Proteinen. Mit \gerquot{De-Novo} wird ausgedrückt, dass diese Methode nicht auf Datenbanken angewiesen ist, sondern direkt mit den Daten einer\gls{gls:TMassSpek} arbeitet.
+        Eine Methode zur Peptidsequenzierung \dashAndSpace also zur Bestimmung der Aminosäuresequenz von Proteinen. Mit \gerquot{De-Novo} wird ausgedrückt, dass diese Methode nicht auf Datenbanken angewiesen ist, sondern direkt mit den Daten einer \gls{gls:TMassSpek} arbeitet.
     }
 }
 
 \newglossaryentry{gls:TMassSpek}
 {
-    name=
-    {
-        Tandem-Massenspektrometrie
-    },
+    name={Tandem-Massenspektrometrie},
+    plural={Tandem-Massenspektrometrien},
     description=
     {
         Analyseverfahren zur Aufklärung von unbekannten biochemischen Strukturen.
+    }
+}
+
+\newglossaryentry{gls:Ionisation}
+{
+    name={Ionisation},
+    plural={Ionisationen},
+    description=
+    {
+        Prozess bei dem ein Atom oder ein Molekül eine positive bzw. negative Ladung annimmt.
+    }
+}
+
+\newglossaryentry{gls:MassSpek}
+{
+    name={Massenspektrum},
+    plural={Massenspektren},
+    description=
+    {
+        Graphische Darstellung der Masse/Ladungs-Verhältnisse von den in der Probe enthaltenen Ionen.
+    }
+}
+
+\newglossaryentry{gls:Peak}
+{
+    name={Peak},
+    plural={Peaks},
+    description=
+    {
+        Englischer Begriff, der mit \emph{Spitze} oder \emph{Höhepunkt} übersetzt werden kann. Er bezeichnet in \glspl{gls:MassSpek} ein relevantes lokales Maximum. Diese lokalen Maxima stellen u.a. die gesuchten Molekülionen dar.
+    }
+}
+
+\newglossaryentry{gls:SpecGraph}
+{
+    name={Spectrum-Graph},
+    plural={Spectrums-Graphen},
+    description=
+    {
+        Konvertierte \gls{gls:MassSpek}daten; dargestellt als gerichteter, azyklischer Graph.
     }
 }

@@ -1,1 +1,4 @@
 \newacronym{acr:MsMs}{MS/MS}{Tandem-Massenspektrometrie}
+\newacronym{acr:HCD}{HCD}{Higher-energy Collisional Dissociation}
+\newacronym{acr:ETD}{ETD}{Electron Transfer Dissociation}
+\newacronym{acr:OFF}{OFF}{Offset Frequency Function}
