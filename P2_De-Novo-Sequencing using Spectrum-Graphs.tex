@@ -50,7 +50,6 @@ nopostdot     %Den Punkt am Ende jeder Beschreibung deaktivieren
 
 \newcommand{\gerquot}[1]{\glqq#1\grqq}
 \newcommand{\dashAndSpace}{\textendash \space}
-\newcommand{\DeNovo}{De-Novo-Peptidsequenzierung \space}
 
 \renewcommand{\floatpagefraction}{0.8}
 % Workaround um die Überschrift des Glossars anzupassen
@@ -67,14 +66,22 @@ nopostdot     %Den Punkt am Ende jeder Beschreibung deaktivieren
 \maketitle
 
 \section{Einleitung}
-Im ersten Kapitel findet zu Beginn eine Erklärung der wichtigsten Begriffe und Abkürzungen statt. Dazu wird die Ausgangssituation geschildert sowie eine Themenabgrenzung durchgeführt.
+Im ersten Kapitel findet zu Beginn eine Erklärung der wichtigsten Begriffe und Abkürzungen statt. Dazu wird eine Themenabgrenzung durchgeführt sowie die Ausgangssituation beschrieben.
 
 \printnoidxglossaries
 
-\subsection{Ausgangssituation}
-Mit Hilfe der\gls{gls:DeNovo} 
 \subsection{Themenabgrenzung}
+Folgende Aspekte sind Bestandteil dieser Ausarbeitung:
+\begin{itemize}
+   \item Was ist die\gls{gls:DeNovo}?
+   \item Was erhofft man sich von dieser Technologie?
+   \item Welche Probleme liegen vor, die von der Seite der Informatik gelöst / verbessert werden können?
+   \item Inwiefern spielen die Spektrums-Graphen dabei eine Rolle?
+\end{itemize}
 
+\subsection{Ausgangssituation}
+Mit Hilfe der\gls{gls:DeNovo} ist grundsätzlich die Bestimmung von unbekannten Aminosäuresequenzen möglich. Das Verfahren arbeitet allerdings nicht in jeder Situation zuverlässig genug. Dadurch wird das Ermitteln von unbekannten Sequenzen erschwert. Auch bei bereits bekannten Sequenzen führt die nicht ausreichende Zuverlässigkeit dazu, dass bei Ergebnissen nicht sicher unterschieden werden kann, ob eine Änderung in der Aminosäuresequenz vorliegt oder ob fehlerhafte Daten bestimmt wurden.
+Das Ziel ist mit Unterstützung von Software eine effizente Möglichkeit bereitzustellen, um die Zuverlässigkeit der\gls{gls:DeNovo} zu erhöhen. 
 
 
 
