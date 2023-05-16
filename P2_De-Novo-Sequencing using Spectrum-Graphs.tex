@@ -8,6 +8,7 @@
 \usepackage[ngerman]{babel} % Neue deutsche Sprache
 \usepackage{fancyhdr}       % Kopf- und Fusszeilen
 \usepackage{tikz}           % Fuer das Erstellen von einfachen Grafiken
+\usepackage{tkz-berge}
 \usepackage{float}          % Fuer den Positionierungsbefehl '[H]'
 \usepackage{fancyhdr}       % Angepasste Header und Footer
 \usepackage{titling}        % Fuer Befehle wie \thetitle
@@ -52,6 +53,9 @@ nopostdot     %Den Punkt am Ende jeder Beschreibung deaktivieren
 
 \newcommand{\gerquot}[1]{\glqq#1\grqq}
 \newcommand{\dashAndSpace}{\textendash \space}
+\newcommand{\tikzScale}{1.15}
+\newcommand{\xAxisUnit}{$m/z$}
+\newcommand{\yAxisUnit}{$y$}
 
 \renewcommand{\floatpagefraction}{0.8}
 % Workaround um die Überschrift des Glossars anzupassen
@@ -110,9 +114,9 @@ Der Algorithmus für die Datenaufbereitung berechnet den natürlichen Logarithmu
    \centering
    \begin{minipage}[t]{.4\linewidth}
       \centering
-      \begin{tikzpicture}[scale=1.35, baseline=(current bounding box.center)]
-         \draw [<->,thick] (0,2.75) node (yaxis) [above] {$y$} 
-         |- (3,0) node (xaxis) [right] {$x$};
+      \begin{tikzpicture}[scale=\tikzScale, baseline=(current bounding box.center)]
+         \draw [<->,thick] (0,2.75) node (yaxis) [above] {\yAxisUnit} 
+         |- (3,0) node (xaxis) [right] {\xAxisUnit};
          
          \draw[thick] (0.2,0) -- (0.2,1.1);
          \draw[thick] (0.3,0) -- (0.3,1.6);
@@ -143,9 +147,9 @@ Der Algorithmus für die Datenaufbereitung berechnet den natürlichen Logarithmu
    \textbf{$\rightarrow$}
    \begin{minipage}[t]{.4\linewidth}
       \centering
-      \begin{tikzpicture}[scale=1.35, baseline=(current bounding box.center)]
-         \draw [<->,thick] (0,2.75) node (yaxis) [above] {$y$} 
-         |- (3,0) node (xaxis) [right] {$x$};
+      \begin{tikzpicture}[scale=\tikzScale, baseline=(current bounding box.center)]
+         \draw [<->,thick] (0,2.75) node (yaxis) [above] {\yAxisUnit} 
+         |- (3,0) node (xaxis) [right] {\xAxisUnit};
          
          \draw[thick] (0.2,0) -- (0.2,{ln(1.1)});
          \draw[thick] (0.3,0) -- (0.3,{ln(1.6)});
@@ -180,9 +184,9 @@ Der Algorithmus für die Datenaufbereitung berechnet den natürlichen Logarithmu
    \centering
    \begin{minipage}[t]{.4\linewidth}
       \centering
-      \begin{tikzpicture}[scale=1.35, baseline=(current bounding box.center)]
-         \draw [<->,thick] (0,2.75) node (yaxis) [above] {$y$} 
-         |- (3,0) node (xaxis) [right] {$x$};
+      \begin{tikzpicture}[scale=\tikzScale, baseline=(current bounding box.center)]
+         \draw [<->,thick] (0,2.75) node (yaxis) [above] {\yAxisUnit} 
+         |- (3,0) node (xaxis) [right] {\xAxisUnit};
          
          \draw[thick] (0.2,0) -- (0.2,{ln(1.1)});
          \draw[thick] (0.3,0) -- (0.3,{ln(1.6)});
@@ -219,9 +223,9 @@ Der Algorithmus für die Datenaufbereitung berechnet den natürlichen Logarithmu
    \textbf{$\rightarrow$}
    \begin{minipage}[t]{.4\linewidth}
       \centering
-      \begin{tikzpicture}[scale=1.35, baseline=(current bounding box.center)]
-         \draw [<->,thick] (0,2.75) node (yaxis) [above] {$y$} 
-         |- (3,0) node (xaxis) [right] {$x$};
+      \begin{tikzpicture}[scale=\tikzScale, baseline=(current bounding box.center)]
+         \draw [<->,thick] (0,2.75) node (yaxis) [above] {\yAxisUnit} 
+         |- (3,0) node (xaxis) [right] {\xAxisUnit};
          
          \draw[thick] (0.6,0) -- (0.6,{ln(1.7)});
          \draw[thick] (0.8,0) -- (0.8,{ln(1.2)});
@@ -253,9 +257,97 @@ Der Algorithmus für die Datenaufbereitung berechnet den natürlichen Logarithmu
    \caption*{Schematische Darstellung: Entfernen von irrelevanten \glspl{gls:Peak} sowie zusammenfassen naheliegender \glspl{gls:Peak}}
 \end{figure}
 
+% `\glsentrytext` funktioniert nicht für `\glspl`
+\subsection{Konvertierung von \glspl{gls:MassSpek}}
+Das Ziel der Konvertierung ist das Erzeugen eines \gls{gls:SpecGraph}en. Um von einem \gls{gls:MassSpek} zu einem \gls{gls:SpecGraph}en zu kommen, werden die \glspl{gls:Peak}, die nach der Datenaufbereitung (Siehe ...) übrig bleiben, als Knoten gewertet. Dazu kommt ein Start- und Endknoten. Jeder Knoten bekommt eine Gewichtung; diese Gewichtung entspricht der Stärke des \gls{gls:Peak}s.
+Gerichtete Kanten zwischen den Knoten werden ausgebildet, wenn diese eine Differenz von genau einer oder zwei Aminosäurereste\footnote{Da eine Aminosäure vielerlei an Reste besitzen kann, ergibt sich aus dieser Differenz ein effektives Intervall von 1 bis etwa 300u.} besitzen.
+
+\newcommand{\colorA}{white!30!green}
+\newcommand{\colorB}{black!10!yellow}
+\newcommand{\colorC}{white!40!red}
+\newcommand{\colorD}{white!25!orange}
+\newcommand{\colorE}{white!45!blue}
+\newcommand{\colorF}{white!5!magenta}
+
+\begin{figure}[htb]
+   \centering
+      \begin{tikzpicture}[scale=\tikzScale*1.75, baseline=(current bounding box.center)]
+         \draw [<->,thick] (0,2.75) node (yaxis) [above] {\yAxisUnit} 
+         |- (3,0) node (xaxis) [below] {\xAxisUnit};
+         
+         \draw[thick] (0.6,0) -- (0.6,{ln(1.7)}) node [right, rotate=90, color=\colorA] {\textbf{A}};
+         \draw[thick] (0.8,0) -- (0.8,{ln(1.2)});
+         \draw[thick] (1.0,0) -- (1.0,{ln(1.1)});
+         
+         \draw[thick] (1.2,0) -- (1.2,{ln(2.65)}) node [right, rotate=90,
+         color=\colorC] {\textbf{C}};
+         \draw[thick] (1.4,0) -- (1.4,{ln(1.4)});
+         \draw[thick] (1.6,0) -- (1.6,{ln(1.2)});
+         \draw[thick] (1.8,0) -- (1.8,{ln(1.3)});
+         \draw[thick] (2.0,0) -- (2.0,{ln(1.8)}) node [right, rotate=90, color=\colorE] {\textbf{E}};
+         
+         \draw[thick] (1.1,0) -- (1.1,{ln(2.0)}) node [right, rotate=90, color=\colorB] {\textbf{B}};
+         \draw[thick] (1.9,0) -- (1.9,{ln(1.4)});
+         \draw[thick] (2.2,0) -- (2.2,{ln(2.6)}) node [right, rotate=90, color=\colorF] {\textbf{F}};
+         \draw[thick] (2.5,0) -- (2.5,{ln(1.25)});
+         
+         \draw[thick] (1.2+1*0.05,0) -- (1.2+1*0.05,{ln(1.0+1*0.15)});
+         \draw[thick] (1.2+3*0.05,0) -- (1.2+3*0.05,{ln(1.0+3*0.15)});
+         \draw[thick] (1.2+5*0.05,0) -- (1.2+5*0.05,{ln(1.0+5*0.15)}) node [right, rotate=90, color=\colorD] {\textbf{D}};
+      \end{tikzpicture}
+      \caption*{Schematische Darstellung: Ausgewählte \glspl{gls:Peak}}
+\end{figure}
+
+% https://tex.stackexchange.com/questions/245448/adjusting-edge-and-vertex-label
+
+\begin{figure}[htb]
+   \centering
+   \begin{tikzpicture}[scale=0.75,transform shape]
+      \tikzstyle{VertexStyle}=[shape=circle,fill=white,draw=black,line width=1pt]
+      \Vertex[x=0,y=0]{Start}
+      \Vertex[x=10,y=0]{End}
+      
+      \tikzstyle{VertexStyle}=[shape=circle,fill=\colorA,draw=black,line width=0.75pt]
+      \Vertex[x=3,y=2]{A}
+      \tikzstyle{VertexStyle}=[shape=circle,fill=\colorB,draw=black,line width=0.75pt]
+      \Vertex[x=3,y=-2]{B}
+      \tikzstyle{VertexStyle}=[shape=circle,fill=\colorC,draw=black,line width=0.75pt]
+      \Vertex[x=5,y=2]{C}
+      \tikzstyle{VertexStyle}=[shape=circle,fill=\colorD,draw=black,line width=0.75pt]
+      \Vertex[x=5,y=-2]{D}
+      \tikzstyle{VertexStyle}=[shape=circle,fill=\colorE,draw=black,line width=0.75pt]
+      \Vertex[x=7,y=2]{E}
+      \tikzstyle{VertexStyle}=[shape=circle,fill=\colorF,draw=black,line width=0.75pt]
+      \Vertex[x=7,y=-2]{F}
+   
+%       \Vertex[x=0,y=0]{K}
+%       \Vertex[x=0,y=2]{F}
+%       \Vertex[x=-1,y=4]{D}
+%       \Vertex[x=3,y=7]{H}
+%       \Vertex[x=8,y=5]{B}
+%       \Vertex[x=9,y=2]{N}
+%       \Vertex[x=5,y=0]{M}
+%       \tikzstyle{VertexStyle}=[shape=circle,fill=\colorD,draw=black,line width=0.75pt]
+%       \Vertex[x=3,y=1]{S}
+%       %\tikzstyle{LabelStyle}=[fill=white,sloped,bottom]
+%       \tikzstyle{EdgeStyle}=[above,sloped,midway]
+%       \Edge[label=$120$](K)(F)
+%       \Edge[label=$650$](H)(S)
+%       \Edge[label=$780$](H)(M)
+%       \Edge[label=$490$](D)(B)
+%       \Edge[label=$600$](D)(M)
+%       \Edge[label=$580$](B)(M)
+%       \Edge[label=$600$](H)(N)
+%       \Edge[label=$490$](F)(H)
+%       \tikzstyle{EdgeStyle}=[bend right]
+%       \Edge[label=$630$](S)(B)
+%       \Edge[label=$210$](S)(N)
+%       \Edge[label=$230$](S)(M)
+   \end{tikzpicture}
+   \caption*{Schematische Darstellung: Erzeugter DAG}
+\end{figure}
 
 \subsection{Datenauswertung}
-Das Ziel der Datenauswertung ist das Erzeugen eines \gls{gls:SpecGraph}en. Um von einem \glspl{gls:MassSpek} zu einem \gls{gls:SpecGraph}en werden die \glspl{gls:Peak}, die nach der Datenaufbereitung übrig bleiben, als Knoten gewertet und die Knoten, die eine Massendifferenz von einer oder zwei Aminosäurereste besitzen, werden mittels einer gerichteten und gewichteten Kante verbunden.
 
 
 \section{Ergebnisse/Evaluierung}
