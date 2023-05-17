@@ -50,10 +50,30 @@
 
 \newglossaryentry{gls:SpecGraph}
 {
-    name={Spectrum-Graph},
-    plural={Spectrums-Graphen},
+    name={Spektrum-Graph},
+    plural={Spektrums-Graphen},
     description=
     {
-        Konvertierte \gls{gls:MassSpek}daten; dargestellt als gerichteter, azyklischer Graph.
+        Aufbereitete \gls{gls:MassSpek}daten; dargestellt als gerichteter, azyklischer Graph.
+    }
+}
+
+\newglossaryentry{gls:StereoIsomer}
+{
+    name={Stereoisomer},
+    plural={Stereoisomere},
+    description=
+    {
+        Bezeichnung für Chemikalien, die die gleiche Struktur besitzen, aber sich durch die räumliche Positionierung der Atome unterscheiden. Die physikalischen Eigenschaften verschiedener \glspl{gls:StereoIsomer} eines gleichen Stoffes können sich teilweise massiv unterscheiden.
+    }
+}
+
+\newglossaryentry{gls:StereoIsomerie}
+{
+    name={Stereoisomerie},
+    plural={Stereoisomerien},
+    description=
+    {
+        Oberbegriff für den Mechanismus, der bei \glspl{gls:StereoIsomer}n zu Grunde liegt.
     }
 }
