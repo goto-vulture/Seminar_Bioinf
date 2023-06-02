@@ -111,7 +111,7 @@ Bei größeren Molekülen (wie einem Protein) führt die \gls{gls:Ionisation} da
 Um dieses Problem zu verringern können unterschiedliche Techniken parallel eingesetzt werden, welche verschiedene Fragmente erzeugen und daher auch verschiedenartige \glspl{gls:MassSpek} zur Folge haben.\footnote{Konkret: Es wird sowohl das \gls{acr:HCD} als auch das \gls{acr:ETD} Verfahren angewendet.}
 
 \subsection{Datenaufbereitung}
-Typischerweise betrachet man die sog. \gerquot{\glspl{gls:Peak}} in den \glspl{gls:MassSpek}. Jeder \gls{gls:Peak} stellt ein unterschiedliches Ion dar. Dazu kommen Messungenauigkeiten sowie Hintergrundrauschen. Durch die hohe Anzahl an möglichen Ionen kann nicht ohne weiteres differenziert werden, welcher der \glspl{gls:Peak} von welchen Ionen erzeugt wurden und welche nicht.
+Typischerweise betrachtet man die sog. \gerquot{\glspl{gls:Peak}} in den \glspl{gls:MassSpek}. Jeder \gls{gls:Peak} stellt ein unterschiedliches Ion dar. Dazu kommen Messungenauigkeiten sowie Hintergrundrauschen. Durch die hohe Anzahl an möglichen Ionen kann nicht ohne weiteres differenziert werden, welcher der \glspl{gls:Peak} von welchen Ionen erzeugt wurden und welche nicht.
 
 % Frage an Dominik: Ist hier eine einfache Auflistung an Techniken für die Datenaufbereitung besser?
 Der Algorithmus für die Datenaufbereitung berechnet den natürlichen Logarithmus von den Intensitäten der \glspl{gls:Peak}, um Hintergrundrauschen und Messungenauigkeiten nicht überzupriorisieren. Zusätzlich dazu werden \glspl{gls:Peak}, die in einem Toleranzbereich nebeneinander liegen, zusammengefasst. Am Ende werden die \glspl{gls:Peak} entfernt, bei denen bekannt ist, dass es sich nicht um relevante Ionen handeln kann. (z.B. \glspl{gls:Peak} von Isotopen)
@@ -423,9 +423,9 @@ Bereits an diesem Minimalbeispiel ist zu erkennen, dass die gebildeten Knoten in
 
 
 \subsection{Datenauswertung}\label{Datenauswertung}
-Um nun aus dem Graphen die Peptidsequenz zu gewinnen müssen alle längesten Pfade im DAG gefunden werden. Da die Kanten gewichtet sind, kann es durchaus mehrere längste Pfade geben. Gleichwohl es Algorithmen für das Problem des längsten Pfades in einem Graphen gibt, handelt es sich hierbei um ein $NP$-schweres Problem. Es existiert also (wahrscheinlich) kein effizienter Algorithmus. Erschwerend kommt hinzu, dass der Graph nicht zwingend ein zusammenhängender Graph sein muss \dashAndSpace auch wenn dies meist der Fall ist. Der Graph muss daher vor Berechnungsbeginn auf diese Eigenschaft hin überprüft werden.
+Um nun aus dem Graphen die Peptidsequenz zu gewinnen müssen alle längsten Pfade im DAG gefunden werden. Da die Kanten gewichtet sind, kann es durchaus mehrere längste Pfade geben. Gleichwohl es Algorithmen für das Problem des längsten Pfades in einem Graphen gibt, handelt es sich hierbei um ein $NP$-schweres Problem. Es existiert also (wahrscheinlich) kein effizienter Algorithmus. Erschwerend kommt hinzu, dass der Graph nicht zwingend ein zusammenhängender Graph sein muss \dashAndSpace auch wenn dies meist der Fall ist. Der Graph muss daher vor Berechnungsbeginn auf diese Eigenschaft hin überprüft werden.
 
-Im Falle der \glspl{gls:SpecGraph} existiert die Eigenschaft, dass solche Graphen meist eine geringe Dichte an Kanten aufweisen. Dies hat den positiven Effekt, dass die Anzahl an überhaupt möglichen längsten Pfaden recht gering ist. Zusätzlich dazu kann die Warteschlange, die in den longest Path DAG Algorithmen verwendet werden, angepasst werden. Da die Gewichtung der Kanten als eine Art \gerquot{Wahrscheinlichkeit}, dass die nächste Kante die reale Peptidsequenz darstellt, interpretiert werden kann, kann eine priorisierte Warteschlange verwendet werden, die die Laufzeit ebenfalls verbessert. In Summe führen diese Eigenschaften der \glspl{gls:SpecGraph} dazu, dass das längeste Pfade Problem in solchen Fällen auf die Laufzeit $\mathcal{O}(abs(E) + log(d))$ reduziert werden kann.\\
+Im Falle der \glspl{gls:SpecGraph} existiert die Eigenschaft, dass solche Graphen meist eine geringe Dichte an Kanten aufweisen. Dies hat den positiven Effekt, dass die Anzahl an überhaupt möglichen längsten Pfaden recht gering ist. Zusätzlich dazu kann die Warteschlange, die in den longest Path DAG Algorithmen verwendet werden, angepasst werden. Da die Gewichtung der Kanten als eine Art \gerquot{Wahrscheinlichkeit}, dass die nächste Kante die reale Peptidsequenz darstellt, interpretiert werden kann, kann eine priorisierte Warteschlange verwendet werden, die die Laufzeit ebenfalls verbessert. In Summe führen diese Eigenschaften der \glspl{gls:SpecGraph} dazu, dass das längste Pfade Problem in solchen Fällen auf die Laufzeit $\mathcal{O}(abs(E) + log(d))$ reduziert werden kann.\\
 
 Zusammengefasst: Es wird versucht die speziellen Eigenschaften der Graphen auszunutzen, um die Laufzeit zu verbessern.
 
@@ -435,18 +435,18 @@ Im folgenden Kapitel werden die Probleme, die in der Praxis bei der Verwendung d
 
 \subsection{Probleme in der Praxis}
 \subsubsection{Qualität der Messwerte}
-Obwohl eine Datenaufbereitung stattfindet, ist das Verfahren bei der Verwendng von \glspl{gls:SpecGraph} stark auf die Genauigkeit der Messwerte angewiesen. Zwar sind durch technische Fortschritte bei der \gls{gls:TMassSpek} die Daten hochwertiger geworden; dennoch gestaltet sich das Sequenzieren von unbekannten Peptidsequenzen als schwierig. Mit heutigen Gerätschaften lassen sich bei der Verwendung des genannten Verfahrens bis zu 13 Peptide mit einer durchschnittlichen Genauigkeit von 94\% ermitteln. Danach nimmt diese sprunghaft ab. Für brauchbare Ergebnisse wird \dashAndSpace je nach Literatur \dashAndSpace eine Trefferquote von 90-95\% vorausgesetzt.
+Obwohl eine Datenaufbereitung stattfindet, ist das Verfahren bei der Verwendung von \glspl{gls:SpecGraph} stark auf die Genauigkeit der Messwerte angewiesen. Zwar sind durch technische Fortschritte bei der \gls{gls:TMassSpek} die Daten hochwertiger geworden; dennoch gestaltet sich das Sequenzieren von unbekannten Peptidsequenzen als schwierig. Mit heutigen Gerätschaften lassen sich bei der Verwendung des genannten Verfahrens bis zu 13 Peptide mit einer durchschnittlichen Genauigkeit von 94\% ermitteln. Danach nimmt diese sprunghaft ab. Für brauchbare Ergebnisse wird \dashAndSpace je nach Literatur \dashAndSpace eine Trefferquote von 90-95\% vorausgesetzt.
 \subsubsection{Fehlende Betrachtung der \glsentrytext{gls:StereoIsomerie}}\label{FehlendeStereoInfos}
 Das komplette Verfahren basiert auf das Masse-Ladungs-Verhältnis, sodass Stereoinformationen schlicht nicht ermittelt werden können. Es kann zwar mithilfe einer energetischen Betrachtung bestimmt werden welche \glspl{gls:StereoIsomer} in welchen Verhältnis auftreten (müssten). Dabei handelt es sich allerdings lediglich um eine grobe Abschätzung.
 \subsubsection{Identifikation der Aminosäuren über Massendifferenz}
-Die Grundidee bei der Identifikation von Aminosäuren ist die Betrachung der Massendifferenzen zwischen zwei \glspl{gls:Peak}. Zwar liefert dieser Ansatz häufig passende Ergebnisse. Dennoch ist solch eine Differenz nicht in der Lage jede Aminosäure immer eindeutig zu identifizieren, da bestimmte Kombinationen (fast) gleiche Differenzen besitzen. Der Algorithmus, der die Gewichtungen bestimmt, arbeitet nur mit ganzzahligen Werten. Dadurch gehen leichte Unterschiede, die durch die Isotope (insb. die des Kohlenstoffes) begründet sind, meist durch die Float Integer Konvertierung verloren.
+Die Grundidee bei der Identifikation von Aminosäuren ist die Betrachtung der Massendifferenzen zwischen zwei \glspl{gls:Peak}. Zwar liefert dieser Ansatz häufig passende Ergebnisse. Dennoch ist solch eine Differenz nicht in der Lage jede Aminosäure immer eindeutig zu identifizieren, da bestimmte Kombinationen (fast) gleiche Differenzen besitzen. Der Algorithmus, der die Gewichtungen bestimmt, arbeitet nur mit ganzzahligen Werten. Dadurch gehen leichte Unterschiede, die durch die Isotope (insb. die des Kohlenstoffes) begründet sind, meist durch die Float Integer Konvertierung verloren.
 
 \subsection{Lösungsansätze}
 \subsubsection{Verbesserung der Ergebnisse durch Machine Learning}
-Bei der Sequenzierung werden ab einer gewissen Länge unweigerlich Fehler eintreten.\cite[S.621,Figure 5]{pNovoPlus} Dadurch, dass nicht jede Peptidsequenz gleich wahrscheinlich ist\footnote{Dies ist u.a. dadurch begründet, dass die Reste der Aminosäuren sich gegenseitig beeinflussen (können), sodass bestimmte Sequenzen energetisch ungübstig sind und lediglich vermindert auftreten.}, können mittels Machine Learning grundsätzlich die Ergebnisse verbessert werden. insbesondere dann, wenn die ermittelte Differenz keinen eindeutigen Rückschluss auf die Aminosäure zulässt.
+Bei der Sequenzierung werden ab einer gewissen Länge unweigerlich Fehler eintreten.\cite[S.621,Figure 5]{pNovoPlus} Dadurch, dass nicht jede Peptidsequenz gleich wahrscheinlich ist\footnote{Dies ist u.a. dadurch begründet, dass die Reste der Aminosäuren sich gegenseitig beeinflussen (können), sodass bestimmte Sequenzen energetisch ungünstig sind und lediglich vermindert auftreten.}, können mittels Machine Learning grundsätzlich die Ergebnisse verbessert werden. insbesondere dann, wenn die ermittelte Differenz keinen eindeutigen Rückschluss auf die Aminosäure zulässt.
 
 \section{Zusammenfassung}
-Im letzten Kapitel werden die ungelösten Probleme gennant und erklärt warum diese eine Relevanz für die Praxis haben. Am Ende findet eine kritische Betrachtung des Verfahrens im allgemeinen statt.
+Im letzten Kapitel werden die ungelösten Probleme genannt und erklärt warum diese eine Relevanz für die Praxis haben. Am Ende findet eine kritische Betrachtung des Verfahrens im allgemeinen statt.
 
 \subsection{Ungelöste Probleme}
 Wie bereits in \ref{FehlendeStereoInfos} erwähnt, kann das Verfahren designbedingt keine Stereoinformationen ermitteln. Daher ist es in diesem Fall besonders wichtig abzuschätzen, ob das Fehlen dieser Informationen tatsächlich eine Relevanz hat. Wenn nur die Peptidsequenz betrachtet werden soll, dann stellt dies kein Problem dar. Aber sobald jedweige Abschätzungen anhand der ermittelten Sequenz stattfinden soll, dann kann das Fehlen jener Informationen zu massiven Fehlern führen.\\
@@ -455,12 +455,12 @@ Wenn für die Verbesserung der Ergebnisse Machine Learning in Betracht kommt, da
 
 \subsection{Kritische Betrachtung}
 Die \gls{gls:DeNovo} mit der Unterstützung von \glspl{gls:SpecGraph} stellt eine Möglichkeit dar Polypeptide mit bis zu einer Länge von etwa 12 Peptiden ausreichend zuverlässig zu bestimmen. Die Autoren des Papers \cite{OpenPNovo} haben die Software frei zur Verfügung gestellt, sodass sie in jedem Fall ein Blick wert ist.
-Gegenüber anderen Ansätzen ist das Verfahren zwar konkurrenzfähig, allerdings nicht immer die beste Wahl \cite[650]{OpenPNovo}. Die Grundidee mittels der Massendifferenz auf die Aminosäuren zu schließen wird nie fehlerfrei sein, sodass dieses Verfahren weniger die bereits vorhandenen Systeme ersetzten kann, sondern eher ein weiteres Werkzeug für die \gls{gls:DeNovo} darstellt. 
+Gegenüber anderen Ansätzen ist das Verfahren zwar konkurrenzfähig, allerdings nicht immer die beste Wahl \cite[650]{OpenPNovo}. Die Grundidee mittels der Massendifferenz auf die Aminosäuren zu schließen wird nie fehlerfrei sein, sodass dieses Verfahren weniger die bereits vorhandenen Systeme ersetzten kann, sondern eher ein weiteres Werkzeug für die \gls{gls:DeNovo} darstellt.
 
 \begingroup
 \setlength{\emergencystretch}{.5em}
 \printbibliography
 \endgroup
- 
+
 \end{document}
 %%%%% %%%%% %%%%% %%%%% %%%%% \end{document} %%%%% %%%%% %%%%% %%%%% %%%%%
