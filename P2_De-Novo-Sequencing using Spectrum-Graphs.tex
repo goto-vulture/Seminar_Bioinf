@@ -59,9 +59,13 @@ nopostdot     %Den Punkt am Ende jeder Beschreibung deaktivieren
 \newcommand{\gerquot}[1]{\glqq#1\grqq}
 \newcommand{\dashAndSpace}{\textendash \space}
 \newcommand{\dashAndSpaceSeq}[1]{\dashAndSpace#1 \dashAndSpace}
-\newcommand{\tikzScale}{1.15}
-\newcommand{\xAxisUnit}{$m/z$}
+\newcommand{\tikzScale}{1.0}
+\newcommand{\massCharge}{$ m/z $ }
+\newcommand{\xAxisUnit}{\massCharge}
 \newcommand{\yAxisUnit}{$y$}
+\newcommand{\yAxisHeight}{3}
+\newcommand{\xAxisLength}{5}
+\newcommand{\axisColorOffset}{0.15}
 
 \renewcommand{\floatpagefraction}{0.8}
 % Workaround um die Überschrift des Glossars anzupassen
@@ -70,7 +74,7 @@ nopostdot     %Den Punkt am Ende jeder Beschreibung deaktivieren
 {%
     \renewcommand*{\glossaryname}{Begriffserklärungen}%
 }
-
+  
 
 
 %%%%% %%%%% %%%%% %%%%% %%%%% \begin{document} %%%%% %%%%% %%%%% %%%%% %%%%%
@@ -78,30 +82,434 @@ nopostdot     %Den Punkt am Ende jeder Beschreibung deaktivieren
 
 \maketitle
 
-\section{Einleitung}
-Im ersten Kapitel findet zu Beginn eine Erklärung der wichtigsten Begriffe und Abkürzungen statt. Dazu wird eine Themenabgrenzung durchgeführt sowie die Ausgangssituation beschrieben.
+\section{Einleitung}\label{s:Einleitung}
+\subsection{Biomedizinische Fragestellung}
+Peptide sind organische Verbindungen von miteinander verknüpften Aminosäuren. Bei der Sequenzierung von Peptiden versucht man die Aminosäuresequenz \dashAndSpaceSeq{also die Abfolge an vorhandenen Aminosäuren} zu bestimmen. Das Wissen über die Aminosäuresequenz ist von großer Bedeutung für den Forschungsbereich der Proteomik. Die Proteomik beschäftigt sich mit der Erforschung von Proteinen. Dies beinhaltet unter anderem auch die Analyse von Enzymen.
 
-\printnoidxglossaries
+Da es 20 verschiedene Aminosäuren gibt \cite{rudat2021alanins}, die weitesgehend beliebig miteinander kombiniert werden können, existiert eine stark wachsende Anzahl an möglichen Variationen (oder Kombinationen(!)). Die Regeln der Kombinatik liefert uns hierfür die Formel $ f(x)=20^x $ wobei $ x $ hier die Anzahl an Aminosäuren ist. Es ist direkt erkennbar, dass selbst bei einer geringen Peptidlänge die Anzahl an möglichen Sequenzen eine Größenordnung erreicht, die von Computersystemen nicht mehr verarbeitet werden kann. Zum Vergleich: Proteine können aus wenigen Hundert bis hin zu aus mehreren Zehntausend Aminosäuren bestehen. Die Frage, die sich hier stellt: \emph{Ist es zumindest für kurze Peptide mögich diese sicher zu sequenzieren?}
 
-\subsection{Themenabgrenzung}
-Folgende Aspekte sind Bestandteil dieser Ausarbeitung:
+\subsection{Methoden der Aminosäuresequenzierung}
+Das Ziel der verschiedenen Sequenzierungsverfahren ist eine möglichst exakte Bestimmung der Aminosäuresequenz. Alle Sequenzierungsverfahren arbeiten mit der Massenspektrometrie (MS). Dabei handelt es sich um ein Verfahren, welches chemische Verbindungen identifizieren kann (eine genauere Erklärung folgt in Kapitel \ref{s:MS}). Viele Analysen arbeiten mit dem Ansatz, dass die Ergebnisse einer MS \dashAndSpaceSeq{genannt wird es Massenspektrum} mit einer Datenbank verglichen werden. Wenn die chemische Verbindung bereits einmal indentifiziert wurde, dann wird sich ein Eintrag in der Datenbank finden lassen.
+
+Die hier vorgestellten Methoden \emph{pNovo+} und \emph{Open-pNovo} gehören zur Gruppe der \gls{gls:DeNovo}en. Im Gegensatz zu anderen Verfahren werden hierbei keinerlei Daten aus Datenbanken verwendet. Stattdessen findet eine Tandem-Massenspektrometrie Anwendung. Bei dieser Form der MS werden zwei MS Durchgänge hintereinander durchgeführt, wobei nach dem ersten Vorgang ein Teil der Probe isoliert wird und vor der 2. MS \gerquot{fragmentiert} wird (hierzu eine Beschreibung in Kapitel \ref{ss:Tandem_MS} mit mehr Details). Die \gls{gls:DeNovo} hat den bedeutsamen Vorteil, dass auch Peptide sequenziert werden können zu denen es keine oder nur unvollständige Informationen gibt.
+
+% Im ersten Kapitel findet zu Beginn eine Erklärung der wichtigsten Begriffe und Abkürzungen statt. Dazu wird eine Themenabgrenzung durchgeführt sowie die Ausgangssituation beschrieben.
+
+% \printnoidxglossaries
+
+%\subsection{Themenabgrenzung}
+%Folgende Aspekte sind Bestandteil dieser Ausarbeitung:
+%\begin{itemize}
+%   \item Was ist die \gls{gls:DeNovo}?
+%   \item Was erhofft man sich von dieser Technologie?
+%   \item Welche Probleme liegen vor, die von der Seite der Informatik %gelöst / verbessert werden können?
+%   \item Inwiefern spielen die Spektrums-Graphen dabei eine Rolle?
+%\end{itemize}
+
+
+% In diesem Abschnitt werden die relevanten Herangehensweisen sowohl für die Datengewinnung als auch für deren Auswertung erklärt.
+
+\section{Massenspektrometrie (MS)}\label{s:MS}
+Wie bereits in Kapitel \ref{s:Einleitung} erwähnt, wird die MS verwendet, um chemische Strukturen zu identifizieren. Moderne Ansätze der MS wurden zu Beginn des 20. Jahrhunderts entwickelt \cite{griffiths2008brief}. Seitdem gab es etliche Erweiterungen; das Grundprinzip ist dennoch immer gleich geblieben. Grob vereinfacht besteht eine MS aus folgenden vier Schritten:
+
 \begin{itemize}
-   \item Was ist die \gls{gls:DeNovo}?
-   \item Was erhofft man sich von dieser Technologie?
-   \item Welche Probleme liegen vor, die von der Seite der Informatik gelöst / verbessert werden können?
-   \item Inwiefern spielen die Spektrums-Graphen dabei eine Rolle?
+   \item \textbf{Ionisation}: Die Moleküle in der Probe bekommen eine positive oder negativ Ladung
+   \item \textbf{Überführung in Gasphase}: Durch Energie wird die Probe in die Gasphase überführt
+   \item \textbf{Anlegen eines elektrischen Feldes}: Die Ionen werden durch das elektrische Feld beschleunigt
+   \item \textbf{Massenanalyse}: Ionen werden anhand des Masse-Ladungs-Verhältnisses \gerquot{sortiert}
 \end{itemize}
 
-\subsection{Ausgangssituation}
-Mit Hilfe der \gls{gls:DeNovo} ist grundsätzlich die Bestimmung von unbekannten Aminosäuresequenzen möglich. Das Verfahren arbeitet allerdings nicht in jeder Situation zuverlässig genug. Dadurch wird das Ermitteln von unbekannten Sequenzen erschwert. Auch bei bereits bekannten Sequenzen führt die nicht ausreichende Zuverlässigkeit dazu, dass bei Ergebnissen nicht sicher unterschieden werden kann, ob eine Änderung in der Aminosäuresequenz vorliegt oder ob fehlerhafte Daten bestimmt wurden.
-Das Ziel ist mit Unterstützung von Software eine Möglichkeit bereitzustellen, um die Zuverlässigkeit der \gls{gls:DeNovo} zu erhöhen. Gleichzeitig soll die Implementierung ein effizienteres Werkzeug darstellen als die bereits verfügbaren Ansätze.
+Für die Schritte gibt es verschiedene Verfahren, wobei die Unterschiede hier nicht relevant sind. Jedes dieser Verfahren nutzt die physikalische Eigenschaft aus, dass Ionen in einem Magnetfeld in Abhänigkeit ihres Verhältnisses zwischen ihrer Masse und ihrer Ladung (häufig abgekürzt mit \massCharge) unterschiedlich reagieren. So wird bei der MS nicht die Masse gemessen \dashAndSpaceSeq{auch wenn der Name es vermuten lässt} sondern die Ionenhäufigkeit bei einem bestimmten \massCharge Verhältnis. Diese Häufigkeit wird dann in einem Massenspektrum graphisch dargestellt \cite{Glish2003}. Abbildung \ref{fig:Sim_Mass_Spec} zeigt ein computergeneriertes Massenspektrum von zwei ähnlichen Aminosäuren.
+
+% Grafik generiert von der Website: https://www.protpi.ch/Calculator/MassSpecSimulator
+\begin{figure}[H]
+   \label{fig:Sim_Mass_Spec}
+   \includegraphics[width=0.75\textwidth]{./Resources/Simulated_Mass_Spectrum.png}
+   \centering
+   \caption{Computergeneriertes Massenspektrum von der Aminosäure \emph{Serin} (1) und \emph{Cystesin} (2). Peak von \emph{Serin} liegt bei 105; bei \emph{Systesin} um 121. y: relative Häufigkeit}
+\end{figure}
+
+Die Maxima werden \gerquot{Peaks} genannt und sind für eine Aminosäure an charakteristischer Position auf der $ x $-Achse. Obwohl sich die beiden Aminosäuren in der Abbildung \ref{fig:Sim_Mass_Spec} nur durch ein Atom unterscheiden (das linke Sauerstoffatom wurde durch ein Schwefelatom ersetzt) sind deren Massenspektren auf der $ x $-Achse weit voneinander entfernt und machen die beiden Aminosäuren dadurch sicher unterscheidbar.\\
+
+Bei einzelnen Aminosäuren funktioniert die MS zuverlässig; bei Peptiden allerdings steht man vor dem Problem, dass das Massenspektrum unübersichtlicher wird und auch Peaks, die von Hintergrundrauschen stammen, schwerer herausgefiltert werden können. Abhilfe schafft hier die Tandem-Massenspektrometrie.
+
+\subsection{Tandem-Massenspektrometrie (MS/MS)}\label{ss:Tandem_MS}
+Bei der Tandem-Massenspektrometrie (MS/MS oder MS2) werden zwei MS Vorgänge hintereinander mit einer Probe durchgeführt. Die erste MS dient dazu Ionen aus einem bestimmten \massCharge Bereich auswählbar zu machen. Es entspricht also quasi einer Form der Filterung.
+
+Vor der 2. MS werden die ausgewählten Reste einer Fragmentierung unterzogen. Bei einer Fragmentierung führt man Energie zu mit dem Ziel, dass die Ionen zerfallen und sog. Fragment-Ionen bilden. Diese Fragment-Ionen werden dann auf dem Massenspektrum nach der 2. MS sichtbar gemacht.
+
+Fragment-Ionen sind kleiner als die ursprünglichen Ionen. So kann die 2. MS mit einer höheren Selektivität durchgeführt werden, welches Peaks durch Hintergrundrauschen verringert. Auch lassen sich Ionen besser identifizieren, die ein sehr ähnliches \massCharge-Verhältnis besitzen. Nach der 2. MS liegt eine Fülle an Fragment-Ionen-Peaks vor, aus denen sich die ursprünglichen Strukturinformationen ableiten lassen, da Ionen in spezifische Fragmente zerfallen \cite{Gross2013}. Zusammengefasst kann man sagen, dass das MS/MS Verfahren Ergebnisse höherer Güte erzeugt im Vergleich zur einfachen MS.
+
+\section{De-Novo-Peptidsequenzierung mit \emph{pNovo+}}\label{s:pNovoPlusSeq}
+Die \emph{pNovo+} Methode ist eine \gls{gls:DeNovo}, die mit einem \gls{gls:SpecGraph}en für die Auswertung der MS2-Spektren arbeitet und eine Erweiterung des \emph{pNovo} Verfahren darstellt \cite{pNovo}. Der Hauptansatz ist, dass zwei MS/MS Durchläufe mit jeweils verschiedenen Fragmentierungsmethoden\footnote{\emph{pNovo+} verwendet die higher energy
+collisional dissociation (HCD) und die electron transfer dissociation (ETD) Fragmentierungsmethoden.} durchgeführt werden. Durch die Wahl einer anderen Fragmentierungsmethode ändert sich auch das MS2-Spektrum. Wenn nun Fragmentierungsmethoden verwendet werden, die möglichst komplementäre Spektren erzeugen, dann lässt sich durch das Zusammenführen der beiden MS2-Spektren die Qualität der Ergebnisse verbessern. Zum Beispiel lassen sich dadurch viele Peaks, die vom Hintergrundrauschen stammen, entfernen.
+
+Für die Ermittlung der Sequenz eines Peptides wird zunächst ein Spektrums-Graph gebildet \dashAndSpace in Form eines DAG (directed acyclic graph). In diesem Graphen wird dann der längste Pfad bei gegebenen Start- und Endknoten berechnet. Die Reihenfolge der Knoten, die im längsten Pfad durchlaufen werden, stellt dann die Peptidsequenz dar.
+
+\subsection{Vorverarbeitung der MS2-Spektren}\label{ss:Vorverarbeitung}
+Bevor aus den MS2-Spektren der Spektrums-Graph gebildet werden kann, müssen die Daten vorverarbeitet werden. Für die Auswertung ist es von entscheidener Bedeutung, dass möglichst wenig Peaks verwendet werden, die vom Hintergrundrauschen stammen. Im weiteren Verlauf werden an einem exemplarischen MS2-Spektrum die Verarbeitungsschritte dargestellt.\\
+
+Der erste Schritt ist das Verwenden des natürlichen Logarithmus der Intensitäten. Die Idee dabei ist, dass Hintergrundrauschen nicht überpriorisiert wird.
+
+\begin{figure}[H]
+   \centering
+   \begin{minipage}[t]{.45\linewidth}
+      \centering
+      \begin{tikzpicture}[scale=\tikzScale, baseline=(current bounding box.center)]
+         \draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit}
+         |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
+\draw[thick] (0.2, 0.0) -- (0.2, 2.3);
+\draw[thick] (0.382, 0.0) -- (0.382, 1.7);
+\draw[thick] (0.476, 0.0) -- (0.476, 2.7);
+\draw[thick] (0.456, 0.0) -- (0.456, 1.8);
+\draw[thick] (0.6859999999999999, 0.0) -- (0.6859999999999999, 2.7);
+\draw[thick] (0.6839999999999999, 0.0) -- (0.6839999999999999, 1.8);
+\draw[thick] (0.752, 0.0) -- (0.752, 1.1);
+\draw[thick] (0.8200000000000001, 0.0) -- (0.8200000000000001, 2.2);
+\draw[thick] (1.076, 0.0) -- (1.076, 1.5);
+\draw[thick] (1.16, 0.0) -- (1.16, 1.9);
+\draw[thick] (1.2120000000000002, 0.0) -- (1.2120000000000002, 2.0);
+\draw[thick] (1.28, 0.0) -- (1.28, 1.9);
+\draw[thick] (1.452, 0.0) -- (1.452, 1.3);
+\draw[thick] (1.426, 0.0) -- (1.426, 1.9);
+\draw[thick] (1.548, 0.0) -- (1.548, 1.9);
+\draw[thick] (1.6740000000000002, 0.0) -- (1.6740000000000002, 1.5);
+\draw[thick] (1.788, 0.0) -- (1.788, 2.5);
+\draw[thick] (1.856, 0.0) -- (1.856, 2.3);
+\draw[thick] (2.036, 0.0) -- (2.036, 1.7);
+\draw[thick] (2.142, 0.0) -- (2.142, 1.6);
+\draw[thick] (2.2520000000000002, 0.0) -- (2.2520000000000002, 2.0);
+\draw[thick] (2.386, 0.0) -- (2.386, 1.6);
+\draw[thick] (2.488, 0.0) -- (2.488, 2.9);
+\draw[thick] (2.4739999999999998, 0.0) -- (2.4739999999999998, 2.7);
+\draw[thick] (2.504, 0.0) -- (2.504, 2.0);
+\draw[thick] (2.682, 0.0) -- (2.682, 2.0);
+\draw[thick] (2.702, 0.0) -- (2.702, 2.5);
+\draw[thick] (2.9259999999999997, 0.0) -- (2.9259999999999997, 2.8);
+\draw[thick] (3.024, 0.0) -- (3.024, 2.4);
+\draw[thick] (3.096, 0.0) -- (3.096, 1.8);
+\draw[thick] (3.244, 0.0) -- (3.244, 2.6);
+\draw[thick] (3.362, 0.0) -- (3.362, 1.9);
+\draw[thick] (3.46, 0.0) -- (3.46, 2.3);
+\draw[thick] (3.516, 0.0) -- (3.516, 1.1);
+\draw[thick] (3.584, 0.0) -- (3.584, 1.8);
+\draw[thick] (3.652, 0.0) -- (3.652, 2.0);
+\draw[thick] (3.838, 0.0) -- (3.838, 1.5);
+\draw[thick] (3.8819999999999997, 0.0) -- (3.8819999999999997, 2.6);
+\draw[thick] (4.088, 0.0) -- (4.088, 2.6);
+\draw[thick] (4.046, 0.0) -- (4.046, 1.1);
+\draw[thick] (4.167999999999999, 0.0) -- (4.167999999999999, 2.0);
+\draw[thick] (4.266, 0.0) -- (4.266, 2.4);
+\draw[thick] (4.38, 0.0) -- (4.38, 1.1);
+\draw[thick] (4.456, 0.0) -- (4.456, 2.2);
+\draw[thick] (4.644, 0.0) -- (4.644, 2.6);
+\draw[thick] (4.675999999999999, 0.0) -- (4.675999999999999, 2.5);
+\draw[thick] (4.898000000000001, 0.0) -- (4.898000000000001, 1.2);
+   \end{tikzpicture}%
+   \end{minipage}%
+   \textbf{$\rightarrow$} 
+   \begin{minipage}[t]{.45\linewidth}
+      \centering
+      \begin{tikzpicture}[scale=\tikzScale, baseline=(current bounding box.center)]
+      \draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit}
+      |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
+\draw[thick] (0.2, 0.0) -- (0.2, {ln(2.3)});
+\draw[thick] (0.382, 0.0) -- (0.382, {ln(1.7)});
+\draw[thick] (0.476, 0.0) -- (0.476, {ln(2.7)});
+\draw[thick] (0.456, 0.0) -- (0.456, {ln(1.8)});
+\draw[thick] (0.6859999999999999, 0.0) -- (0.6859999999999999, {ln(2.7)});
+\draw[thick] (0.6839999999999999, 0.0) -- (0.6839999999999999, {ln(1.8)});
+\draw[thick] (0.752, 0.0) -- (0.752, {ln(1.1)});
+\draw[thick] (0.8200000000000001, 0.0) -- (0.8200000000000001, {ln(2.2)});
+\draw[thick] (1.076, 0.0) -- (1.076, {ln(1.5)});
+\draw[thick] (1.16, 0.0) -- (1.16, {ln(1.9)});
+\draw[thick] (1.2120000000000002, 0.0) -- (1.2120000000000002, {ln(2.0)});
+\draw[thick] (1.28, 0.0) -- (1.28, {ln(1.9)});
+\draw[thick] (1.452, 0.0) -- (1.452, {ln(1.3)});
+\draw[thick] (1.426, 0.0) -- (1.426, {ln(1.9)});
+\draw[thick] (1.548, 0.0) -- (1.548, {ln(1.9)});
+\draw[thick] (1.6740000000000002, 0.0) -- (1.6740000000000002, {ln(1.5)});
+\draw[thick] (1.788, 0.0) -- (1.788, {ln(2.5)});
+\draw[thick] (1.856, 0.0) -- (1.856, {ln(2.3)});
+\draw[thick] (2.036, 0.0) -- (2.036, {ln(1.7)});
+\draw[thick] (2.142, 0.0) -- (2.142, {ln(1.6)});
+\draw[thick] (2.2520000000000002, 0.0) -- (2.2520000000000002, {ln(2.0)});
+\draw[thick] (2.386, 0.0) -- (2.386, {ln(1.6)});
+\draw[thick] (2.488, 0.0) -- (2.488, {ln(2.9)});
+\draw[thick] (2.4739999999999998, 0.0) -- (2.4739999999999998, {ln(2.7)});
+\draw[thick] (2.504, 0.0) -- (2.504, {ln(2.0)});
+\draw[thick] (2.682, 0.0) -- (2.682, {ln(2.0)});
+\draw[thick] (2.702, 0.0) -- (2.702, {ln(2.5)});
+\draw[thick] (2.9259999999999997, 0.0) -- (2.9259999999999997, {ln(2.8)});
+\draw[thick] (3.024, 0.0) -- (3.024, {ln(2.4)});
+\draw[thick] (3.096, 0.0) -- (3.096, {ln(1.8)});
+\draw[thick] (3.244, 0.0) -- (3.244, {ln(2.6)});
+\draw[thick] (3.362, 0.0) -- (3.362, {ln(1.9)});
+\draw[thick] (3.46, 0.0) -- (3.46, {ln(2.3)});
+\draw[thick] (3.516, 0.0) -- (3.516, {ln(1.1)});
+\draw[thick] (3.584, 0.0) -- (3.584, {ln(1.8)});
+\draw[thick] (3.652, 0.0) -- (3.652, {ln(2.0)});
+\draw[thick] (3.838, 0.0) -- (3.838, {ln(1.5)});
+\draw[thick] (3.8819999999999997, 0.0) -- (3.8819999999999997, {ln(2.6)});
+\draw[thick] (4.088, 0.0) -- (4.088, {ln(2.6)});
+\draw[thick] (4.046, 0.0) -- (4.046, {ln(1.1)});
+\draw[thick] (4.167999999999999, 0.0) -- (4.167999999999999, {ln(2.0)});
+\draw[thick] (4.266, 0.0) -- (4.266, {ln(2.4)});
+\draw[thick] (4.38, 0.0) -- (4.38, {ln(1.1)});
+\draw[thick] (4.456, 0.0) -- (4.456, {ln(2.2)});
+\draw[thick] (4.644, 0.0) -- (4.644, {ln(2.6)});
+\draw[thick] (4.675999999999999, 0.0) -- (4.675999999999999, {ln(2.5)});
+\draw[thick] (4.898000000000001, 0.0) -- (4.898000000000001, {ln(1.2)});
+      \end{tikzpicture}
+      \end{minipage}
+      \caption{Anwendung des $ ln $ auf einem exemplarischen MS2-Spektrum.}
+\end{figure}
+
+Für das Verständnis des nächsten Schrittes muss man sich in Erinnerung rufen, dass eine gleiche Aminosäure keineswegs immer die gleiche Masse hat. Durch Isotope existiert eine gewisse \gerquot{Massenbandbreite} für ein und dieselbe Aminosäure. MS Systeme sind heute so genau, dass sie diese Differenzen erkennen. Dies hat den ungewollten Effekt, dass mehrere Peaks zu einer Aminosäure gehören können \cite{IsotopicDistributionMS}. Gleichzeitig können die \gerquot{Massenbandbreiten} zweier Aminosäuren sich überschneiden, sodass im ungünstigen Fall zwei Peaks kaum unterscheidbar nebeneinander liegen.\\
+
+Eine Möglichkeit mit dieser Problematik umzugehen ist die Verwendung der monoisotopischen Masse. Die monoisotopische Masse ist die \gerquot{[...] exact mass of the most abundant naturally occurring stable isotope determined relative to the mass of 12 C, which is assigned the exact value of 12.0000.} \cite{MonoisotopicMass}. Ohne dabei jetzt tiefer ins Detail zu gehen kann man sagen, dass alle Peaks, deren Intensität mit einer möglichen monoisotopischen Masse übereinstimmen, auf jeden Fall einer Aminosäure entsprechen und (höchstwahrscheinlich)\footnote{Natürlich ist es möglich, dass das Rauschen zufällig einer monoisotopischen Masse entspricht. Die Wahrscheinlichkeit dafür ist allerdings sehr gering.} kein Hintergrundrauschen sind \cite{MassDefectMS}. Diese Peaks bekommen eine sogennante \emph{charge state}.\\
+
+Der Algorithmus verwendet die \emph{charge state} Peaks als Ausganspunkte für weitere Berechnungen. Wenn die \massCharge Differenz zu einem anderen Peak einem Peptidfragment entspricht, dann stammt dieser Peak höchstwahrscheinlich von einem Fragment. Insgesamt werden damit die relevanten Peptidfragmente herausgeholt. Abbildung \ref{MonoisotopicMassFiltering} zeigt das Ergebnis nach den beiden zuvor genannten Schritten.
+
+\begin{figure}[H]\label{MonoisotopicMassFiltering}
+   \centering
+   \begin{minipage}[t]{.45\linewidth}
+      \centering
+      \begin{tikzpicture}[scale=\tikzScale, baseline=(current bounding box.center)]
+         \draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit}
+         |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
+\draw[thick] (0.2, 0.0) -- (0.2, {ln(2.3)});
+\draw[color=blue!85!,opacity=.55,thick] (0.382, 0.0) -- (0.382, {ln(1.7)});
+\draw[color=blue!85!,opacity=.55,thick] (0.476, 0.0) -- (0.476, {ln(2.7)});
+\draw[color=magenta,thick] (0.456, 0.0) -- (0.456, {ln(1.8)});
+\draw[color=blue!85!,opacity=.55,thick] (0.6859999999999999, 0.0) -- (0.6859999999999999, {ln(2.7)});
+\draw[color=blue!85!,opacity=.55,thick] (0.6839999999999999, 0.0) -- (0.6839999999999999, {ln(1.8)});
+\draw[thick] (0.752, 0.0) -- (0.752, {ln(1.1)});
+\draw[thick] (0.8200000000000001, 0.0) -- (0.8200000000000001, {ln(2.2)});
+\draw[thick] (1.076, 0.0) -- (1.076, {ln(1.5)});
+\draw[thick] (1.16, 0.0) -- (1.16, {ln(1.9)});
+\draw[thick] (1.2120000000000002, 0.0) -- (1.2120000000000002, {ln(2.0)});
+\draw[thick] (1.28, 0.0) -- (1.28, {ln(1.9)});
+\draw[color=blue!85!,opacity=.55,thick] (1.452, 0.0) -- (1.452, {ln(1.3)});
+\draw[color=blue!85!,opacity=.55,thick] (1.426, 0.0) -- (1.426, {ln(1.9)});
+\draw[color=magenta,thick] (1.548, 0.0) -- (1.548, {ln(1.9)});
+\draw[color=blue!85!,opacity=.55,thick] (1.6740000000000002, 0.0) -- (1.6740000000000002, {ln(1.5)});
+\draw[color=blue!85!,opacity=.55,thick] (1.788, 0.0) -- (1.788, {ln(2.5)});
+\draw[thick] (1.856, 0.0) -- (1.856, {ln(2.3)});
+\draw[thick] (2.036, 0.0) -- (2.036, {ln(1.7)});
+\draw[thick] (2.142, 0.0) -- (2.142, {ln(1.6)});
+\draw[thick] (2.2520000000000002, 0.0) -- (2.2520000000000002, {ln(2.0)});
+\draw[thick] (2.386, 0.0) -- (2.386, {ln(1.6)});
+\draw[color=blue!85!,opacity=.55,thick] (2.488, 0.0) -- (2.488, {ln(2.9)});
+\draw[thick] (2.4739999999999998, 0.0) -- (2.4739999999999998, {ln(2.7)});
+\draw[color=blue!85!,opacity=.55,thick] (2.504, 0.0) -- (2.504, {ln(2.0)});
+\draw[color=magenta,thick] (2.682, 0.0) -- (2.682, {ln(2.0)});
+\draw[color=blue!85!,opacity=.55,thick] (2.702, 0.0) -- (2.702, {ln(2.5)});
+\draw[thick] (2.9259999999999997, 0.0) -- (2.9259999999999997, {ln(2.8)});
+\draw[thick] (3.024, 0.0) -- (3.024, {ln(2.4)});
+\draw[thick] (3.096, 0.0) -- (3.096, {ln(1.8)});
+\draw[thick] (3.244, 0.0) -- (3.244, {ln(2.6)});
+\draw[thick] (3.362, 0.0) -- (3.362, {ln(1.9)});
+\draw[color=blue!85!,opacity=.55,thick] (3.46, 0.0) -- (3.46, {ln(2.3)});
+\draw[color=blue!85!,opacity=.55,thick] (3.516, 0.0) -- (3.516, {ln(1.1)});
+\draw[color=blue!85!,opacity=.55,thick] (3.584, 0.0) -- (3.584, {ln(1.8)});
+\draw[color=magenta,thick] (3.652, 0.0) -- (3.652, {ln(2.0)});
+\draw[color=blue!85!,opacity=.55,thick] (3.838, 0.0) -- (3.838, {ln(1.5)});
+\draw[color=blue!85!,opacity=.55,thick] (3.8819999999999997, 0.0) -- (3.8819999999999997, {ln(2.6)});
+\draw[thick] (4.088, 0.0) -- (4.088, {ln(2.6)});
+\draw[thick] (4.046, 0.0) -- (4.046, {ln(1.1)});
+\draw[thick] (4.167999999999999, 0.0) -- (4.167999999999999, {ln(2.0)});
+\draw[thick] (4.266, 0.0) -- (4.266, {ln(2.4)});
+\draw[color=blue!85!,opacity=.55,thick] (4.38, 0.0) -- (4.38, {ln(1.1)});
+\draw[color=blue!85!,opacity=.55,thick] (4.456, 0.0) -- (4.456, {ln(2.2)});
+\draw[color=magenta,thick] (4.644, 0.0) -- (4.644, {ln(2.6)});
+\draw[color=blue!85!,opacity=.55,thick] (4.675999999999999, 0.0) -- (4.675999999999999, {ln(2.5)});
+\draw[color=blue!85!,opacity=.55,thick] (4.898000000000001, 0.0) -- (4.898000000000001, {ln(1.2)});
+   \end{tikzpicture}%
+   \end{minipage}%
+   \textbf{$\rightarrow$} 
+   \begin{minipage}[t]{.45\linewidth}
+      \centering
+      \begin{tikzpicture}[scale=\tikzScale, baseline=(current bounding box.center)]
+      \draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit}
+      |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
+\draw[color=blue!85!,opacity=.55,thick] (0.382, 0.0) -- (0.382, {ln(1.7)});
+\draw[color=blue!85!,opacity=.55,thick] (0.476, 0.0) -- (0.476, {ln(2.7)});
+\draw[color=magenta,thick] (0.456, 0.0) -- (0.456, {ln(1.8)});
+\draw[color=blue!85!,opacity=.55,thick] (0.6859999999999999, 0.0) -- (0.6859999999999999, {ln(2.7)});
+\draw[color=blue!85!,opacity=.55,thick] (0.6839999999999999, 0.0) -- (0.6839999999999999, {ln(1.8)});
+\draw[color=blue!85!,opacity=.55,thick] (1.452, 0.0) -- (1.452, {ln(1.3)});
+\draw[color=blue!85!,opacity=.55,thick] (1.426, 0.0) -- (1.426, {ln(1.9)});
+\draw[color=magenta,thick] (1.548, 0.0) -- (1.548, {ln(1.9)});
+\draw[color=blue!85!,opacity=.55,thick] (1.6740000000000002, 0.0) -- (1.6740000000000002, {ln(1.5)});
+\draw[color=blue!85!,opacity=.55,thick] (1.788, 0.0) -- (1.788, {ln(2.5)});
+\draw[color=blue!85!,opacity=.55,thick] (2.488, 0.0) -- (2.488, {ln(2.9)});
+\draw[color=blue!85!,opacity=.55,thick] (2.504, 0.0) -- (2.504, {ln(2.0)});
+\draw[color=magenta,thick] (2.682, 0.0) -- (2.682, {ln(2.0)});
+\draw[color=blue!85!,opacity=.55,thick] (2.702, 0.0) -- (2.702, {ln(2.5)});
+\draw[color=blue!85!,opacity=.55,thick] (3.46, 0.0) -- (3.46, {ln(2.3)});
+\draw[color=blue!85!,opacity=.55,thick] (3.516, 0.0) -- (3.516, {ln(1.1)});
+\draw[color=blue!85!,opacity=.55,thick] (3.584, 0.0) -- (3.584, {ln(1.8)});
+\draw[color=magenta,thick] (3.652, 0.0) -- (3.652, {ln(2.0)});
+\draw[color=blue!85!,opacity=.55,thick] (3.838, 0.0) -- (3.838, {ln(1.5)});
+\draw[color=blue!85!,opacity=.55,thick] (3.8819999999999997, 0.0) -- (3.8819999999999997, {ln(2.6)});
+\draw[color=blue!85!,opacity=.55,thick] (4.38, 0.0) -- (4.38, {ln(1.1)});
+\draw[color=blue!85!,opacity=.55,thick] (4.456, 0.0) -- (4.456, {ln(2.2)});
+\draw[color=magenta,thick] (4.644, 0.0) -- (4.644, {ln(2.6)});
+\draw[color=blue!85!,opacity=.55,thick] (4.675999999999999, 0.0) -- (4.675999999999999, {ln(2.5)});
+\draw[color=blue!85!,opacity=.55,thick] (4.898000000000001, 0.0) -- (4.898000000000001, {ln(1.2)});
+      \end{tikzpicture}
+      \end{minipage}
+      \caption{Entfernen von Peaks, die keiner monoisotopischen Masse entsprechen oder benachbart mit einer Differenz von einem Fragment-Ion sind.}
+\end{figure}
+
+Tatsächlich ist die Verarbeitung an dieser Stelle noch etwas komplexer. So existieren auch noch sogenannte \emph{isotopic cluster}\footnote{Definition eines \emph{isotopic cluster} nach IUPAC: \gerquot{Group of peaks representing ions of the same elemental composition, but different isotopic compositions.} \cite[1556]{IUPACDefinitions}}, die gesondert verarbeitet werden. Für das grundsätzliche Prinzip ist dieses Detail allerdings weniger relevant.\\
+
+Im letzten Vorberarbeitungsschritt werden Peaks aus einem irrelevanten \massCharge Bereich entfernt und naheliegende Peaks werden zusammengefasst, indem der Mittelwert sowol des \massCharge Wertes als auch der der Intensität besimmt wird. Üblicherweise liegt der Bereich für das Zusammenfassen bei $ +- 20 ppm $.
+
+\begin{figure}[H]
+   \centering
+   \begin{minipage}[t]{.45\linewidth}
+      \centering
+      \begin{tikzpicture}[scale=\tikzScale, baseline=(current bounding box.center)]
+         \draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit}
+         |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
+\draw[thick] (0.382, 0.0) -- (0.382, {ln(1.7)});
+\draw[thick] (0.476, 0.0) -- (0.476, {ln(2.7)});
+\draw[thick] (0.456, 0.0) -- (0.456, {ln(1.8)});
+\draw[thick] (0.6859999999999999, 0.0) -- (0.6859999999999999, {ln(2.7)});
+\draw[thick] (0.6839999999999999, 0.0) -- (0.6839999999999999, {ln(1.8)});
+\draw[color=red,thick] (1.452, 0.0) -- (1.452, {ln(1.3)});
+\draw[color=red,thick] (1.426, 0.0) -- (1.426, {ln(1.9)});
+\draw[thick] (1.548, 0.0) -- (1.548, {ln(1.9)});
+\draw[thick] (1.6740000000000002, 0.0) -- (1.6740000000000002, {ln(1.5)});
+\draw[thick] (1.788, 0.0) -- (1.788, {ln(2.5)});
+\draw[color=red,thick] (2.488, 0.0) -- (2.488, {ln(2.9)});
+\draw[color=red,thick] (2.504, 0.0) -- (2.504, {ln(2.0)});
+\draw[color=red,thick] (2.682, 0.0) -- (2.682, {ln(2.0)});
+\draw[color=red,thick] (2.702, 0.0) -- (2.702, {ln(2.5)});
+\draw[thick] (3.46, 0.0) -- (3.46, {ln(2.3)});
+\draw[thick] (3.516, 0.0) -- (3.516, {ln(1.1)});
+\draw[thick] (3.584, 0.0) -- (3.584, {ln(1.8)});
+\draw[thick] (3.652, 0.0) -- (3.652, {ln(2.0)});
+\draw[color=red,thick] (3.838, 0.0) -- (3.838, {ln(1.5)});
+\draw[color=red,thick] (3.8819999999999997, 0.0) -- (3.8819999999999997, {ln(2.6)});
+\draw[thick] (4.38, 0.0) -- (4.38, {ln(1.1)});
+\draw[thick] (4.456, 0.0) -- (4.456, {ln(2.2)});
+\draw[thick] (4.644, 0.0) -- (4.644, {ln(2.6)});
+\draw[thick] (4.675999999999999, 0.0) -- (4.675999999999999, {ln(2.5)});
+\draw[thick] (4.898000000000001, 0.0) -- (4.898000000000001, {ln(1.2)});
+
+\fill[red!25!,opacity=.25] (0,0) rectangle (1,\yAxisHeight-\axisColorOffset);
+         \fill[red!25!,opacity=.25] (\xAxisLength-1,0) rectangle (\xAxisLength-\axisColorOffset,\yAxisHeight-\axisColorOffset);
+         \fill[green!25!,opacity=.25] (1,0) rectangle (\xAxisLength-1,\yAxisHeight-\axisColorOffset);
+   \end{tikzpicture}%
+   \end{minipage}%
+   \textbf{$\rightarrow$} 
+   \begin{minipage}[t]{.45\linewidth}
+      \centering
+      \begin{tikzpicture}[scale=\tikzScale, baseline=(current bounding box.center)]
+      \draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit}
+      |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
+%\draw[color=red,thick] (1.452, 0.0) -- (1.452, {ln(1.3)});
+%\draw[color=red,thick] (1.426, 0.0) -- (1.426, {ln(1.9)});
+\draw[color=red,ultra thick] ({(1.452+1.426)/2}, 0.0) -- ({(1.452+1.426)/2}, {(ln(1.3)+ln(1.9))/2});
+
+\draw[thick] (1.548, 0.0) -- (1.548, {ln(1.9)});
+\draw[thick] (1.6740000000000002, 0.0) -- (1.6740000000000002, {ln(1.5)});
+\draw[thick] (1.788, 0.0) -- (1.788, {ln(2.5)});
+
+%\draw[color=red,thick] (2.488, 0.0) -- (2.488, {ln(2.9)});
+%\draw[color=red,thick] (2.504, 0.0) -- (2.504, {ln(2.0)});
+\draw[color=red,ultra thick] ({(2.488+2.504)/2}, 0.0) -- ({(2.488+2.504)/2}, {(ln(2.9)+ln(2.0))/2});
+
+%\draw[color=red,thick] (2.682, 0.0) -- (2.682, {ln(2.0)});
+%\draw[color=red,thick] (2.702, 0.0) -- (2.702, {ln(2.5)});
+\draw[color=red,ultra thick] ({(2.682+2.702)/2}, 0.0) -- ({(2.682+2.702)/2}, {(ln(2.0+ln(2.5))/2});
+
+\draw[thick] (3.46, 0.0) -- (3.46, {ln(2.3)});
+\draw[thick] (3.516, 0.0) -- (3.516, {ln(1.1)});
+\draw[thick] (3.584, 0.0) -- (3.584, {ln(1.8)});
+\draw[thick] (3.652, 0.0) -- (3.652, {ln(2.0)});
+
+%\draw[color=red,thick] (3.838, 0.0) -- (3.838, {ln(1.5)});
+%\draw[color=red,thick] (3.8819999999999997, 0.0) -- (3.8819999999999997,{ln(2.6)});
+\draw[color=red,ultra thick] ({(3.838+3.8819999999999997)/2}, 0.0) -- ({(3.838+3.8819999999999997)/2}, {(ln(1.5)+ln(2.6))/2});
+
+\fill[red!25!,opacity=.25] (0,0) rectangle (1,\yAxisHeight-\axisColorOffset);
+         \fill[red!25!,opacity=.25] (\xAxisLength-1,0) rectangle (\xAxisLength-\axisColorOffset,\yAxisHeight-\axisColorOffset);
+         \fill[green!25!,opacity=.25] (1,0) rectangle (\xAxisLength-1,\yAxisHeight-\axisColorOffset);
+      \end{tikzpicture}
+      \end{minipage}
+      \caption{Entfernen von Peaks aus einem irrelevanten \massCharge Bereich und zusammenfassen naheliegender Peaks. Rot markierte Peaks sind jene, die zusammengefasst werden.}
+\end{figure}
+
+\subsection{Bildung eines Spektrums-Graphen}\label{ss:BildungSpekGraph}
+Der Spektrums-Graph wird aus einem vorverarbeiteten MS2-Spektrum (siehe Kapitel: \ref{ss:Vorverarbeitung}) gebildet. Im initialen Zustand werden die Peaks als Knoten interpretiert. Dazu kommt ein Start- und Endknoten. Jedem Knoten wird eine Masse zugeordet; im initialen Zustand bekommt der Startknoten die Masse 0 und der Endknoten die Masse des vorherigen Knotens minus der Masse des Wassers ($ 18,02 $). Die Masse der übrigen Knoten entsprechen ihren jeweils korrespondierenden \massCharge Wert. Die gerichteten Kanten werden zwischen einem Knotenpaar hinzugefügt, wenn die Differenz deren Masse gleich ist mit der Masse von ein oder zwei Aminosäuren.
+
+\subsection{Identifikation der Aminosäuresequenz}
+Der gebildete DAG kann mit klassischen Algorithmen, die den längsten Pfad suchen, durchlaufen werden. Bezogen auf die Graphentheorie entspricht die Ermittlung der Aminosäurensequenz dem Suchen eines bestimmten Pfades \dashAndSpace und nicht nach irgendeinem Pfad. Daher muss der Algorithmus mittels einer Breitensuche arbeiten, um alle möglichen Pfade zu bestimmen.
+
+In aller Regel wird es mehrere Pfade geben. Bestimmte Sequenzen sind wahrscheinlicher als andere. So sind Pfade mit Kanten, die wegen der Massendifferenz von genau einer Aminosäure gebildet wurden, wahrscheinlicher \cite{pNovoPlus}. Alle Pfade bekommen mittels einer Scoring-Funktion einen Wert zugewiesen. Der Pfad mit dem höchsten Scoring-Wert ist wahrscheinlich das richtige Ergebnis. Die Scoring-Funktion berücksichtigt unter anderem wie viele Fragmente, die einer bestimmten Aminosäure zugeordet werden können, im MS2-Spektrum vorhanden sind \cite{pNovo}. Die Sequenz mit dem höchsten Scoring-Wert ist das Endergebnis.
+
+\section{De-Novo-Peptidsequenzierung mit \emph{Open-pNovo}}\label{s:OpenpNovoSeq}
+Bei Proteinen können posttranslationale Proteinmodifikationen (PTM) auftreten. PTMs sind Ereignisse, bei denen sich Änderungen im Protein einstellen \cite{Mann2003}; teilweise sind die Änderungen von einer Zelle erwünscht \dashAndSpace teilweise stammen sie aber auch zum Beispiel von unerwünschten Wechselwirkungen nebeneinanderliegenden Aminosäuren. Ein Teil dieser PTMs führen zu einer Änderung der Aminosäuresequenz. Dies ist für die \gls{gls:DeNovo} nicht weiter problematisch, da sowieso ohne eine Datenbank gearbeitet wird, sodass solche PTMs nicht einmal auffallen würden. Andere PTMs hingegen haben die Auswirkung, dass Stoffe gebildet werden, die nicht mehr zu der Gruppe der proteinogenen Aminosäuren gehören. Proteinogene Aminosäuren sind jene Aminosäuren, die für den Bau von Proteinen verwendet werden. Der Effekt ist also, dass Stoffe (oder deren Fragmente) bei einem Massenspektrum angezeigt werden, die kein Teil eines Peptids sein können. Bei der Sequenzierung von Peptidfragmenten muss dies daher berücksichtigt werden.
+Wenn im weiteren Verlauf von PTMs gesprochen wird, dann sind solche gemeint, die für die \gls{gls:DeNovo} relevant sind.
+
+Open-pNovo ist ein \gls{gls:DeNovo}sverfahren, welches auf pNovo+ Tool aufbaut und versucht die Problematik mit den PTMs zu lösen.
+
+\subsection{PTMs im konstruierten DAG}
+Die Konvertierung eines MS2-Spektrums läuft bis zum DAG analog ab wie in den Kapiteln \ref{ss:Vorverarbeitung} und \ref{ss:BildungSpekGraph} für pNovo+. Der Unterschied ist nun, dass es zwei Arten von Kanten gibt:
+
+\begin{itemize}
+   \item \gerquot{Normale} Kanten: Kanten, die gebildet werden, wie es bereits für \emph{pNovo+} gezeigt wurde. 
+   \item \gerquot{Modifizierte} Kanten: Kanten, die zum Grahpen hinzugefügt werden, wenn die Massendifferenz zweier Knoten der Masse einer Aminosäure plus der Masse einer möglichen PTM-Änderung entspricht. 
+\end{itemize}
+
+Eine Liste aller PTMs in der Datenbank Unimod (sowohl relevante als auch nicht relevante) beinhaltet aktuell 1510 Einträge\footnote{Siehe: \url{https://www.ebi.ac.uk/ols/ontologies/unimod}} (Stand: 18.04.2022). Für die modifizierten Kanten gibt es insgesamt $ 1510 * 20 = 30200 $ mögliche Differenzen, wobei viele davon nicht relevante PTMs sind. Zum Vergleich: bei den normalen Kanten gibt es $ 20^2 = 400 $ mögliche Differenzen.
+
+Die hohe Anzahl an Differenzen für modifizierte Kanten hat die Konsequenz, dass viele Knoten zufällig verbunden werden und dass dadurch die Genauigkeit der Ergebnisse abnimmt. Dieses Problem kann man durch eine geringere Liste an möglichen PTMs abfedern, allerdings mit einem Verlust  der Genauigkeit auf Seiten der PTMs. Es ist hier also eine Abwägung.
+
+\subsection{Evaluierung von Open-pNovo}
+Open-pNovo wurde sowohl auf drei realen als auch auf drei generierten Testdaten getestet. Tabelle \ref{tab:OpenPNovoResults} zeigt die Ergebnisse im Vergleich zu pNovo+ und zwei anderen Algorithmen. Die Datensätze enthielten die am häufigsten vorkommenden PTMs.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{l|c|c|c|c}
+        \toprule
+        \textbf{Testdatensätze} & \textbf{Open-pNovo+} & \textbf{pNovo+} & \textbf{PEAKS} & \textbf{Novor} \\
+        \midrule
+        Real (20259) & $76,3 \%$ & $68,5 \%$ & $65,8 \%$ & $39,9 \%$ \\
+        Generiert (17877) & $77,8 \%$ & $0,6 \%$ & $0,5 \%$ & $0,2 \%$ \\
+        \bottomrule
+    \end{tabular}
+    \newline
+    \caption{Vergleich der durchschnittlichen richtigen \gls{gls:DeNovo} Peptidsequenzierungen von Open-pNovo und anderen Algorithmen \cite[650]{OpenPNovo}.}
+    \label{tab:OpenPNovoResults}
+\end{table}
+
+Die enorm schlechten Ergebnisse der anderen Algorithmen bei den generierten Testdaten ist ein Nebeneffekt des Ziels bei der Testdatengenerierung. Denn diese wurden so ausgelegt, um die Grenzen von Open-pNovo+ zu ermitteln \cite[649]{OpenPNovo}. Eine Aussagekraft haben diese Ergebnisse also nicht. Allerdings auch bei realen Testdaten zeigt sich Open-pNovo als voll konkurrenzfähig gegenüber den anderen Algorithmen.
+
+Noch besser zeigt sich Open-pNovo, wenn der Recall Wert betrachtet wird \dashAndSpace also die Anzahl an verschiedenen PSMs, die erkannt wurden. In diesem Fall ist der Abstand zu den anderen Algorithmen deutlich größer geworden.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{l|c|c|c|c}
+        \toprule
+        \textbf{Testdatensätze} & \textbf{Open-pNovo+} & \textbf{pNovo+} & \textbf{PEAKS} & \textbf{Novor} \\
+        \midrule
+        Real (5034) & $61,6 \%$ & $31,3 \%$ & $32,0 \%$ & $13,7 \%$ \\
+        \bottomrule
+    \end{tabular}
+    \newline
+    \caption{Vergleich der durchschnittlichen Recall Werte einer \gls{gls:DeNovo} Peptidsequenzierungen von Open-pNovo und anderen Algorithmen \cite[650]{OpenPNovo}.}
+    \label{tab:OpenPNovoResultsRecall}
+\end{table}
+
+\subsection{Zusammenfassung}
 
 
-\section{De-Novo-Peptidsequenzierung und \glspl{gls:SpecGraph} im Detail}
-In diesem Abschnitt werden die relevanten Herangehensweisen sowohl für die Datengewinnung als auch für deren Auswertung erklärt.
-
-\subsection{Datengewinnung}
-Die \gls{gls:DeNovo} nutzt die sogenannte \gls{gls:TMassSpek} für die Bestimmung der Peptidsequenz. Dabei wird die physikalische Eigenschaft ausgenutzt, dass jedes Atom bzw. jedes Molekül \dashAndSpace wenn es einer \gls{gls:Ionisation} unterzogen wurde \dashAndSpace ein charakteristisches \gls{gls:MassSpek} besitzt. Das \gls{gls:MassSpek} stellt also eine Art \gerquot{Fingerabdruck} eines Moleküls dar und macht dieses ermittelbar.
+% Die \gls{gls:DeNovo} nutzt die sogenannte \gls{gls:TMassSpek} für die Bestimmung der Peptidsequenz. Dabei wird die physikalische Eigenschaft ausgenutzt, dass jedes Atom bzw. jedes Molekül \dashAndSpace wenn es einer \gls{gls:Ionisation} unterzogen wurde \dashAndSpace ein charakteristisches \gls{gls:MassSpek} besitzt. Das \gls{gls:MassSpek} stellt also eine Art \gerquot{Fingerabdruck} eines Moleküls dar und macht dieses ermittelbar.
 
 % U.U. eine Beispielgrafik eines Massenspektrums hinzufuegen ...
 
