@@ -15,6 +15,8 @@
 \usepackage{makecell}
 \usepackage{titleref}
 \usepackage{booktabs}
+\usepackage{isotope}
+\usepackage{multirow}
 \usepackage{float}          % Fuer den Positionierungsbefehl '[H]'
 \usepackage{fancyhdr}       % Angepasste Header und Footer
 \usepackage{titling}        % Fuer Befehle wie \thetitle
@@ -38,7 +40,7 @@ nopostdot     %Den Punkt am Ende jeder Beschreibung deaktivieren
 
 \title{De-Novo-Sequencing using Spectrum-Graphs, enabling Open Searches}
 \author{Dominik Habermann}
-\date{\today}
+%\date{\today}
 
 % Kopf- und Fussnoten anpassen
 \pagestyle{fancy}
@@ -62,7 +64,7 @@ nopostdot     %Den Punkt am Ende jeder Beschreibung deaktivieren
 \newcommand{\yAxisHeight}{3}
 \newcommand{\xAxisLength}{5}
 \newcommand{\axisColorOffset}{0.15}
-  
+
 
 
 %%%%% %%%%% %%%%% %%%%% %%%%% \begin{document} %%%%% %%%%% %%%%% %%%%% %%%%%
@@ -74,70 +76,54 @@ nopostdot     %Den Punkt am Ende jeder Beschreibung deaktivieren
 \subsection{Biomedizinische Fragestellung}
 Peptide sind organische Verbindungen von miteinander verknüpften Aminosäuren. Bei der Sequenzierung von Peptiden versucht man die Aminosäuresequenz \dashAndSpaceSeq{also die Abfolge an vorhandenen Aminosäuren} zu bestimmen. Das Wissen über die Aminosäuresequenz ist von großer Bedeutung für den Forschungsbereich der Proteomik. Die Proteomik beschäftigt sich mit der Erforschung von Proteinen. Dies beinhaltet unter anderem auch die Analyse von Enzymen.
 
-Da es 20 verschiedene Aminosäuren gibt \cite[377]{rudat2021alanins}, die weitesgehend beliebig miteinander kombiniert werden können, existiert eine stark wachsende Anzahl an möglichen Kombinationen. Die Regeln der Kombinatik liefert uns hierfür die Formel $ f(x)=20^x $ wobei $ x $ hier die Anzahl an Aminosäuren ist. Es ist direkt erkennbar, dass selbst bei einer geringen Peptidlänge die Anzahl an möglichen Sequenzen eine Größenordnung erreicht, die von Computersystemen nicht mehr verarbeitet werden kann. Zum Vergleich: Proteine können aus wenigen Hundert bis hin zu aus mehreren Zehntausend Aminosäuren bestehen. Die Frage, die sich hier stellt: \emph{Ist es zumindest für kurze Peptide mögich diese sicher zu sequenzieren?}
+Da es 20 verschiedene relevante Aminosäuren gibt \cite[377]{rudat2021alanins}, die weitestgehend beliebig miteinander kombiniert werden können, existiert eine stark wachsende Anzahl an möglichen Kombinationen. Die Regeln der Kombinatorik liefert uns hierfür die Formel $ f(x)=20^x $ wobei $ x $ hier die Anzahl an Aminosäuren ist. Es ist direkt erkennbar, dass selbst bei einer geringen Peptidlänge die Anzahl an möglichen Sequenzen eine Größenordnung erreicht, die von Computersystemen nicht mehr verarbeitet werden kann. Zum Vergleich: Proteine können aus wenigen Hundert bis hin zu aus mehreren Zehntausend Aminosäuren bestehen. Die Frage, die sich hier stellt: \emph{Ist es zumindest für kurze Peptide möglich diese sicher zu sequenzieren?}
 
 \subsection{Methoden der Aminosäuresequenzierung}
-Das Ziel der verschiedenen Sequenzierungsverfahren ist eine möglichst exakte Bestimmung der Aminosäuresequenz. Alle Sequenzierungsverfahren arbeiten mit der Massenspektrometrie (MS). Dabei handelt es sich um ein Verfahren, welches chemische Verbindungen identifizieren kann (eine genauere Erklärung folgt in Kapitel \ref{s:MS}). Viele Analysen arbeiten mit dem Ansatz, dass die Ergebnisse einer MS \dashAndSpaceSeq{genannt wird es Massenspektrum} mit einer Datenbank verglichen werden. Wenn die chemische Verbindung bereits einmal indentifiziert wurde, dann wird sich ein Eintrag in der Datenbank finden lassen.
+Das Ziel der verschiedenen Sequenzierungsverfahren ist eine möglichst exakte Bestimmung der Aminosäuresequenz. Alle Sequenzierungsverfahren arbeiten mit der Massenspektrometrie (MS). Dabei handelt es sich um ein Verfahren, welches chemische Verbindungen identifizieren kann (eine genauere Erklärung folgt in Kapitel \ref{s:MS}). Viele Analysen arbeiten mit dem Ansatz, dass die Ergebnisse einer MS \dashAndSpaceSeq{genannt wird es Massenspektrum}mit einer Datenbank verglichen werden. Wenn die chemische Verbindung bereits einmal identifiziert wurde, dann wird sich ein Eintrag in der Datenbank finden lassen.
 
-Die hier vorgestellten Methoden \emph{pNovo+} und \emph{Open-pNovo} gehören zur Gruppe der \gls{gls:DeNovo}en. Im Gegensatz zu anderen Verfahren werden hierbei keinerlei Daten aus Datenbanken verwendet. Stattdessen findet eine Tandem-Massenspektrometrie Anwendung. Bei dieser Form der MS werden zwei MS Durchgänge hintereinander durchgeführt, wobei nach dem ersten Vorgang ein Teil der Probe isoliert wird und vor der 2. MS \gerquot{fragmentiert} wird (hierzu eine Beschreibung in Kapitel \ref{ss:Tandem_MS} mit mehr Details). Die \gls{gls:DeNovo} hat den bedeutsamen Vorteil, dass auch Peptide sequenziert werden können zu denen es keine oder nur unvollständige Informationen gibt.
-
-% Im ersten Kapitel findet zu Beginn eine Erklärung der wichtigsten Begriffe und Abkürzungen statt. Dazu wird eine Themenabgrenzung durchgeführt sowie die Ausgangssituation beschrieben.
-
-% \printnoidxglossaries
-
-%\subsection{Themenabgrenzung}
-%Folgende Aspekte sind Bestandteil dieser Ausarbeitung:
-%\begin{itemize}
-%   \item Was ist die \gls{gls:DeNovo}?
-%   \item Was erhofft man sich von dieser Technologie?
-%   \item Welche Probleme liegen vor, die von der Seite der Informatik %gelöst / verbessert werden können?
-%   \item Inwiefern spielen die Spektrums-Graphen dabei eine Rolle?
-%\end{itemize}
+Die hier vorgestellten Methoden \emph{pNovo+} und \emph{Open-pNovo} gehören zur Gruppe der \gls{gls:DeNovo}en. Im Gegensatz zu anderen Verfahren werden hierbei keinerlei Daten aus Datenbanken verwendet. Die \gls{gls:DeNovo} hat den bedeutsamen Vorteil, dass auch Peptide sequenziert werden können zu denen es keine oder nur unvollständige Informationen gibt. Statt einer MS findet eine Tandem-Massenspektrometrie Anwendung. Bei dieser Form der MS werden zwei MS Durchgänge hintereinander durchgeführt, wobei nach dem ersten Vorgang ein Teil der Probe isoliert wird und vor der 2. MS \gerquot{fragmentiert} wird (hierzu eine Beschreibung in Kapitel \ref{ss:Tandem_MS} mit mehr Details).
 
 
-% In diesem Abschnitt werden die relevanten Herangehensweisen sowohl für die Datengewinnung als auch für deren Auswertung erklärt.
 
 \section{Massenspektrometrie (MS)}\label{s:MS}
 Wie bereits in Kapitel \ref{s:Einleitung} erwähnt, wird die MS verwendet, um chemische Strukturen zu identifizieren. Die ersten modernen Ansätze der MS wurden zu Beginn des 20. Jahrhunderts entwickelt \cite[5678]{griffiths2008brief}. Seitdem gab es etliche Erweiterungen; das Grundprinzip ist dennoch immer gleich geblieben. Grob vereinfacht besteht eine MS aus folgenden vier Schritten:
 
 \begin{itemize}
-   \item \textbf{Ionisation}: Die Moleküle in der Probe bekommen eine positive oder negativ Ladung
-   \item \textbf{Überführung in Gasphase}: Durch Energie wird die Probe in die Gasphase überführt
-   \item \textbf{Anlegen eines elektrischen Feldes}: Die Ionen werden durch das elektrische Feld beschleunigt
+   \item \textbf{Ionisation}: Die Moleküle in der Probe bekommen eine positive oder negative Ladung
+   \item \textbf{Überführung in die Gasphase}: Durch Energie wird die Probe in die Gasphase überführt
+   \item \textbf{Anlegen eines elektrischen Feldes}: Die Ionen werden durch ein elektrisches Feld beschleunigt
    \item \textbf{Massenanalyse}: Ionen werden anhand des Masse-Ladungs-Verhältnisses \gerquot{sortiert}
 \end{itemize}
 
-Für die Schritte gibt es verschiedene Verfahren, wobei die Unterschiede hier nicht relevant sind. Jedes dieser Verfahren nutzt die physikalische Eigenschaft aus, dass Ionen in einem Magnetfeld in Abhänigkeit ihres Verhältnisses zwischen ihrer Masse und ihrer Ladung (häufig abgekürzt mit $ m/z $) unterschiedlich reagieren. So wird bei der MS nicht die Masse gemessen \dashAndSpaceSeq{auch wenn der Name es vermuten lässt} sondern die Ionenhäufigkeit bei einem bestimmten \massCharge Verhältnis \cite[140]{Glish2003}. Diese Häufigkeit wird dann in einem Massenspektrum graphisch dargestellt. Abbildung \ref{fig:Sim_Mass_Spec} zeigt ein computergeneriertes Massenspektrum\footnote{Generiert von der Website: \url{https://www.protpi.ch/Calculator/MassSpecSimulator}} von zwei ähnlichen Aminosäuren.
+Für die Schritte gibt es verschiedene Verfahren, wobei die Unterschiede hier nicht relevant sind. Jedes dieser Verfahren nutzt die physikalische Eigenschaft aus, dass Ionen in einem Magnetfeld in Abhängigkeit ihres Verhältnisses zwischen ihrer Masse und ihrer Ladung (häufig abgekürzt mit $ m/z $) unterschiedlich reagieren. So wird bei der MS nicht die Masse gemessen \dashAndSpaceSeq{auch wenn der Name es vermuten lässt} sondern die Ionenhäufigkeit bei einem bestimmten \massCharge Verhältnis \cite[140]{Glish2003}. Diese Häufigkeit wird dann in einem Massenspektrum graphisch dargestellt. Abbildung \ref{fig:Sim_Mass_Spec} zeigt ein computergeneriertes Massenspektrum\footnote{Generiert von der Website: \url{https://www.protpi.ch/Calculator/MassSpecSimulator}} von zwei ähnlichen Aminosäuren.
 
 % Grafik generiert von der Website: https://www.protpi.ch/Calculator/MassSpecSimulator
-\begin{figure}[H]
+\begin{figure}[ht]
    \includegraphics[width=0.75\textwidth]{./Resources/Simulated_Mass_Spectrum.png}
    \centering
-   \caption{Computergeneriertes Massenspektrum von der Aminosäure \emph{Serin} (1) und \emph{Cystesin} (2). Peak von \emph{Serin} liegt bei 105; bei \emph{Systesin} um 121. y: relative Häufigkeit}
+   \caption{Computergeneriertes Massenspektrum von der Aminosäure \emph{Serin} (1) und \emph{Cystesin} (2). Peak von \emph{Serin} liegt bei 105 \massCharge; bei \emph{Systesin} um 121 \massCharge.}
    \label{fig:Sim_Mass_Spec}
 \end{figure}
 
-Die Maxima werden \gerquot{Peaks} genannt und sind für eine Aminosäure an charakteristischer Position auf der $ x $-Achse. Obwohl sich die beiden Aminosäuren in der Abbildung \ref{fig:Sim_Mass_Spec} nur durch ein Atom unterscheiden (das linke Sauerstoffatom wurde durch ein Schwefelatom ersetzt) sind deren Massenspektren auf der $ x $-Achse weit voneinander entfernt und machen die beiden Aminosäuren dadurch sicher unterscheidbar.\\
+Die Maxima werden \gerquot{Peaks} genannt und haben für eine Aminosäure einen charakteristischen \massCharge Wert. Obwohl sich die beiden Aminosäuren in der Abbildung \ref{fig:Sim_Mass_Spec} nur durch ein Atom unterscheiden (das linke Sauerstoffatom wurde durch ein Schwefelatom ersetzt) sind deren Peaks weit voneinander entfernt und machen die beiden Aminosäuren dadurch sicher unterscheidbar.\\
 
 Bei einzelnen Aminosäuren funktioniert die MS zuverlässig; bei Peptiden allerdings steht man vor dem Problem, dass das Massenspektrum unübersichtlicher wird und auch Peaks, die von Hintergrundrauschen stammen, schwerer herausgefiltert werden können. Abhilfe schafft hier die Tandem-Massenspektrometrie.
 
 \subsection{Tandem-Massenspektrometrie (MS/MS)}\label{ss:Tandem_MS}
-Bei der Tandem-Massenspektrometrie (MS/MS oder MS2) werden zwei MS Vorgänge hintereinander mit einer Probe durchgeführt. Die erste MS dient dazu Ionen aus einem bestimmten \massCharge Bereich auswählbar zu machen. Es entspricht also quasi einer Form der Filterung.
+Bei der Tandem-Massenspektrometrie (MS/MS oder MS2) werden zwei MS Vorgänge hintereinander mit einer Probe durchgeführt. Die erste MS dient dazu Ionen aus einem bestimmten \massCharge Bereich auswählbar zu machen. Es entspricht also quasi einer Form der Filterung. Vor der 2. MS werden die ausgewählten Reste einer Fragmentierung unterzogen. Bei einer Fragmentierung führt man Energie zu mit dem Ziel, dass die Ionen zerfallen und Fragment-Ionen bilden. Diese Fragment-Ionen werden dann auf dem Massenspektrum nach der 2. MS sichtbar gemacht.
 
-Vor der 2. MS werden die ausgewählten Reste einer Fragmentierung unterzogen. Bei einer Fragmentierung führt man Energie zu mit dem Ziel, dass die Ionen zerfallen und sog. Fragment-Ionen bilden. Diese Fragment-Ionen werden dann auf dem Massenspektrum nach der 2. MS sichtbar gemacht.
-
-Fragment-Ionen sind kleiner als die ursprünglichen Ionen. So kann die 2. MS mit einer höheren Selektivität durchgeführt werden, welches Peaks durch Hintergrundrauschen verringert. Auch lassen sich Ionen besser identifizieren, die ein sehr ähnliches \massCharge-Verhältnis besitzen. Nach der 2. MS liegt eine Fülle an Fragment-Ionen-Peaks vor, aus denen sich die ursprünglichen Strukturinformationen ableiten lassen, da Ionen in spezifische Fragmente zerfallen \cite{Gross2013}. Zusammengefasst kann man sagen, dass das MS/MS Verfahren Ergebnisse höherer Güte erzeugt im Vergleich zur einfachen MS.
+Fragment-Ionen sind kleiner als die ursprünglichen Ionen. So kann die 2. MS mit einer höheren Selektivität durchgeführt werden, welches Peaks durch Hintergrundrauschen verringert. Auch lassen sich Ionen besser identifizieren, die ein sehr ähnliches \massCharge-Verhältnis besitzen. Nach der 2. MS liegt eine Fülle an Fragment-Ionen-Peaks vor, aus denen sich die ursprünglichen chemischen Strukturen ableiten lassen, da Ionen in spezifische Fragmente zerfallen \cite{Gross2013}. Zusammengefasst kann man sagen, dass das MS/MS Verfahren Ergebnisse höherer Güte erzeugt im Vergleich zur einfachen MS.
 
 \section{De-Novo-Peptidsequenzierung mit \emph{pNovo+}}\label{s:pNovoPlusSeq}
-Die \emph{pNovo+} Methode ist eine \gls{gls:DeNovo}, die mit einem \gls{gls:SpecGraph}en für die Auswertung der MS2-Spektren arbeitet und eine Erweiterung des \emph{pNovo} Verfahren darstellt \cite{pNovo}. Der Hauptansatz ist, dass zwei MS/MS Durchläufe mit jeweils verschiedenen Fragmentierungsmethoden\footnote{\emph{pNovo+} verwendet die higher energy
-collisional dissociation (HCD) und die electron transfer dissociation (ETD) Fragmentierungsmethoden.} durchgeführt werden. Durch die Wahl einer anderen Fragmentierungsmethode ändert sich auch das MS2-Spektrum. Wenn nun Fragmentierungsmethoden verwendet werden, die möglichst komplementäre Spektren erzeugen, dann lässt sich durch das Zusammenführen der beiden MS2-Spektren die Qualität der Ergebnisse verbessern. Zum Beispiel lassen sich dadurch viele Peaks, die vom Hintergrundrauschen stammen, entfernen.
+Die Sequenzierung nach pNovo+ ist eine \gls{gls:DeNovo}, die mit einem Spek\-trums-Graphen für die Auswertung der MS2-Spektren arbeitet und eine Erweiterung des pNovo Verfahrens darstellt \cite{pNovo}. Der Hauptansatz ist, dass zwei MS/MS Durchläufe mit jeweils verschiedenen Fragmentierungsmethoden\footnote{pNovo+ verwendet die higher energy
+collisional dissociation (HCD) und die electron transfer dissociation (ETD) Fragmentierungsmethoden.} durchgeführt werden (pNovo hat nur mit einem MS2-Spektrum gearbeitet). Durch die Wahl einer anderen Fragmentierungsmethode ändert sich auch das MS2-Spektrum. Wenn nun Fragmentierungsmethoden verwendet werden, die möglichst komplementäre Spektren erzeugen, dann lässt sich durch das Zusammenführen der beiden MS2-Spektren die Qualität der Ergebnisse verbessern. Zum Beispiel lassen sich dadurch viele Peaks, die vom Hintergrundrauschen stammen, entfernen.
 
-Für die Ermittlung der Sequenz eines Peptides wird zunächst ein Spektrums-Graph gebildet \dashAndSpace in Form eines DAG (directed acyclic graph). In diesem Graphen wird dann der längste Pfad bei gegebenen Start- und Endknoten berechnet. Die Reihenfolge der Knoten, die im längsten Pfad durchlaufen werden, stellt dann die Peptidsequenz dar.
+Für die Ermittlung der Sequenz eines Peptids wird zunächst ein Spektrums-Graph gebildet \dashAndSpace in Form eines DAG (directed acyclic graph). In diesem Graphen wird dann der längste Pfad bei gegebenen Start- und Endknoten berechnet. Die Reihenfolge der Knoten, die im längsten Pfad durchlaufen werden, stellt dann die Peptidsequenz dar.
 
 \subsection{Vorverarbeitung der MS2-Spektren}\label{ss:Vorverarbeitung}
-Bevor aus den MS2-Spektren der Spektrums-Graph gebildet werden kann, müssen die Daten vorverarbeitet werden. Für die Auswertung ist es von entscheidener Bedeutung, dass möglichst wenig Peaks verwendet werden, die vom Hintergrundrauschen stammen. Im weiteren Verlauf werden an einem exemplarischen MS2-Spektrum die Verarbeitungsschritte dargestellt.\\
+Bevor aus den MS2-Spektren der Spektrums-Graph gebildet werden kann, müssen die Daten vorverarbeitet werden. Für die Auswertung ist es von entscheidender Bedeutung, dass möglichst wenig Peaks verwendet werden, die vom Hintergrundrauschen stammen. Im weiteren Verlauf werden an einem exemplarischen MS2-Spektrum die Verarbeitungsschritte dargestellt.\\
 
-Der erste Schritt ist das Verwenden des natürlichen Logarithmus der Intensitäten. Die Idee dabei ist, dass Hintergrundrauschen nicht überpriorisiert wird.
+Der erste Schritt ist das Verwenden des natürlichen Logarithmus der Intensitäten (entspricht hier der $y$-Achse). Die Idee dabei ist, dass Hintergrundrauschen nicht über-priorisiert wird.
 
 \begin{figure}[H]
    \centering
@@ -195,7 +181,7 @@ Der erste Schritt ist das Verwenden des natürlichen Logarithmus der Intensität
 \draw[thick] (4.898000000000001, 0.0) -- (4.898000000000001, 1.2);
    \end{tikzpicture}%
    \end{minipage}%
-   \textbf{$\rightarrow$} 
+   \textbf{$\rightarrow$}
    \begin{minipage}[t]{.45\linewidth}
       \centering
       \begin{tikzpicture}[scale=\tikzScale, baseline=(current bounding box.center)]
@@ -255,9 +241,9 @@ Der erste Schritt ist das Verwenden des natürlichen Logarithmus der Intensität
 
 Für das Verständnis des nächsten Schrittes muss man sich in Erinnerung rufen, dass eine gleiche Aminosäure keineswegs immer die gleiche Masse hat. Durch Isotope existiert eine gewisse \gerquot{Massenbandbreite} für ein und dieselbe Aminosäure. MS Systeme sind heute so genau, dass sie diese Differenzen erkennen. Dies hat den ungewollten Effekt, dass mehrere Peaks zu einer Aminosäure gehören können \cite{IsotopicDistributionMS}. Gleichzeitig können die \gerquot{Massenbandbreiten} zweier Aminosäuren sich überschneiden, sodass im ungünstigen Fall zwei Peaks kaum unterscheidbar nebeneinander liegen.\\
 
-Eine Möglichkeit mit dieser Problematik umzugehen ist die Verwendung der monoisotopischen Masse. Die monoisotopische Masse ist die \gerquot{[...] exact mass of the most abundant naturally occurring stable isotope determined relative to the mass of 12 C, which is assigned the exact value of 12.0000.} \cite{MonoisotopicMass}. Ohne dabei jetzt tiefer ins Detail zu gehen kann man sagen, dass alle Peaks, deren Intensität mit einer möglichen monoisotopischen Masse übereinstimmen, auf jeden Fall einer Aminosäure entsprechen und (höchstwahrscheinlich)\footnote{Natürlich ist es möglich, dass das Rauschen zufällig einer monoisotopischen Masse entspricht. Die Wahrscheinlichkeit dafür ist allerdings sehr gering.} kein Hintergrundrauschen sind \cite{MassDefectMS}. Diese Peaks bekommen eine sogennante \emph{charge state}.\\
+Eine Möglichkeit mit dieser Problematik umzugehen ist die Verwendung der monoisotopischen Masse. Die monoisotopische Masse ist die \gerquot{[...] exact mass of the most abundant naturally occurring stable isotope determined relative to the mass of \isotope[12]{C}, which is assigned the exact value of 12.0000.} \cite{MonoisotopicMass}. Ohne dabei jetzt tiefer ins Detail zu gehen kann man sagen, dass alle Peaks, deren Intensitäten mit einer möglichen monoisotopischen Masse übereinstimmen, auf jeden Fall einer Aminosäure entsprechen und (höchstwahrscheinlich)\footnote{Natürlich ist es möglich, dass das Rauschen zufällig einer monoisotopischen Masse entspricht. Die Wahrscheinlichkeit dafür ist allerdings sehr gering.} kein Hintergrundrauschen sind \cite{MassDefectMS}. Diese Peaks bekommen eine sogenannte \emph{charge state}.\\
 
-Der Algorithmus verwendet die \emph{charge state} Peaks als Ausganspunkte für weitere Berechnungen. Wenn die \massCharge Differenz zu einem anderen Peak einem Peptidfragment entspricht, dann stammt dieser Peak höchstwahrscheinlich von einem Fragment. Insgesamt werden damit die relevanten Peptidfragmente herausgeholt. Abbildung \ref{fig:MonoisotopicMassFiltering} zeigt das Ergebnis nach den beiden zuvor genannten Schritten.
+Der Algorithmus verwendet die \emph{charge state} Peaks als Ausganspunkte für weitere Berechnungen. Wenn die \massCharge Differenz zu einem anderen Peak einem \massCharge eines Peptidfragmentes entspricht, dann stammt dieser Peak höchstwahrscheinlich von einem Fragment. Insgesamt werden damit die relevanten Peptidfragmente herausgeholt. Abbildung \ref{fig:MonoisotopicMassFiltering} zeigt das Ergebnis nach den beiden zuvor genannten Schritten.
 
 \begin{figure}[H]
    \centering
@@ -315,7 +301,7 @@ Der Algorithmus verwendet die \emph{charge state} Peaks als Ausganspunkte für w
 \draw[color=blue!85!,opacity=.55,thick] (4.898000000000001, 0.0) -- (4.898000000000001, {ln(1.2)});
    \end{tikzpicture}%
    \end{minipage}%
-   \textbf{$\rightarrow$} 
+   \textbf{$\rightarrow$}
    \begin{minipage}[t]{.45\linewidth}
       \centering
       \begin{tikzpicture}[scale=\tikzScale, baseline=(current bounding box.center)]
@@ -348,13 +334,13 @@ Der Algorithmus verwendet die \emph{charge state} Peaks als Ausganspunkte für w
 \draw[color=blue!85!,opacity=.55,thick] (4.898000000000001, 0.0) -- (4.898000000000001, {ln(1.2)});
       \end{tikzpicture}
       \end{minipage}
-      \caption{Entfernen von Peaks, die keiner monoisotopischen Masse entsprechen oder benachbart mit einer Differenz von einem Fragment-Ion sind.}
+      \caption{Entfernen von Peaks, die keiner monoisotopischen Masse entsprechen oder benachbart mit einer Differenz von einem Fragment-Ion sind. Magenta-Peaks stellen monoisotopische Massen dar; blaue-Peaks besitzen eine passende Differenz zu einem Magenta-Peak}
       \label{fig:MonoisotopicMassFiltering}
 \end{figure}
 
 Tatsächlich ist die Verarbeitung an dieser Stelle noch etwas komplexer. So existieren auch noch sogenannte \emph{isotopic cluster}\footnote{Definition eines \emph{isotopic cluster} nach IUPAC: \gerquot{Group of peaks representing ions of the same elemental composition, but different isotopic compositions.} \cite[1556]{IUPACDefinitions}}, die gesondert verarbeitet werden. Für das grundsätzliche Prinzip ist dieses Detail allerdings weniger relevant.\\
 
-Im letzten Vorberarbeitungsschritt werden Peaks aus einem irrelevanten \massCharge Bereich entfernt und naheliegende Peaks werden zusammengefasst, indem der Mittelwert sowol des \massCharge Wertes als auch der der Intensität besimmt wird. Üblicherweise liegt der Bereich für das Zusammenfassen bei $ +- 20 ppm $.
+Im letzten Vorberarbeitungsschritt werden Peaks aus einem irrelevanten \massCharge Bereich entfernt und naheliegende Peaks werden zusammengefasst, indem der Mittelwert sowohl des \massCharge Wertes als auch der der Intensität bestimmt wird. Üblicherweise liegt der Bereich für das Zusammenfassen bei $ \pm 20 ppm $.
 
 \begin{figure}[H]
    \centering
@@ -394,7 +380,7 @@ Im letzten Vorberarbeitungsschritt werden Peaks aus einem irrelevanten \massChar
          \fill[green!25!,opacity=.25] (1,0) rectangle (\xAxisLength-1,\yAxisHeight-\axisColorOffset);
    \end{tikzpicture}%
    \end{minipage}%
-   \textbf{$\rightarrow$} 
+   \textbf{$\rightarrow$}
    \begin{minipage}[t]{.45\linewidth}
       \centering
       \begin{tikzpicture}[scale=\tikzScale, baseline=(current bounding box.center)]
@@ -434,57 +420,82 @@ Im letzten Vorberarbeitungsschritt werden Peaks aus einem irrelevanten \massChar
 \end{figure}
 
 \subsection{Bildung eines Spektrums-Graphen}\label{ss:BildungSpekGraph}
-Der Spektrums-Graph wird aus einem vorverarbeiteten MS2-Spektrum (siehe Kapitel: \ref{ss:Vorverarbeitung}) gebildet. Im initialen Zustand werden die Peaks als Knoten interpretiert. Dazu kommt ein Start- und Endknoten. Jedem Knoten wird eine Masse zugeordet; im initialen Zustand bekommt der Startknoten die Masse 0 und der Endknoten die Masse des vorherigen Knotens minus der Masse des Wassers ($ 18,02 $). Die Masse der übrigen Knoten entsprechen ihren jeweils korrespondierenden \massCharge Wert. Die gerichteten Kanten werden zwischen einem Knotenpaar hinzugefügt, wenn die Differenz deren Masse gleich ist mit der Masse von ein oder zwei Aminosäuren.
+Der Spektrums-Graph wird aus einem vorverarbeiteten MS2-Spektrum (siehe Kapitel: \ref{ss:Vorverarbeitung}) gebildet. Im initialen Zustand werden die Peaks als Knoten interpretiert. Dazu kommt ein Start- und Endknoten. Jedem Knoten wird eine Masse zugeordnet; im initialen Zustand bekommt der Startknoten die Masse 0 und der Endknoten die Masse des vorherigen Knotens minus der Masse des Wassers ($ 18,02 $). Die Masse der übrigen Knoten entsprechen ihren jeweils korrespondierenden \massCharge Wert. Die gerichteten Kanten werden zwischen einem Knotenpaar hinzugefügt, wenn die Differenz deren Masse gleich ist mit der Masse von \emph{ein} oder \emph{zwei} Aminosäuren.
 
 \subsection{Identifikation der Aminosäuresequenz}
 Der gebildete DAG kann mit klassischen Algorithmen, die den längsten Pfad suchen, durchlaufen werden. Bezogen auf die Graphentheorie entspricht die Ermittlung der Aminosäurensequenz dem Suchen eines bestimmten Pfades \dashAndSpace und nicht nach irgendeinem Pfad. Daher muss der Algorithmus mittels einer Breitensuche arbeiten, um alle möglichen Pfade zu bestimmen.
 
-In aller Regel wird es mehrere Pfade geben. Bestimmte Sequenzen sind wahrscheinlicher als andere. So sind Pfade mit Kanten, die wegen der Massendifferenz von genau einer Aminosäure gebildet wurden, wahrscheinlicher \cite{pNovoPlus}. Alle Pfade bekommen mittels einer Scoring-Funktion einen Wert zugewiesen. Der Pfad mit dem höchsten Scoring-Wert ist wahrscheinlich das richtige Ergebnis. Die Scoring-Funktion berücksichtigt unter anderem wie viele Fragmente, die einer bestimmten Aminosäure zugeordet werden können, im MS2-Spektrum vorhanden sind \cite{pNovo}. Die Sequenz mit dem höchsten Scoring-Wert ist das Endergebnis.
+In aller Regel wird es mehrere Pfade geben. Bestimmte Sequenzen sind wahrscheinlicher als andere. So sind Pfade mit Kanten, die wegen der Massendifferenz von genau einer Aminosäure gebildet wurden, wahrscheinlicher \cite{pNovoPlus}. Alle Pfade bekommen mittels einer Scoring-Funktion einen Wert zugewiesen. Der Pfad mit dem höchsten Scoring-Wert ist wahrscheinlich das richtige Ergebnis. Die Scoring-Funktion berücksichtigt unter anderem wie viele Fragmente, die einer bestimmten Aminosäure zugeordnet werden können, im MS2-Spektrum vorhanden sind \cite{pNovo}. Die Sequenz mit dem höchsten Scoring-Wert ist das Endergebnis.
+
+\subsection{Evaluierung von pNovo+}
+Mit echten Testdaten wurden die HCD und die ETD MS2-Spektren erstellt. Insgesamt bestand der Datensatz aus $ 8677 $ Elementen.
+
+\begin{table}[H]
+   \hspace*{0.75cm}
+   \centering
+   \begin{tabular}{c|c|c|c|c|c}
+      \toprule
+      \multicolumn{3}{c|}{\emph{\textbf{pNovo+}}} & \multicolumn{3}{c}{\emph{\textbf{PEAKS}}} \\
+      \textbf{HCD $\cup$ ETD} & \textbf{HCD} & \textbf{ETD} & \textbf{HCD $\cup$ ETD} & \textbf{HCD} & \textbf{ETD} \\
+      \midrule
+      $81,2 \%$ & $73,9 \%$ & $55,7 \%$ & $71,8 \%$ & $68,4 \%$ & $30.6 \%$\\
+      \bottomrule
+   \end{tabular}
+   \newline
+   \caption{Gegenüberstellung der erfolgreichen \gls{gls:DeNovo} von pNovo+ und PEAKS bei MS2-Spektren \cite[620]{pNovoPlus}.}
+   \label{tab:PNovoPlusResults}
+\end{table}
+
+Tabelle \ref{tab:PNovoPlusResults} zeigt, dass beider-maßen von der Verwendung zweier MS2-Spektren profitiert wird. Das könnte darauf hindeuten, dass \gls{gls:DeNovo} Algorithmen im allgemeinen dadurch bessere Ergebnisse liefern können. Auffällig ist, dass pNovo+ mit jedem Datensatz besser abschneidet als PEAKS.
+
+\subsection{Ergebnisse und Diskussion}
+Das Ziel basierend auf pNovo ein \gls{gls:DeNovo} Tool zu entwerfen, welches genauer und effizienter ist, wurde mit einer Verbesserung von $ 9,4 $ Prozentpunkten definitiv erreicht. Die Grundidee, dass zwei komplementäre MS2-Spektren verwendet werden, scheint generell einen positiven Einfluss auf \gls{gls:DeNovo}s-Algorithmen zu haben. Es bleibt allerdings offen, ob dieser Vorteil ebenfalls gegeben ist, wenn andere Fragmentierungsmethoden verwendet werden.
+
+
 
 \section{De-Novo-Peptidsequenzierung mit \emph{Open-pNovo}}\label{s:OpenpNovoSeq}
-Bei Proteinen können posttranslationale Proteinmodifikationen (PTM) auftreten. PTMs sind Ereignisse, bei denen sich Änderungen im Protein einstellen \cite{Mann2003}; teilweise sind die Änderungen von einer Zelle erwünscht \dashAndSpace teilweise stammen sie aber auch zum Beispiel von unerwünschten Wechselwirkungen nebeneinanderliegenden Aminosäuren. Ein Teil dieser PTMs führen zu einer Änderung der Aminosäuresequenz. Dies ist für die \gls{gls:DeNovo} nicht weiter problematisch, da sowieso ohne eine Datenbank gearbeitet wird, sodass solche PTMs nicht einmal auffallen würden. Andere PTMs hingegen haben die Auswirkung, dass Stoffe gebildet werden, die nicht mehr zu der Gruppe der proteinogenen Aminosäuren gehören. Proteinogene Aminosäuren sind jene Aminosäuren, die für den Bau von Proteinen verwendet werden. Der Effekt ist also, dass Stoffe (oder deren Fragmente) bei einem Massenspektrum angezeigt werden, die kein Teil eines Peptids sein können. Bei der Sequenzierung von Peptidfragmenten muss dies daher berücksichtigt werden.
-Wenn im weiteren Verlauf von PTMs gesprochen wird, dann sind solche gemeint, die für die \gls{gls:DeNovo} relevant sind.
+Bei Proteinen können posttranslationale Proteinmodifikationen (PTM) auftreten. PTMs sind Ereignisse, bei denen sich Änderungen im Protein einstellen; teilweise sind die Änderungen von einer Zelle erwünscht \dashAndSpace teilweise stammen sie aber auch zum Beispiel von unerwünschten Wechselwirkungen nebeneinanderliegenden Aminosäuren \cite[256]{Mann2003}. Ein Teil dieser PTMs führen zu einer Änderung der Aminosäuresequenz. Dies ist für die \gls{gls:DeNovo} nicht weiter problematisch, da sowieso ohne eine Datenbank gearbeitet wird, sodass solche PTMs nicht einmal auffallen würden. Andere PTMs hingegen haben die Auswirkung, dass Stoffe gebildet werden, die nicht mehr zu der Gruppe der proteinogenen Aminosäuren gehören. Proteinogene Aminosäuren sind jene Aminosäuren, die für den Bau von Proteinen verwendet werden. Der Effekt ist also, dass Stoffe (oder deren Fragmente) bei einem Massenspektrum angezeigt werden, die kein Teil eines Peptids sein können. Bei der Sequenzierung von Peptidfragmenten muss dies daher berücksichtigt werden. Wenn im weiteren Verlauf von PTMs gesprochen wird, dann sind solche gemeint, die für die \gls{gls:DeNovo} relevant sind.
 
-Open-pNovo ist ein \gls{gls:DeNovo}sverfahren, welches auf pNovo+ Tool aufbaut und versucht die Problematik mit den PTMs zu lösen.
+Open-pNovo ist ein \gls{gls:DeNovo}sverfahren, welches auf pNovo+ aufbaut und versucht die Problematik mit den PTMs zu lösen.
 
 \subsection{PTMs im konstruierten DAG}\label{ss:PTMUndDAG}
 Die Konvertierung eines MS2-Spektrums läuft bis zum DAG analog ab wie in den Kapiteln \ref{ss:Vorverarbeitung} und \ref{ss:BildungSpekGraph} für pNovo+. Der Unterschied ist nun, dass es zwei Arten von Kanten gibt:
 
 \begin{itemize}
-   \item \gerquot{Normale} Kanten: Kanten, die gebildet werden, wie es bereits für \emph{pNovo+} gezeigt wurde. 
-   \item \gerquot{Modifizierte} Kanten: Kanten, die zum Grahpen hinzugefügt werden, wenn die Massendifferenz zweier Knoten der Masse einer Aminosäure plus der Masse einer möglichen PTM-Änderung entspricht. 
+   \item \textbf{\gerquot{Normale} Kanten:} Kanten, die gebildet werden, wie es bereits für \emph{pNovo+} gezeigt wurde.
+   \item \textbf{\gerquot{Modifizierte} Kanten:} Kanten, die zum Graphen hinzugefügt werden, wenn die Massendifferenz zweier Knoten der Masse \emph{genau einer} Aminosäure plus der Masse einer möglichen PTM-Änderung entspricht.
 \end{itemize}
 
-Eine Liste aller PTMs in der Datenbank Unimod (sowohl relevante als auch nicht relevante) beinhaltet aktuell 1510 Einträge\footnote{Siehe: \url{https://www.ebi.ac.uk/ols/ontologies/unimod}} (Stand: 18.04.2022). Für die modifizierten Kanten gibt es insgesamt $ 1510 * 20 = 30200 $ mögliche Differenzen, wobei viele davon nicht relevante PTMs sind. Zum Vergleich: bei den normalen Kanten gibt es $ 20^2 = 400 $ mögliche Differenzen.
-
-Die hohe Anzahl an Differenzen für modifizierte Kanten hat die Konsequenz, dass viele Knoten zufällig verbunden werden und dass dadurch die Genauigkeit der Ergebnisse abnimmt. Dieses Problem kann man durch eine geringere Liste an möglichen PTMs abfedern, allerdings mit einem Verlust  der Genauigkeit auf Seiten der PTMs. Es ist hier also eine Abwägung.
+Eine Liste aller PTMs (sowohl relevante als auch nicht relevante) in der Datenbank Unimod beinhaltet aktuell 1510 Einträge\footnote{Siehe: \url{https://www.ebi.ac.uk/ols/ontologies/unimod}} (Stand: 18.04.2022). Für die modifizierten Kanten gibt es daher mehr mögliche Differenzen als für die normalen Kanten.\footnote{$1510 \cdot 20 = 30200$ für die modifizierten Kanten. $20^2 = 400$ für die normalen Kanten.} Die hohe Anzahl an Differenzen für modifizierte Kanten hat die Konsequenz, dass viele Knoten zufällig verbunden werden und dass dadurch die Genauigkeit der Ergebnisse abnimmt. Dieses Problem kann man durch eine geringere Liste an möglichen PTMs abfedern, allerdings mit einem Verlust  der Genauigkeit auf Seiten der PTMs. Es ist hier also eine Abwägung zu treffen.
 
 \subsection{Identifikation der Aminosäuresequenz}
-Auch bei Open-pNovo findet ein Algorithmus aus der Graphentheorie Anwendung, um alle möglichen Pfade durch den DAG zu bestimmen. Der Unterschied im Vergleich zu pNovo+ ist die Scoring-Funktion. Bei Open-pNovo wird ein Algorithmus namens \emph{Rankboost} für diese Aufgabe verwendet. \emph{Rankboost} ist ein Machine Learning (ML) Algorithmus, der vortrainierte Strukturen verwendet. Wichtig ist hierbei zu erwähnen, dass die Tainingsdaten Daten aus der Praxis stammen. Durch die hohe Anzahl an moglichen Differenzen für modifizierte Kanten (Siehe Kapite \ref{ss:PTMUndDAG}) sind vollumfängliche Muster nicht mehr von Menschenhand erkennbar. Am Ende ist auch hier die Sequenz mit dem höchsten Score das Endergebnis.
+Auch bei Open-pNovo findet ein Algorithmus aus der Graphentheorie Anwendung, um alle möglichen Pfade durch den DAG zu bestimmen. Der Unterschied im Vergleich zu pNovo+ ist die Scoring-Funktion. Bei Open-pNovo wird ein Algorithmus namens RankBoost für diese Aufgabe verwendet. RankBoost ist ein Machine-Learning Algorithmus aus dem Jahr 2003, der versucht Präferenzen aus Datensätzen zu bestimmen \cite[933]{freund2003efficient}. Ursprünglich wurde RankBoost geschaffen, um Filme für einen Nutzer vorzusortieren basierend auf Bewertungen anderer Nutzer. Open-pNovo überträgt den Anwendungszweck von RankBoost auf die Scoring-Problematik und nutzt diesen Algorithmus, trainiert durch reale Testdaten, um einen möglichst passenden Score zu bestimmen. Am Ende ist auch hier die Sequenz mit dem höchsten Score das Endergebnis.
 
 \subsection{Evaluierung von Open-pNovo}
-Open-pNovo wurde sowohl auf drei realen als auch auf drei generierten Testdaten getestet. Tabelle \ref{tab:OpenPNovoResults} zeigt die Ergebnisse im Vergleich zu pNovo+ und zwei anderen Algorithmen. Die Datensätze enthielten die am häufigsten vorkommenden PTMs.
+Open-pNovo wurde sowohl auf drei realen als auch auf drei generierten Testdaten getestet. Tabelle \ref{tab:OpenPNovoResults} zeigt die Ergebnisse im Vergleich zu pNovo+ und zwei anderen Algorithmen. Die generierten Datensätze enthielten die am häufigsten vorkommenden PTMs.
 
 \begin{table}[H]
+    \hspace*{0.75cm}
     \centering
     \begin{tabular}{l|c|c|c|c}
         \toprule
-        \textbf{Testdatensätze} & \textbf{Open-pNovo} & \textbf{pNovo+} & \textbf{PEAKS} & \textbf{Novor} \\
+        \textbf{Testdatensätze} & \textbf{Open-pNovo} & \textbf{pNovo+} &  \textbf{PEAKS} & \textbf{Novor} \\
         \midrule
         Real (20259) & $76,3 \%$ & $68,5 \%$ & $65,8 \%$ & $39,9 \%$ \\
         Generiert (17877) & $77,8 \%$ & $0,6 \%$ & $0,5 \%$ & $0,2 \%$ \\
         \bottomrule
     \end{tabular}
     \newline
-    \caption{Vergleich der durchschnittlichen richtigen \gls{gls:DeNovo} Peptidsequenzierungen von Open-pNovo und anderen Algorithmen \cite[650]{OpenPNovo}.}
+    \caption{Vergleich der durchschnittlichen richtigen \gls{gls:DeNovo}en von Open-pNovo und anderen Algorithmen \cite[650]{OpenPNovo}.}
     \label{tab:OpenPNovoResults}
 \end{table}
 
-Die enorm schlechten Ergebnisse der anderen Algorithmen bei den generierten Testdaten ist ein Nebeneffekt des Ziels bei der Testdatengenerierung. Denn diese wurden so ausgelegt, um die Grenzen von Open-pNovo+ zu ermitteln \cite[649]{OpenPNovo}. Eine Aussagekraft haben diese Ergebnisse also nicht. Allerdings auch bei realen Testdaten zeigt sich Open-pNovo als voll konkurrenzfähig gegenüber den anderen Algorithmen.
+Die enorm schlechten Ergebnisse der anderen Algorithmen bei den generierten Testdaten ist ein Nebeneffekt des Ziels bei der Testdatengenerierung. Denn die Generierung wurde so ausgelegt, um die Grenzen von Open-pNovo zu ermitteln \cite[649]{OpenPNovo}. Eine Aussagekraft haben diese Ergebnisse bezüglich der Trefferquote also nicht. Allerdings auch bei realen Testdaten zeigt sich Open-pNovo als voll konkurrenzfähig gegenüber den anderen Algorithmen.
 
-Noch besser zeigt sich Open-pNovo, wenn der Recall Wert betrachtet wird \dashAndSpace also die Anzahl an verschiedenen PSMs, die erkannt wurden. In diesem Fall ist der Abstand zu den anderen Algorithmen deutlich größer geworden.
+Noch besser zeigt sich Open-pNovo, wenn der Recall Wert betrachtet wird \dashAndSpace also die Anzahl an verschiedenen PTMs, die erkannt werden. In diesem Fall ist der Abstand zum nächstbesten Algorithmus deutlich größer geworden. ($ 7,8 \% \rightarrow 30,3 \% $)
 
 \begin{table}[H]
+    \hspace*{0.75cm}
     \centering
     \begin{tabular}{l|c|c|c|c}
         \toprule
@@ -498,8 +509,10 @@ Noch besser zeigt sich Open-pNovo, wenn der Recall Wert betrachtet wird \dashAnd
     \label{tab:OpenPNovoResultsRecall}
 \end{table}
 
-\subsection{Zusammenfassung}
-Open-pNovo ist ein Tool für die \gls{gls:DeNovo} mit dem Ziel, dass auch Peptide mit PTMs, die nicht proteinogene Änderungen hervorrufen, sequenziert werden können. Die Trefferquote liegt bei etwa $ 76 \% $ und ist damit voll konkurrenzfähig zu anderen Algorithmen und liefert meist die besten Ergebnisse.
+\subsection{Ergebnisse und Diskussion}
+Die Trefferquote von Open-pNovo liegt bei etwa $ 76 \% $ und ist damit voll konkurrenzfähig zu anderen Algorithmen und liefert meist die besten Ergebnisse. Es zeigt sich, dass die Wahl von RankBoost die Qualität der Ergebnisse entscheidend positiv beeinflusst. So steigt die durchschnittliche Trefferquote im Vergleich zu pNovo+ um knapp $ 7,8 $ Prozentpunkte. Interessant dabei ist, dass bereits pNovo+ mit den Konkurrenzalgorithmen (allen voran PEAKS) mithalten kann.
+
+Die Wahl eines Machine-Learning Verfahrens hat allerdings auch einen negativen Aspekt. Es werden viele Daten benötigt, um RankBoost ausreichend gut zu trainieren. Zwar kann Open-pNovo immer noch als \gls{gls:DeNovo}s-Tool dienen, da für das Sequenzieren an sich keine Datenbank im Hintergrund notwendig ist, dennoch existiert eine gewisse \gerquot{Abhängigkeit} zu vorher sequenzierten Daten. Inwiefern dies tatsächlich ein Problem in der Praxis darstellt, kann an dieser Stelle nicht beurteilt werden.
 
 \begingroup
 \printbibliography
