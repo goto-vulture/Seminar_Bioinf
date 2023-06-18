@@ -1,0 +1,112 @@
+%%
+%% This is file `beamerthemeneo.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% beamerthemeneo.dtx  (with options: `package')
+%% ---------------------------------------------------------------------------
+%% neoboss template 2021 by Christian Eichler
+%% based on the i4neo template 2017 by Bernhard Heinloth
+%%     https://gitlab.cs.fau.de/i4/tex/i4neo/
+%% based on the metropolis template by Matthias Vogelgesang et al.
+%%     https://github.com/matze/mtheme/
+%% and the original template was based on the HSRM theme by Benjamin Weiss.
+%% 
+%% This work is licensed under a Creative Commons Attribution-ShareAlike 4.0
+%% International License (https://creativecommons.org/licenses/by-sa/4.0/).
+%% ---------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeneo}
+  [2021/05/01 v1.0 neoboss color theme]
+\RequirePackage{etoolbox}
+\RequirePackage{pgfpages}
+\RequirePackage{pgfopts}
+\pgfkeys{/neo/.cd,
+  .search also={
+    /neo/inner,
+    /neo/outer,
+    /neo/color,
+    /neo/font,
+  }
+}
+\pgfkeys{
+  /neo/titleformat plain/.cd,
+    .is choice,
+    regular/.code={%
+      \let\neo@plaintitleformat\@empty%
+      \setbeamerfont{standout}{shape=\normalfont}%
+    },
+    smallcaps/.code={%
+      \let\neo@plaintitleformat\@empty%
+      \setbeamerfont{standout}{shape=\scshape}%
+    },
+    allsmallcaps/.code={%
+      \let\neo@plaintitleformat\MakeLowercase%
+      \setbeamerfont{standout}{shape=\scshape}%
+      \PackageWarning{beamerthemeneo}{%
+        Be aware that titleformat plain=allsmallcaps can lead to problems%
+      }
+    },
+    allcaps/.code={%
+      \let\neo@plaintitleformat\MakeUppercase%
+      \setbeamerfont{standout}{shape=\normalfont}%
+      \PackageWarning{beamerthemeneo}{%
+        Be aware that titleformat plain=allcaps can lead to problems%
+      }
+    },
+}
+\pgfkeys{
+  /neo/titleformat/.code=\pgfkeysalso{
+      font/titleformat title=#1,
+      font/titleformat subtitle=#1,
+      font/titleformat section=#1,
+      font/titleformat frame=#1,
+      titleformat plain=#1,
+    }
+}
+\pgfkeys{/neo/.cd,
+  noslidenumbers/.code=\pgfkeysalso{outer/numbering=none},
+  usetotalslideindicator/.code=\pgfkeysalso{outer/numbering=fraction},
+  nosectionslide/.code=\pgfkeysalso{inner/sectionpage=none},
+  darkcolors/.code=\pgfkeysalso{color/background=dark},
+  whitebg/.code=\pgfkeysalso{color/background=white},
+  blockbg/.code=\pgfkeysalso{color/block=fill},
+  light/.code=\pgfkeysalso{font/style=light},
+  book/.code=\pgfkeysalso{font/style=book},
+  regular/.code=\pgfkeysalso{font/style=regular},
+}
+\newcommand{\neo@setdefaults}{
+  \pgfkeys{/neo/.cd,
+    titleformat plain=regular,
+  }
+}
+\providecommand{\tikzexternalenable}{}
+\providecommand{\tikzexternaldisable}{}
+\useinnertheme{neo}
+\useoutertheme{neo}
+\usecolortheme{neo}
+\usefonttheme{neo}
+\AtEndPreamble{%
+  \RequirePackage{pdfpcnotes}
+  \@ifpackageloaded{pgfplots}{%
+    \RequirePackage{pgfplotsthemetol}
+  }{}
+}
+\newcommand{\neoset}[1]{\pgfkeys{/neo/.cd,#1}}
+\def\neo@plaintitleformat#1{#1}
+\newcommand{\plain}[2][]{%
+  \PackageWarning{beamerthemeneo}{%
+    The syntax `\plain' may be deprecated in a future version of neo.
+    Please use a frame with [standout] instead.
+  }
+  \begin{frame}[standout]{#1}
+    \neo@plaintitleformat{#2}
+  \end{frame}
+}
+\newcommand{\mreducelistspacing}{\vspace{-\topsep}}
+\neo@setdefaults
+\ProcessPgfOptions{/neo}
+\endinput
+%%
+%% End of file `beamerthemeneo.sty'.

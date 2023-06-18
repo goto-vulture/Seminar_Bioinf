@@ -1,0 +1,53 @@
+\documentclass{beamer}
+%\documentclass[handout]{beamer}
+\usetheme{neo}
+\usepackage{tikz}
+\usetikzlibrary{arrows,backgrounds,decorations.markings,shapes.misc}
+
+% Gefunden auf: https://texample.net/tikz/examples/double-arrows/
+\tikzstyle{vecArrow} = [thick, decoration={markings,mark=at position
+    1 with {\arrow[semithick]{open triangle 60}}},
+    double distance=1.4pt, shorten >= 5.5pt,
+    preaction = {decorate},
+    postaction = {draw,line width=1.4pt, white,shorten >= 4.5pt}]
+
+% Siehe: https://tex.stackexchange.com/questions/123760/draw-crosses-in-tikz
+\tikzset{cross/.style={cross out, draw=black, minimum size=2*(#1-\pgflinewidth), inner sep=0pt, outer sep=0pt, line width=2pt},
+%default radius will be 1pt.
+cross/.default={8pt}}
+
+\usepackage[utf8]{inputenc} % UTF-8 Kodierung verwenden
+\usepackage[ngerman]{babel} % Neue deutsche Sprache
+\usepackage{textpos}
+\usepackage[percent]{overpic}
+\usepackage{soul}
+
+
+
+\newcommand{\gerquot}[1]{\glqq#1\grqq}
+\newcommand{\dashAndSpace}{\textendash \space}
+\newcommand{\dashAndSpaceSeq}[1]{\dashAndSpace#1 \dashAndSpace}
+\newcommand{\tikzScale}{1.0}
+\newcommand{\massCharge}{$ m/z $ }
+\newcommand{\xAxisUnit}{\massCharge}
+\newcommand{\yAxisUnit}{$y$}
+\newcommand{\yAxisHeight}{3}
+\newcommand{\xAxisLength}{5}
+\newcommand{\axisColorOffset}{0.15}
+
+
+
+\title{De-Novo-Sequencing using Spectrum-Graphs, enabling Open Searches}
+\author{Dominik Habermann}
+\date{\today}
+
+\institute{Ruhr Universität Bochum}
+
+
+\begin{document}
+    \maketitle
+
+    \begin{frame}{Gliederung}
+    \tableofcontents
+    \end{frame}
+\end{document}

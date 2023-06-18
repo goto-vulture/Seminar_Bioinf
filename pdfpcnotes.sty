@@ -1,0 +1,77 @@
+%%
+%% This is file `pdfpcnotes.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% pdfpcnotes.dtx  (with options: `package')
+%% ---------------------------------------------------------------------------
+%% neoboss template 2021 by Christian Eichler
+%% based on the i4neo template 2017 by Bernhard Heinloth
+%%     https://gitlab.cs.fau.de/i4/tex/i4neo/
+%% based on the metropolis template by Matthias Vogelgesang et al.
+%%     https://github.com/matze/mtheme/
+%% and the original template was based on the HSRM theme by Benjamin Weiss.
+%% 
+%% This work is licensed under a Creative Commons Attribution-ShareAlike 4.0
+%% International License (https://creativecommons.org/licenses/by-sa/4.0/).
+%% ---------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{pdfpcnotes}
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+  family=PDFPC,
+  prefix=PDFPC@
+}
+\DeclareStringOption{duration}
+\DeclareStringOption{starttime}
+\DeclareStringOption{endtime}
+\DeclareStringOption{lastminutes}
+\DeclareStringOption{fontsize}
+
+\ProcessKeyvalOptions*
+\newcommand\PDFPC@option[2]{
+  \ifx#2\@empty\else
+    \immediate\write\pdfpcnotesfile{[#1]}%
+    \immediate\write\pdfpcnotesfile{#2}%
+  \fi
+}
+
+\newwrite\pdfpcnotesfile
+
+\AtBeginDocument{%
+\immediate\openout\pdfpcnotesfile\jobname.pdfpc\relax
+ \PDFPC@option{duration}{\PDFPC@duration}
+ \PDFPC@option{start_time}{\PDFPC@starttime}
+ \PDFPC@option{end_time}{\PDFPC@endtime}
+ \PDFPC@option{last_minutes}{\PDFPC@lastminutes}
+ \PDFPC@option{font_size}{\PDFPC@fontsize}
+  \immediate\write\pdfpcnotesfile{[notes]}
+}
+\begingroup
+\catcode`\#=12
+\gdef\hashchar{#}%
+\endgroup
+
+\def\lastpage{0}
+
+\newcommand<>{\pnote}[2][item]{%
+\note[#1]#3{#2}%
+\only#3{%
+\ifdim\thepage pt>\lastpage pt
+\let\lastpage\thepage
+\begingroup
+\let\#\hashchar
+\immediate\write\pdfpcnotesfile{\#\#\# \thepage}%
+\endgroup
+\fi
+
+\immediate\write\pdfpcnotesfile{\unexpanded{#2}}%
+}%
+}
+\AtEndDocument{%
+\immediate\closeout\pdfpcnotesfile
+}
+\endinput
+%%
+%% End of file `pdfpcnotes.sty'.

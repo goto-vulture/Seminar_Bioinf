@@ -1,0 +1,364 @@
+%%
+%% This is file `beamerfontthemeneo.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% beamerfontthemeneo.dtx  (with options: `package')
+%% ---------------------------------------------------------------------------
+%% neoboss template 2021 by Christian Eichler
+%% based on the i4neo template 2017 by Bernhard Heinloth
+%%     https://gitlab.cs.fau.de/i4/tex/i4neo/
+%% based on the metropolis template by Matthias Vogelgesang et al.
+%%     https://github.com/matze/mtheme/
+%% and the original template was based on the HSRM theme by Benjamin Weiss.
+%% 
+%% This work is licensed under a Creative Commons Attribution-ShareAlike 4.0
+%% International License (https://creativecommons.org/licenses/by-sa/4.0/).
+%% ---------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerfontthemeneo}[2021/05/01 neoboss font theme]
+\RequirePackage{etoolbox}
+\RequirePackage{ifxetex}
+\RequirePackage{ifluatex}
+\RequirePackage{pgfopts}
+\ifboolexpr{bool {xetex} or bool {luatex}}{
+  \@ifpackageloaded{fontspec}{
+    \PassOptionsToPackage{no-math}{fontspec}
+  }{
+    \RequirePackage[no-math]{fontspec}
+  }
+  \IfFileExists{FiraSans-Regular.otf}{
+    \defaultfontfeatures{
+          Scale     = 1.0,
+          Extension = .otf
+    }
+  }{
+    \PackageWarning{beamerthemeneo}{%
+      FiraSans font not found in path, therefore using system fonts. %
+      Make sure you have the fonts installed.%
+    }
+  }
+  \setmonofont
+    [ Numbers = {Monospaced,Lining},
+      UprightFont    = *-Regular ,
+      ItalicFont     = *-Regular ,
+      BoldFont       = *-Medium ,
+      BoldItalicFont = *-Medium ,
+    ]
+    {FiraMono}
+  \newcommand{\neo@fontsave}{
+    \let\firaneofamily\sfdefault
+    \renewcommand*\familydefault{\firaneofamily}
+  }
+  \newcommand{\neo@fontlight}{
+    \setsansfont[
+        Numbers = {OldStyle, Monospaced},
+        UprightFont    = *-Light ,
+        ItalicFont     = *-LightItalic ,
+        BoldFont       = *-Regular ,
+        BoldItalicFont = *-Italic ,
+      ]{FiraSans}
+    \neo@fontsave
+  }
+  \newcommand{\neo@fontbook}{
+    \setsansfont[
+        Numbers = {OldStyle, Monospaced},
+        UprightFont    = *-Book ,
+        ItalicFont     = *-BookItalic ,
+        BoldFont       = *-Medium ,
+        BoldItalicFont = *-MediumItalic ,
+      ]{FiraSans}
+    \neo@fontsave
+  }
+  \newcommand{\neo@fontregular}{
+    \setsansfont[
+        Numbers = {OldStyle, Monospaced},
+        UprightFont    = *-Regular ,
+        ItalicFont     = *-Italic ,
+        BoldFont       = *-SemiBold ,
+        BoldItalicFont = *-SemiBoldItalic ,
+      ]{FiraSans}
+    \neo@fontsave
+  }
+  \AtBeginEnvironment{tabular}{%
+    \addfontfeature{Numbers={Monospaced}}%
+  }
+}{%
+  \RequirePackage[utf8]{inputenc}
+  \IfFileExists{FiraSans.sty}{
+    \RequirePackage[T1]{fontenc}
+    \RequirePackage[sfdefault]{FiraSans}
+    \RequirePackage[nomap,lining]{FiraMono}
+    \def\bfseries@tt{mb}
+    \newcommand{\neo@fontsave}{
+      \edef\familydefault{\sfdefault}
+      \edef\seriesdefault{\mdseries@sf}
+    }
+    \newcommand{\neo@fontlight}{
+      \def\mdseries@sf{l}
+      \def\bfseries@sf{m}
+      \neo@fontsave
+    }
+    \newcommand{\neo@fontbook}{
+      \def\bfseries@sf{mb}
+      \neo@fontsave
+    }
+    \newcommand{\neo@fontregular}{
+      \def\mdseries@sf{m}
+      \def\bfseries@sf{sb}
+      \neo@fontsave
+    }
+  }{
+    \PackageWarning{beamerthemeneo}{%
+      You need to install the Fira Fonts package or compile with XeLaTeX or %
+      LuaLaTeX to use the included Fira fonts%
+    }
+  }
+}
+\setbeamerfont{title}{size=\Large,%
+                      series=\bfseries}
+\setbeamerfont{author}{size=\small}
+\setbeamerfont{date}{size=\small}
+\setbeamerfont{section title}{size=\Large,%
+                              series=\bfseries}
+\setbeamerfont{block title}{size=\normalsize,%
+                            series=\bfseries}
+\setbeamerfont{block title alerted}{size=\normalsize,%
+                                    series=\bfseries}
+\setbeamerfont*{subtitle}{size=\large}
+\setbeamerfont{frametitle}{size=\large,%
+                           series=\bfseries}
+\setbeamerfont{framesubtitle}{parent=frametitle,%
+                              size=\footnotesize}
+\setbeamerfont{caption}{size=\small}
+\setbeamerfont{caption name}{series=\bfseries}
+\setbeamerfont{description item}{series=\bfseries}
+\setbeamerfont{page number in head/foot}{size=\scriptsize}
+\setbeamerfont{bibliography entry author}{size=\normalsize,%
+                                          series=\normalfont}
+\setbeamerfont{bibliography entry title}{size=\normalsize,%
+                                         series=\bfseries}
+\setbeamerfont{bibliography entry location}{size=\normalsize,%
+                                            series=\normalfont}
+\setbeamerfont{bibliography entry note}{size=\small,%
+                                        series=\normalfont}
+\setbeamerfont{standout}{size=\Large,%
+                         series=\bfseries}
+\pgfkeys{
+  /neo/font/style/.cd,
+    .is choice,
+    light/.code={\neo@fontlight},
+    book/.code={\neo@fontbook},
+    regular/.code={\neo@fontregular},
+}
+\pgfkeys{
+  /neo/font/titleformat title/.cd,
+    .is choice,
+    regular/.code={%
+      \let\neo@titleformat\@empty%
+      \setbeamerfont{title}{shape=\normalfont}%
+    },
+    smallcaps/.code={%
+      \let\neo@titleformat\@empty%
+      \setbeamerfont{title}{shape=\scshape}%
+    },
+    allsmallcaps/.code={%
+      \let\neo@titleformat\lowercase%
+      \setbeamerfont{title}{shape=\scshape}%
+      \PackageWarning{beamerthemeneo}{%
+        Be aware that titleformat title=allsmallcaps can lead to problems%
+      }
+    },
+    allcaps/.code={%
+      \let\neo@titleformat\uppercase%
+      \setbeamerfont{title}{shape=\normalfont}
+      \PackageWarning{beamerthemeneo}{%
+        Be aware that titleformat title=allcaps can lead to problems%
+      }
+    },
+}
+\pgfkeys{
+  /neo/font/titleformat subtitle/.cd,
+    .is choice,
+    regular/.code={%
+      \let\neo@subtitleformat\@empty%
+      \setbeamerfont{subtitle}{shape=\normalfont}%
+    },
+    smallcaps/.code={%
+      \let\neo@subtitleformat\@empty%
+      \setbeamerfont{subtitle}{shape=\scshape}%
+    },
+    allsmallcaps/.code={%
+      \let\neo@subtitleformat\lowercase%
+      \setbeamerfont{subtitle}{shape=\scshape}%
+      \PackageWarning{beamerthemeneo}{%
+        Be aware that titleformat subtitle=allsmallcaps can lead to problems%
+      }
+    },
+    allcaps/.code={%
+      \let\neo@subtitleformat\uppercase%
+      \setbeamerfont{subtitle}{shape=\normalfont}%
+      \PackageWarning{beamerthemeneo}{%
+        Be aware that titleformat subtitle=allcaps can lead to problems%
+      }
+    },
+}
+\pgfkeys{
+  /neo/font/titleformat section/.cd,
+    .is choice,
+    regular/.code={%
+      \let\neo@sectiontitleformat\@empty%
+      \setbeamerfont{section title}{shape=\normalfont}%
+    },
+    smallcaps/.code={%
+      \let\neo@sectiontitleformat\@empty%
+      \setbeamerfont{section title}{shape=\scshape}%
+    },
+    allsmallcaps/.code={%
+      \let\neo@sectiontitleformat\MakeLowercase%
+      \setbeamerfont{section title}{shape=\scshape}%
+      \PackageWarning{beamerthemeneo}{%
+        Be aware that titleformat section=allsmallcaps can lead to problems%
+      }
+    },
+    allcaps/.code={%
+      \let\neo@sectiontitleformat\MakeUppercase%
+      \setbeamerfont{section title}{shape=\normalfont}%
+      \PackageWarning{beamerthemeneo}{%
+        Be aware that titleformat section=allcaps can lead to problems%
+      }
+    },
+}
+\pgfkeys{
+  /neo/font/titleformat frame/.cd,
+    .is choice,
+    regular/.code={%
+      \let\neo@frametitleformat\@empty%
+      \setbeamerfont{frametitle}{shape=\normalfont}%
+    },
+    smallcaps/.code={%
+      \let\neo@frametitleformat\@empty%
+      \setbeamerfont{frametitle}{shape=\scshape}%
+    },
+    allsmallcaps/.code={%
+      \let\neo@frametitleformat\MakeLowercase%
+      \setbeamerfont{frametitle}{shape=\scshape}%
+      \PackageWarning{beamerthemeneo}{%
+        Be aware that titleformat frame=allsmallcaps can lead to problems%
+      }
+    },
+    allcaps/.code={%
+      \let\neo@frametitleformat\MakeUppercase%
+      \setbeamerfont{frametitle}{shape=\normalfont}
+      \PackageWarning{beamerthemeneo}{%
+        Be aware that titleformat frame=allcaps can lead to problems%
+      }
+    },
+}
+\pgfkeys{
+  /neo/font/.cd,
+  titleformattitle/.code=\pgfkeysalso{titleformat title=#1},
+  titleformatsubtitle/.code=\pgfkeysalso{titleformat subtitle=#1},
+  titleformatsection/.code=\pgfkeysalso{titleformat section=#1},
+  titleformatframe/.code=\pgfkeysalso{titleformat frame=#1},
+}
+\newcommand{\neo@font@setdefaults}{
+  \pgfkeys{/neo/font/.cd,
+    style=book,
+    titleformat title=regular,
+    titleformat subtitle=regular,
+    titleformat section=regular,
+    titleformat frame=regular,
+  }
+}
+\def\neo@titleformat#1{#1}
+\def\neo@subtitleformat#1{#1}
+\def\neo@sectiontitleformat#1{#1}
+\def\neo@frametitleformat#1{#1}
+\patchcmd{\beamer@title}%
+  {\def\inserttitle{#2}}%
+  {\def\inserttitle{\neo@titleformat{#2}}}%
+  {}%
+  {\PackageError{beamerfontthemeneo}{Patching title failed}\@ehc}
+\patchcmd{\beamer@subtitle}%
+  {\def\insertsubtitle{#2}}%
+  {\def\insertsubtitle{\neo@subtitleformat{#2}}}%
+  {}%
+  {\PackageError{beamerfontthemeneo}{Patching subtitle failed}\@ehc}
+\patchcmd{\sectionentry}
+  {\def\insertsectionhead{#2}}
+  {\def\insertsectionhead{\neo@sectiontitleformat{#2}}}
+  {}
+  {\PackageError{beamerfontthemeneo}{Patching section title failed}\@ehc}
+\@tempswafalse
+\patchcmd{\beamer@section}
+  {\edef\insertsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{\unexpanded{#1}}}}
+  {\edef\insertsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{%
+    \noexpand\neo@sectiontitleformat{\unexpanded{#1}}}}}
+  {\@tempswatrue}
+  {}
+\patchcmd{\beamer@section}
+  {\def\insertsectionhead{\hyperlink{Navigation\the\c@page}{#1}}}
+  {\def\insertsectionhead{\hyperlink{Navigation\the\c@page}{%
+    \neo@sectiontitleformat{#1}}}}
+  {\@tempswatrue}
+  {}
+\patchcmd{\beamer@section}
+  {\edef\insertsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{\unexpanded{#1}}}}
+  {\edef\insertsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{%
+    \noexpand\neo@sectiontitleformat{\unexpanded{#1}}}}}
+  {\@tempswatrue}
+  {}
+\patchcmd{\beamer@section}
+  {\protected@edef\insertsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{#1}}}
+  {\protected@edef\insertsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{%
+    \noexpand\neo@sectiontitleformat{#1}}}}
+  {\@tempswatrue}
+  {}
+\if@tempswa\else
+  \PackageError{beamerfontthemeneo}{Patching section title failed}\@ehc
+\fi
+\@tempswafalse
+\patchcmd{\beamer@subsection}
+  {\edef\insertsubsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{\unexpanded{#1}}}}
+  {\edef\insertsubsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{%
+    \noexpand\neo@sectiontitleformat{\unexpanded{#1}}}}}
+  {\@tempswatrue}
+  {}
+\patchcmd{\beamer@subsection}
+  {\def\insertsubsectionhead{\hyperlink{Navigation\the\c@page}{#1}}}
+  {\def\insertsubsectionhead{\hyperlink{Navigation\the\c@page}{%
+    \neo@sectiontitleformat{#1}}}}
+  {\@tempswatrue}
+  {}
+\patchcmd{\beamer@subsection}
+  {\protected@edef\insertsubsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{#1}}}
+  {\protected@edef\insertsubsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{%
+    \noexpand\neo@sectiontitleformat{#1}}}}
+  {\@tempswatrue}
+  {}
+\if@tempswa\else
+  \PackageError{beamerfontthemeneo}{Patching section title failed}\@ehc
+\fi
+\patchcmd{\beamer@@frametitle}
+  {{%
+      \gdef\insertframetitle{{#2\ifnum\beamer@autobreakcount>0\relax{}\space%
+      \usebeamertemplate*{frametitle continuation}\fi}}%
+    \gdef\beamer@frametitle{#2}%
+    \gdef\beamer@shortframetitle{#1}%
+    }}
+  {{%
+      \gdef\insertframetitle{{\neo@frametitleformat{#2}\ifnum%
+      \beamer@autobreakcount>0\relax{}\space%
+      \usebeamertemplate*{frametitle continuation}\fi}}%
+    \gdef\beamer@frametitle{#2}%
+    \gdef\beamer@shortframetitle{#1}%
+    }}
+  {}
+  {\PackageError{beamerfontthemeneo}{Patching frame title failed}\@ehc}
+\neo@font@setdefaults
+\ProcessPgfPackageOptions{/neo/font}
+\endinput
+%%
+%% End of file `beamerfontthemeneo.sty'.
