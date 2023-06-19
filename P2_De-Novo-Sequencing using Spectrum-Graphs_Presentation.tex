@@ -302,18 +302,78 @@ cross/.default={8pt}}
      \end{itemize}
     \end{frame}
 
-    \begin{frame}{pNovo+ Algorithmus \dashAndSpace Verarbeitungsschritte}
-    \begin{itemize}
-     \item<1-> Datenaufbereitung
-     \begin{itemize}
-      \item<2-> Hintergrundrauschen verringern
-      \item<3-> Entfernen von falschen Peaks
-      \item<4-> Entfernen von irrelevanten Peaks
-      \item<5-> Zusammenfasen von Peaks
-     \end{itemize}
-    \item<6-> Bildung eines Spektrums-Graphen
-    \item<7-> Identifikation der AS-Sequenz
-     \end{itemize}
+
+    \begin{frame}{pNovo+ Algorithmus \dashAndSpace Datenaufbereitung}
+    \newcommand{\minWidth}{4.5cm}
+    \newcommand{\minHeight}{1.0cm}
+    \newcommand{\minWidthOverview}{2.9cm}
+    \newcommand{\minHeightOverview}{0.5cm}
+    \newcommand{\xStartOverview}{3}
+    \newcommand{\yStartOverview}{2}
+    \only<1>{
+         \centering
+         \begin{tikzpicture}
+        \node[rectangle,draw,text=black, fill=orange, minimum width=\minWidth, minimum height=\minHeight, align=center] (r1) at (0,0) {Hintergrundrauschen\\ verringern};
+        %\node[rectangle,draw,text=black, fill=yellow, minimum width=\minWidth, minimum height=\minHeight, align=center] (r2) at (0,-1.75) {Entfernung falscher\\Peaks};
+          %\node[rectangle,draw,text=black, fill=green, minimum width=\minWidth, minimum height=\minHeight, align=center] (r3) at (0,-3.5) {Entfernung irrelevanter\\ Peaks};
+          %\node[rectangle,draw,text=black, fill=magenta, minimum width=\minWidth, minimum height=\minHeight, align=center] (r4) at (0,-5.25) {Zusammenfassen};
+          %\draw[->, ultra thick] (r1) -- (r2);
+          %\draw[->, ultra thick] (r2) -- (r3);
+          %\draw[->, ultra thick] (r3) -- (r4);
+         \end{tikzpicture}
+         }%
+
+         \only<2>{
+              \centering
+         \begin{tikzpicture}
+        \node[rectangle,draw,text=black, fill=orange, minimum width=\minWidth, minimum height=\minHeight, align=center] (r1) at (0,0) {Hintergrundrauschen\\ verringern};
+        \node[rectangle,draw,text=black, fill=yellow, minimum width=\minWidth, minimum height=\minHeight, align=center] (r2) at (0,-1.75) {Entfernung falscher\\Peaks};
+          %\node[rectangle,draw,text=black, fill=green, minimum width=\minWidth, minimum height=\minHeight, align=center] (r3) at (0,-3.5) {Entfernung irrelevanter\\ Peaks};
+          %\node[rectangle,draw,text=black, fill=magenta, minimum width=\minWidth, minimum height=\minHeight, align=center] (r4) at (0,-5.25) {Zusammenfassen};
+          \draw[->, ultra thick] (r1) -- (r2);
+          %\draw[->, ultra thick] (r2) -- (r3);
+          %\draw[->, ultra thick] (r3) -- (r4);
+         \end{tikzpicture}
+         }%
+
+         \only<3>{
+              \centering
+         \begin{tikzpicture}
+        \node[rectangle,draw,text=black, fill=orange, minimum width=\minWidth, minimum height=\minHeight, align=center] (r1) at (0,0) {Hintergrundrauschen\\ verringern};
+        \node[rectangle,draw,text=black, fill=yellow, minimum width=\minWidth, minimum height=\minHeight, align=center] (r2) at (0,-1.75) {Entfernung falscher\\Peaks};
+          \node[rectangle,draw,text=black, fill=green, minimum width=\minWidth, minimum height=\minHeight, align=center] (r3) at (0,-3.5) {Entfernung irrelevanter\\ Peaks};
+          %\node[rectangle,draw,text=black, fill=magenta, minimum width=\minWidth, minimum height=\minHeight, align=center] (r4) at (0,-5.25) {Zusammenfassen};
+          \draw[->, ultra thick] (r1) -- (r2);
+          \draw[->, ultra thick] (r2) -- (r3);
+          %\draw[->, ultra thick] (r3) -- (r4);
+         \end{tikzpicture}
+         }%
+
+         \only<4>{
+              \centering
+         \begin{tikzpicture}
+        \node[rectangle,draw,text=black, fill=orange, minimum width=\minWidth, minimum height=\minHeight, align=center] (r1) at (0,0) {Hintergrundrauschen\\ verringern};
+        \node[rectangle,draw,text=black, fill=yellow, minimum width=\minWidth, minimum height=\minHeight, align=center] (r2) at (0,-1.75) {Entfernung falscher\\Peaks};
+          \node[rectangle,draw,text=black, fill=green, minimum width=\minWidth, minimum height=\minHeight, align=center] (r3) at (0,-3.5) {Entfernung irrelevanter\\ Peaks};
+          \node[rectangle,draw,text=black, fill=magenta, minimum width=\minWidth, minimum height=\minHeight, align=center] (r4) at (0,-5.25) {Zusammenfassen};
+          \draw[->, ultra thick] (r1) -- (r2);
+          \draw[->, ultra thick] (r2) -- (r3);
+          \draw[->, ultra thick] (r3) -- (r4);
+         \end{tikzpicture}
+         }%
+
+         \only<5>{
+              \centering
+         \begin{tikzpicture}[font=\scriptsize]
+        \node[rectangle,draw,text=black, fill=orange, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r1) at (\xStartOverview,\yStartOverview) {Hintergrundrauschen};
+        \node[rectangle,draw,text=black, fill=yellow, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r2) at (\xStartOverview,\yStartOverview-1) {Falsche Peaks};
+          \node[rectangle,draw,text=black, fill=green, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r3) at (\xStartOverview,\yStartOverview-2) {Irrelevante Peaks};
+          \node[rectangle,draw,text=black, fill=magenta, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r4) at (\xStartOverview,\yStartOverview-3) {Zusammenfassen};
+          \draw[->, ultra thick] (r1) -- (r2);
+          \draw[->, ultra thick] (r2) -- (r3);
+          \draw[->, ultra thick] (r3) -- (r4);
+         \end{tikzpicture}
+         }%
     \end{frame}
 
     \begin{frame}{pNovo+ Algorithmus \dashAndSpace Datenaufbereitung}
