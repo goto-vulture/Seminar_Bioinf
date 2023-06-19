@@ -18,13 +18,15 @@ cross/.default={8pt}}
 
 \usepackage[utf8]{inputenc} % UTF-8 Kodierung verwenden
 \usepackage[ngerman]{babel} % Neue deutsche Sprache
+\usepackage{xcolor}
 \usepackage{textpos}
 \usepackage[percent]{overpic}
 \usepackage{soul}
 \usepackage{pgfplots}
 \usepackage{booktabs} % \midrule
 \usepackage{makecell} % \makecell
-\usepackage{smartdiagram}
+\usepackage{tabulary}
+
 
 
 
@@ -67,17 +69,16 @@ cross/.default={8pt}}
     \section{Hintergrund}
         \begin{frame}{Hintergrund}
         \onslide<1->{
-            \begin{minipage}[t]{0.2\textwidth}
-            \vspace*{0.5cm}
+            \begin{minipage}[c]{0.2\textwidth}
             \includegraphics[scale=0.065]{./Presentation_Images/Glycine-neutral-Ipttt-conformer-3D-bs-17.png}
       \end{minipage}
             }%
             \onslide<1->{
-            \begin{minipage}[t]{0.75\textwidth}
+            \begin{minipage}[c]{0.775\textwidth}
                 \begin{itemize}
                   \item<1-> Peptide: Kette von Aminosäuren (AS)
                   \item<2-> 20 relevante AS
-                  \item<3-> Reihenfolge von AS ist weitesgehend beliebig
+                  \item<3-> Reihenfolge von AS ist weitestgehend beliebig
                   \item<4-> $f(x)=20^x$\space\space\space$x:$ $Anzahl$ $an$ $AS$
                 \end{itemize}
                 % Bild von Grundaufbau einer AS
@@ -87,9 +88,8 @@ cross/.default={8pt}}
         \begin{frame}{Anzahl an Kombinationen}
          \onslide<1->{
          \begin{itemize}
-          \item<1-> Bereits bei wenigen AS: Zu viele Kombinationen
+          \item<1-> Bereits bei wenigen AS: Kaum händelbare Anzahl an Kombinationen
          \end{itemize}
-
          }%
          \onslide<2->{
          \centering
@@ -111,13 +111,12 @@ cross/.default={8pt}}
 
         \begin{frame}{Biomedizinische Fragestellung}
         \onslide<1->{
-         \begin{minipage}[t]{0.2\textwidth}
-         \vspace*{0.5cm}
+         \begin{minipage}[c]{0.2\textwidth}
          \includegraphics[scale=0.25]{./Presentation_Images/vecteezy_question-mark-with-3d-vector-icon-cartoon-minimal-style_16626300.png}
    \end{minipage}
          }%
         \onslide<1->{
-        \begin{minipage}[t]{0.75\textwidth}
+        \begin{minipage}[c]{0.775\textwidth}
         \begin{itemize}
         \item<1-> Zuverlässige Bestimmung \emph{kurzkettiger} Peptide möglich?
         \item<2-> Biomedizinisch relevant:
@@ -145,12 +144,11 @@ cross/.default={8pt}}
      }%
     \end{frame}
 
-    \begin{frame}{Beispiel Massenspektrogramm}
+    \begin{frame}{Beispiel Spektrogramm}
     \onslide<1->{
         \begin{itemize}
-         \item<1-> Ergebnisse einer MS: Massenspektrogramm
+         \item<1-> Ergebnisse einer MS: Spektrogramm
         \end{itemize}
-
     }%
     \onslide<2->{
     \centering
@@ -171,57 +169,57 @@ cross/.default={8pt}}
 
      \only<2>{
      \centering
-     \begin{tabular}{c|c}
+     \begin{tabulary}{0.95\textwidth}{c|c}
      AS Sequenzierung & De-Novo-Sequenzierung \\
      \midrule
-     Datenbanken als \\Hilfsmittel & \\
+     Datenbanken als Hilfsmittel & \\
       & \\
       & \\
-     \end{tabular}
+     \end{tabulary}
      }%
 
      \only<3>{
      \centering
-     \begin{tabular}{c|c}
+     \begin{tabulary}{0.95\textwidth}{c|c}
      AS Sequenzierung & De-Novo-Sequenzierung \\
      \midrule
-     Datenbanken als \\Hilfsmittel & \\
+     Datenbanken als Hilfsmittel & \\
       & \\
      \makecell{Identifizierung von \emph{bekannten}\\Sequenzen} & \\
-     \end{tabular}
+     \end{tabulary}
      }%
 
      \only<4>{
      \centering
-     \begin{tabular}{c|c}
+     \begin{tabulary}{0.95\textwidth}{c|c}
      AS Sequenzierung & De-Novo-Sequenzierung \\
      \midrule
-     Datenbanken als \\Hilfsmittel & Ohne weitere Hilfsmittel\\
+     Datenbanken als Hilfsmittel & Ohne weitere Hilfsmittel\\
       & \\
      \makecell{Identifizierung von \emph{bekannten}\\Sequenzen} & \\
-     \end{tabular}
+     \end{tabulary}
      }%
 
      \only<5>{
      \centering
-     \begin{tabular}{c|c}
+     \begin{tabulary}{0.95\textwidth}{c|c}
      AS Sequenzierung & De-Novo-Sequenzierung \\
      \midrule
-     Datenbanken als \\Hilfsmittel & Ohne weitere Hilfsmittel\\
+     Datenbanken als Hilfsmittel & Ohne weitere Hilfsmittel\\
       & \\
      \makecell{Identifizierung von \emph{bekannten}\\Sequenzen} & \makecell{Bestimmung \emph{unbekannter}\\Sequenzen}\\
-     \end{tabular}
+     \end{tabulary}
      }%
 
      \only<6>{
      \centering
-     \begin{tabular}{c|c}
+     \begin{tabulary}{0.95\textwidth}{c|c}
      AS Sequenzierung & De-Novo-Sequenzierung \\
      \midrule
-     Datenbanken als \\Hilfsmittel & Ohne weitere Hilfsmittel\\
+     Datenbanken als Hilfsmittel & Ohne weitere Hilfsmittel\\
       & \\
      \makecell{Identifizierung von \emph{bekannten}\\Sequenzen} & \makecell{Bestimmung \emph{unbekannter}\\Sequenzen}\\
-     \end{tabular}
+     \end{tabulary}
      \vspace*{0.5cm}
      \begin{itemize}
       \item De novo: lat. \gerquot{Von neuem}
@@ -229,24 +227,15 @@ cross/.default={8pt}}
      }%
      \end{frame}
 
-    \begin{frame}{De-Novo-Sequenzierung (Sequenzierung ohne Datenbank)}
-         \onslide<1->{
-         \begin{minipage}[t]{0.2\textwidth}
-         \smartdiagramset{back arrow disabled=true, module y sep =1,}
-         \smartdiagram[flow diagram:vertical]{Edit,
-  \LaTeX, Bib\TeX/ biber, make\-index, \LaTeX}
-   \end{minipage}
-         }%
+    \begin{frame}{De-Novo-Sequenzierung \dashAndSpace Übersicht}
          \onslide<1->
          {
-         \begin{minipage}[t]{0.70\textwidth}
     \begin{itemize}
      \item<1-> Zusätzliche Informationen notwendig
      \item<2-> Verwendung einer 2. MS
-     \item<3-> Sogenannte Tandem-Massenspektrometrie MS2
+     \item<3-> Verfahren: Tandem-Massenspektrometrie MS2
      % einfacher Graph, der den Ablauf zeigt
      \end{itemize}
-     \end{minipage}
      }%
    \end{frame}
 
@@ -266,7 +255,8 @@ cross/.default={8pt}}
        \item<3-> Ionen zerfallen
        \item<4-> Ergebnis: \gerquot{Fragment-Ionen}
       \end{itemize}
-      \item<2-> 2. MS wird auf Fragment-Ionen angewendet
+      \item<5-> Verschiedene Fragmentierungsmethoden mit spezifischen Fragmenten
+      \item<6-> 2. MS wird auf Fragment-Ionen angewendet
     \end{itemize}
     \end{frame}
 
@@ -274,14 +264,12 @@ cross/.default={8pt}}
     \begin{itemize}
       \item<1-> Höhere Genauigkeit durch Filterung nach 1. MS
       \item<2-> Bessere Selektivität beim 2. MS
-      \item<3-> Fragment-Ionen zerfallen spezifisch
+      \item<3-> Ionen zerfallen spezifisch
       \item<4-> $\rightarrow$ Rekonstruktion der ursprünglichen Ionen möglich
       \vspace*{0.5cm}
       \item<5-> MS2 Ergebnisse haben eine höhere Qualität
     \end{itemize}
     \end{frame}
-
-
 
     \section{pNovo+ Algorithmus}
     \begin{frame}{pNovo+ Algorithmus \dashAndSpace Übersicht}
@@ -289,100 +277,110 @@ cross/.default={8pt}}
     \item<1-> Algorithmus für die De-Novo-Sequenzierung
     \item<2-> Auswertung von MS2 Spektrogrammen
     \item<3-> Rekonstruktion der AS-Sequenz
-    \item<4-> Spektrums-Graph
-    \item<3-> Ziel: Qualität der Ergebnisse verbessern
+    \item<4-> Hilfsmittel: Spektrums-Graph
     \end{itemize}
     \end{frame}
 
     \begin{frame}{pNovo+ Algorithmus \dashAndSpace Hauptansatz}
     \begin{itemize}
      \item<1-> \textbf{Zwei} MS2 Spektren verwenden
-     \item<2-> Unterschiedliche Fragmentierungsmethoden
-     \item<3-> Hintergrundrauschen aus den Daten entfernen
+     \item<2-> Unterschiedliche Fragmentierungsmethoden pro Spektrum
+     \item<3-> Ziel: bessere Sequenzierungsergebnisse
      \end{itemize}
     \end{frame}
 
 
-    \begin{frame}{pNovo+ Algorithmus \dashAndSpace Datenaufbereitung}
     \newcommand{\minWidth}{4.5cm}
     \newcommand{\minHeight}{1.0cm}
-    \newcommand{\minWidthOverview}{2.9cm}
-    \newcommand{\minHeightOverview}{0.5cm}
-    \newcommand{\xStartOverview}{3}
-    \newcommand{\yStartOverview}{2}
+    \newcommand{\minWidthOverview}{2.3cm}
+    \newcommand{\minHeightOverview}{0.4cm}
+    \newcommand{\xStartOverview}{10}
+    \newcommand{\yStartOverview}{15}
+    \newcommand{\currElementOpacity}{1}
+    \newcommand{\otherElementOpacity}{0.35}
+    \begin{frame}{pNovo+ Algorithmus \dashAndSpace Datenaufbereitung}
     \only<1>{
          \centering
          \begin{tikzpicture}
-        \node[rectangle,draw,text=black, fill=orange, minimum width=\minWidth, minimum height=\minHeight, align=center] (r1) at (0,0) {Hintergrundrauschen\\ verringern};
-        %\node[rectangle,draw,text=black, fill=yellow, minimum width=\minWidth, minimum height=\minHeight, align=center] (r2) at (0,-1.75) {Entfernung falscher\\Peaks};
-          %\node[rectangle,draw,text=black, fill=green, minimum width=\minWidth, minimum height=\minHeight, align=center] (r3) at (0,-3.5) {Entfernung irrelevanter\\ Peaks};
-          %\node[rectangle,draw,text=black, fill=magenta, minimum width=\minWidth, minimum height=\minHeight, align=center] (r4) at (0,-5.25) {Zusammenfassen};
-          %\draw[->, ultra thick] (r1) -- (r2);
-          %\draw[->, ultra thick] (r2) -- (r3);
-          %\draw[->, ultra thick] (r3) -- (r4);
+        \node[rectangle,draw,text=black, fill=orange, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r1) at (0,0) {Hintergrundrauschen\\ verringern};
+        \node[rectangle,draw,text=black, fill=yellow, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r2) at (0,-1.75) {Entfernung falscher\\Peaks};
+          \node[rectangle,draw,text=black, fill=green, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r3) at (0,-3.5) {Entfernung irrelevanter\\ Peaks};
+          \node[rectangle,draw,text=black, fill=magenta, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r4) at (0,-5.25) {Zusammenfassen};
+          \draw[->, ultra thick, opacity=0] (r1) -- (r2);
+          \draw[->, ultra thick, opacity=0] (r2) -- (r3);
+          \draw[->, ultra thick, opacity=0] (r3) -- (r4);
          \end{tikzpicture}
          }%
 
          \only<2>{
               \centering
          \begin{tikzpicture}
-        \node[rectangle,draw,text=black, fill=orange, minimum width=\minWidth, minimum height=\minHeight, align=center] (r1) at (0,0) {Hintergrundrauschen\\ verringern};
-        \node[rectangle,draw,text=black, fill=yellow, minimum width=\minWidth, minimum height=\minHeight, align=center] (r2) at (0,-1.75) {Entfernung falscher\\Peaks};
-          %\node[rectangle,draw,text=black, fill=green, minimum width=\minWidth, minimum height=\minHeight, align=center] (r3) at (0,-3.5) {Entfernung irrelevanter\\ Peaks};
-          %\node[rectangle,draw,text=black, fill=magenta, minimum width=\minWidth, minimum height=\minHeight, align=center] (r4) at (0,-5.25) {Zusammenfassen};
-          \draw[->, ultra thick] (r1) -- (r2);
-          %\draw[->, ultra thick] (r2) -- (r3);
-          %\draw[->, ultra thick] (r3) -- (r4);
+        \node[rectangle,draw,text=black, fill=orange, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r1) at (0,0) {Hintergrundrauschen\\ verringern};
+        \node[rectangle,draw,text=black, fill=yellow, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r2) at (0,-1.75) {Entfernung falscher\\Peaks};
+          \node[rectangle,draw,text=black, fill=green, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r3) at (0,-3.5) {Entfernung irrelevanter\\ Peaks};
+          \node[rectangle,draw,text=black, fill=magenta, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r4) at (0,-5.25) {Zusammenfassen};
+          \draw[->, ultra thick, opacity=1] (r1) -- (r2);
+          \draw[->, ultra thick, opacity=0] (r2) -- (r3);
+          \draw[->, ultra thick, opacity=0] (r3) -- (r4);
          \end{tikzpicture}
          }%
 
          \only<3>{
               \centering
          \begin{tikzpicture}
-        \node[rectangle,draw,text=black, fill=orange, minimum width=\minWidth, minimum height=\minHeight, align=center] (r1) at (0,0) {Hintergrundrauschen\\ verringern};
-        \node[rectangle,draw,text=black, fill=yellow, minimum width=\minWidth, minimum height=\minHeight, align=center] (r2) at (0,-1.75) {Entfernung falscher\\Peaks};
-          \node[rectangle,draw,text=black, fill=green, minimum width=\minWidth, minimum height=\minHeight, align=center] (r3) at (0,-3.5) {Entfernung irrelevanter\\ Peaks};
-          %\node[rectangle,draw,text=black, fill=magenta, minimum width=\minWidth, minimum height=\minHeight, align=center] (r4) at (0,-5.25) {Zusammenfassen};
-          \draw[->, ultra thick] (r1) -- (r2);
-          \draw[->, ultra thick] (r2) -- (r3);
-          %\draw[->, ultra thick] (r3) -- (r4);
+        \node[rectangle,draw,text=black, fill=orange, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r1) at (0,0) {Hintergrundrauschen\\ verringern};
+        \node[rectangle,draw,text=black, fill=yellow, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r2) at (0,-1.75) {Entfernung falscher\\Peaks};
+          \node[rectangle,draw,text=black, fill=green, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r3) at (0,-3.5) {Entfernung irrelevanter\\ Peaks};
+          \node[rectangle,draw,text=black, fill=magenta, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r4) at (0,-5.25) {Zusammenfassen};
+          \draw[->, ultra thick, opacity=1] (r1) -- (r2);
+          \draw[->, ultra thick, opacity=1] (r2) -- (r3);
+          \draw[->, ultra thick, opacity=0] (r3) -- (r4);
          \end{tikzpicture}
          }%
 
          \only<4>{
               \centering
          \begin{tikzpicture}
-        \node[rectangle,draw,text=black, fill=orange, minimum width=\minWidth, minimum height=\minHeight, align=center] (r1) at (0,0) {Hintergrundrauschen\\ verringern};
-        \node[rectangle,draw,text=black, fill=yellow, minimum width=\minWidth, minimum height=\minHeight, align=center] (r2) at (0,-1.75) {Entfernung falscher\\Peaks};
-          \node[rectangle,draw,text=black, fill=green, minimum width=\minWidth, minimum height=\minHeight, align=center] (r3) at (0,-3.5) {Entfernung irrelevanter\\ Peaks};
-          \node[rectangle,draw,text=black, fill=magenta, minimum width=\minWidth, minimum height=\minHeight, align=center] (r4) at (0,-5.25) {Zusammenfassen};
-          \draw[->, ultra thick] (r1) -- (r2);
-          \draw[->, ultra thick] (r2) -- (r3);
-          \draw[->, ultra thick] (r3) -- (r4);
-         \end{tikzpicture}
-         }%
-
-         \only<5>{
-              \centering
-         \begin{tikzpicture}[font=\scriptsize]
-        \node[rectangle,draw,text=black, fill=orange, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r1) at (\xStartOverview,\yStartOverview) {Hintergrundrauschen};
-        \node[rectangle,draw,text=black, fill=yellow, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r2) at (\xStartOverview,\yStartOverview-1) {Falsche Peaks};
-          \node[rectangle,draw,text=black, fill=green, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r3) at (\xStartOverview,\yStartOverview-2) {Irrelevante Peaks};
-          \node[rectangle,draw,text=black, fill=magenta, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r4) at (\xStartOverview,\yStartOverview-3) {Zusammenfassen};
-          \draw[->, ultra thick] (r1) -- (r2);
-          \draw[->, ultra thick] (r2) -- (r3);
-          \draw[->, ultra thick] (r3) -- (r4);
+        \node[rectangle,draw,text=black, fill=orange, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r1) at (0,0) {Hintergrundrauschen\\ verringern};
+        \node[rectangle,draw,text=black, fill=yellow, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r2) at (0,-1.75) {Entfernung falscher\\Peaks};
+          \node[rectangle,draw,text=black, fill=green, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r3) at (0,-3.5) {Entfernung irrelevanter\\ Peaks};
+          \node[rectangle,draw,text=black, fill=magenta, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r4) at (0,-5.25) {Zusammenfassen};
+          \draw[->, ultra thick, opacity=1] (r1) -- (r2);
+          \draw[->, ultra thick, opacity=1] (r2) -- (r3);
+          \draw[->, ultra thick, opacity=1] (r3) -- (r4);
          \end{tikzpicture}
          }%
     \end{frame}
 
-    \begin{frame}{pNovo+ Algorithmus \dashAndSpace Datenaufbereitung}
+    % BEGIN ln()
+\begin{frame}{pNovo+ Algorithmus \dashAndSpace Datenaufbereitung}
+    \onslide<1->{
+    \begin{minipage}[c]{0.775\textwidth}
+    \centering
     \begin{itemize}
-    \item<1-> Hintergrundrauschen reduzieren
-    \item<2-> Anwendung $ln()$
+    \item<1-> Überpriorisierung fehlerhafter Daten vermeiden
+    \item<2-> Tool: $ln()$
     \end{itemize}
+    \end{minipage}
+}
+\onslide<1->{
+    \begin{minipage}[c]{0.2\textwidth}
+  \centering
+     \begin{tikzpicture}[font=\tiny]
+         %\node[rectangle] at (0,0) {};
+        \node[rectangle,draw,text=black, fill=orange,opacity=\currElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r1) at (\xStartOverview,\yStartOverview) {Hintergrundrauschen};
+        \node[rectangle,draw,text=black, fill=yellow,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r2) at (\xStartOverview,\yStartOverview-0.75) {Falsche Peaks};
+          \node[rectangle,draw,text=black, fill=green, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r3) at (\xStartOverview,\yStartOverview-1.5) {Irrelevante Peaks};
+          \node[rectangle,draw,text=black, fill=magenta, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r4) at (\xStartOverview,\yStartOverview-2.25) {Zusammenfassen};
+          \draw[->, ultra thick] (r1) -- (r2);
+          \draw[->, ultra thick] (r2) -- (r3);
+          \draw[->, ultra thick] (r3) -- (r4);
+         \end{tikzpicture}
+    \end{minipage}
+    }
+    \vspace*{1cm}
 \onslide<3-> {
-   \begin{minipage}[t]{0.45\textwidth}
+   \begin{minipage}[l]{0.45\textwidth}
       \centering
       \begin{tikzpicture}[scale=\tikzScale, baseline=(current bounding box.center)]
          \draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit}
@@ -441,7 +439,7 @@ cross/.default={8pt}}
    \textbf{$\rightarrow$}
    }%
    \onslide<5->{
-   \begin{minipage}[t]{0.45\textwidth}
+   \begin{minipage}[r]{0.45\textwidth}
       \centering
       \begin{tikzpicture}[scale=\tikzScale, baseline=(current bounding box.center)]
       \draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit}
@@ -495,14 +493,37 @@ cross/.default={8pt}}
 \draw[thick] (4.898000000000001, 0.0) -- (4.898000000000001, {ln(1.2)});
       \end{tikzpicture}
       \end{minipage}
-      }%
-    \end{frame}
+     }%
+\end{frame}
+% END ln()
 
-    \begin{frame}{pNovo+ Algorithmus \dashAndSpace Datenaufbereitung}
+% BEGIN Monoisotopische Masse
+\begin{frame}{pNovo+ Algorithmus \dashAndSpace Datenaufbereitung}
+    \onslide<1->{
+    \begin{minipage}[c]{0.775\textwidth}
+    \centering
     \begin{itemize}
-     \item<1-> Entfernen von falschen Peaks
-     \item<2->
+    \item<1-> Hintergrundrauschen könnte auch AS mit Isotop sein
+    \item<2-> $m/z$ wählen, die garantiert von AS stammen % (monoisotopische Masse)
+    \item<3-> Peaks mit definierten Abstand auswählen
     \end{itemize}
+    \end{minipage}
+}
+\onslide<1->{
+    \begin{minipage}[c]{0.2\textwidth}
+  \centering
+     \begin{tikzpicture}[font=\tiny]
+         %\node[rectangle] at (0,0) {};
+        \node[rectangle,draw,text=black, fill=orange,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r1) at (\xStartOverview,\yStartOverview) {Hintergrundrauschen};
+        \node[rectangle,draw,text=black, fill=yellow,opacity=\currElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r2) at (\xStartOverview,\yStartOverview-0.75) {Falsche Peaks};
+          \node[rectangle,draw,text=black, fill=green, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r3) at (\xStartOverview,\yStartOverview-1.5) {Irrelevante Peaks};
+          \node[rectangle,draw,text=black, fill=magenta, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r4) at (\xStartOverview,\yStartOverview-2.25) {Zusammenfassen};
+          \draw[->, ultra thick] (r1) -- (r2);
+          \draw[->, ultra thick] (r2) -- (r3);
+          \draw[->, ultra thick] (r3) -- (r4);
+         \end{tikzpicture}
+    \end{minipage}
+    }
     \onslide<3-> {
        \begin{minipage}[t]{.45\linewidth}
       \centering
@@ -597,12 +618,33 @@ cross/.default={8pt}}
       \end{minipage}
 }%
     \end{frame}
+    % END Monoisotopische Masse
 
-
-    \begin{frame}{pNovo+ Algorithmus \dashAndSpace Datenaufbereitung}
-     \begin{itemize}
-      \item<1-> Entfernen von Peaks aus einem irrelevanten Bereich
-     \end{itemize}
+% BEGIN Irr
+\begin{frame}{pNovo+ Algorithmus \dashAndSpace Datenaufbereitung}
+    \onslide<1->{
+    \begin{minipage}[c]{0.775\textwidth}
+    \centering
+    \begin{itemize}
+    \item<1-> Peaks aus irrelevantem Intervall entfernen
+    \end{itemize}
+    \end{minipage}
+}
+\onslide<1->{
+    \begin{minipage}[c]{0.2\textwidth}
+  \centering
+     \begin{tikzpicture}[font=\tiny]
+         %\node[rectangle] at (0,0) {};
+        \node[rectangle,draw,text=black, fill=orange,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r1) at (\xStartOverview,\yStartOverview) {Hintergrundrauschen};
+        \node[rectangle,draw,text=black, fill=yellow,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r2) at (\xStartOverview,\yStartOverview-0.75) {Falsche Peaks};
+          \node[rectangle,draw,text=black, fill=green, opacity=\currElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r3) at (\xStartOverview,\yStartOverview-1.5) {Irrelevante Peaks};
+          \node[rectangle,draw,text=black, fill=magenta, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r4) at (\xStartOverview,\yStartOverview-2.25) {Zusammenfassen};
+          \draw[->, ultra thick] (r1) -- (r2);
+          \draw[->, ultra thick] (r2) -- (r3);
+          \draw[->, ultra thick] (r3) -- (r4);
+         \end{tikzpicture}
+    \end{minipage}
+    }
      \onslide<2-> {
         \begin{minipage}[t]{.45\linewidth}
       \centering
@@ -683,11 +725,35 @@ cross/.default={8pt}}
    \end{minipage}%
      }%
     \end{frame}
+    % END Irr
 
+    % BEGIN Merge
     \begin{frame}{pNovo+ Algorithmus \dashAndSpace Datenaufbereitung}
-     \begin{itemize}
-      \item<1-> Zusammenfassen von Peaks
-     \end{itemize}
+    \onslide<1->{
+    \begin{minipage}[c]{0.775\textwidth}
+    \centering
+    \begin{itemize}
+    \item<1-> Zusammenfassen von Peaks
+    \item<2-> Abstand einen Schwellwert unterschreitet
+    \item<3-> $y=$ Median aus zusammengefassten Peaks
+    \end{itemize}
+    \end{minipage}
+}
+\onslide<1->{
+    \begin{minipage}[c]{0.2\textwidth}
+  \centering
+     \begin{tikzpicture}[font=\tiny]
+         %\node[rectangle] at (0,0) {};
+        \node[rectangle,draw,text=black, fill=orange,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r1) at (\xStartOverview,\yStartOverview) {Hintergrundrauschen};
+        \node[rectangle,draw,text=black, fill=yellow,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r2) at (\xStartOverview,\yStartOverview-0.75) {Falsche Peaks};
+          \node[rectangle,draw,text=black, fill=green, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r3) at (\xStartOverview,\yStartOverview-1.5) {Irrelevante Peaks};
+          \node[rectangle,draw,text=black, fill=magenta, opacity=\currElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r4) at (\xStartOverview,\yStartOverview-2.25) {Zusammenfassen};
+          \draw[->, ultra thick] (r1) -- (r2);
+          \draw[->, ultra thick] (r2) -- (r3);
+          \draw[->, ultra thick] (r3) -- (r4);
+         \end{tikzpicture}
+    \end{minipage}
+    }
      \onslide<2-> {
         \begin{minipage}[t]{.45\linewidth}
       \centering
@@ -767,8 +833,37 @@ cross/.default={8pt}}
       \end{minipage}
      }%
      \end{frame}
+     % END Merge
+
 
      \begin{frame}{pNovo+ Algorithmus \dashAndSpace Bildung eines Spektrumsgraphen}
+          \onslide<1->{
+        \begin{minipage}[c]{0.2\textwidth}
+        \centering
+        \includegraphics[scale=0.1]{./Presentation_Images/MassSpectraIcon.png}
+
+        \vspace*{-0.4cm}
+         $\Downarrow$
+         \vspace*{0.2cm}
+
+        \begin{tikzpicture}[scale=0.9]
+        \node [circle,draw,ultra thick,color=blue] (0) at (-0.75, 0.75) {};
+        \node [circle,draw,ultra thick,color=blue] (1) at (0.25, 1.5) {};
+        \node [circle,draw,ultra thick,color=blue] (2) at (-0.25, -0.25) {};
+        \node [circle,draw,ultra thick,color=blue] (3) at (0.75, 0.5) {};
+        \node [circle,draw,ultra thick,color=blue] (4) at (-1.25, -0.25) {};
+
+        \draw[->,thick] (4) to (0);
+        \draw[->,thick] (0) to (2);
+        \draw[->,thick] (2) to (3);
+        \draw[->,thick] (0) to (1);
+        \draw[->,thick] (0) to (3);
+        \draw[->,thick] (1) to (3);
+        \end{tikzpicture}
+  \end{minipage}
+            }%
+            \onslide<1->{
+            \begin{minipage}[c]{0.775\textwidth}
     \begin{itemize}
      \item<1-> Verwendung vorverarbeiteter MS2 Spektren
      \item<2-> Peaks $\widehat{=}$ Knoten
@@ -777,18 +872,49 @@ cross/.default={8pt}}
      \item<5-> Startknoten (Masse = 0)
      \item<6-> Endknoten (Masse = vorheriger Knoten - $18,02$)
     \end{itemize}
-     \end{frame}
+    \end{minipage}
+     }%
+    \end{frame}
 
      \begin{frame}{pNovo+ Algorithmus \dashAndSpace Bildung eines Spektrumsgraphen}
+               \onslide<1->{
+        \begin{minipage}[c]{0.2\textwidth}
+        \centering
+        \includegraphics[scale=0.1]{./Presentation_Images/MassSpectraIcon.png}
+
+        \vspace*{-0.4cm}
+         $\Downarrow$
+         \vspace*{0.2cm}
+
+        \begin{tikzpicture}[scale=0.9]
+        \node [circle,draw,thick] (0) at (-0.75, 0.75) {};
+        \node [circle,draw,thick] (1) at (0.25, 1.5) {};
+        \node [circle,draw,thick] (2) at (-0.25, -0.25) {};
+        \node [circle,draw,thick] (3) at (0.75, 0.5) {};
+        \node [circle,draw,thick] (4) at (-1.25, -0.25) {};
+
+        \draw[->,ultra thick,color=blue] (4) to (0);
+        \draw[->,ultra thick,color=blue] (0) to (2);
+        \draw[->,ultra thick,color=blue] (2) to (3);
+        \draw[->,ultra thick,color=blue] (0) to (1);
+        \draw[->,ultra thick,color=blue] (0) to (3);
+        \draw[->,ultra thick,color=blue] (1) to (3);
+        \end{tikzpicture}
+  \end{minipage}
+            }%
+            \onslide<1->{
+            \begin{minipage}[c]{0.775\textwidth}
       \begin{itemize}
        \item<1-> Gerichtete Kanten zwischen Knotenpaar, wenn:
        \begin{itemize}
         \item<2-> Massendifferenz genau Masse einer AS entspricht
         \item<3-> Massendifferenz genau Masse zwei AS entsprechen
-        \item<4-> $N + \binom{n+N-1}{N-1}$ $n=2$ $N=20$ Differenzen
        \end{itemize}
+       \item<4-> $N + \binom{n+N-1}{N-1}$ Differenzen $n=2$ $N=20$
        \item<5-> $230$ Differenzen
       \end{itemize}
+      \end{minipage}
+      }
      \end{frame}
 
 
@@ -798,7 +924,7 @@ cross/.default={8pt}}
         \end{itemize}
 \onslide<2->{
 \centering
-    \begin{tikzpicture}[scale=.8,auto=left,every node/.style={circle,fill=blue!20}]
+    \begin{tikzpicture}[scale=.7,auto=left,every node/.style={circle,fill=blue!20}]
     \node (begin) at (0,10) {Start};
     \node (end) at (12,10) {End};
     \node (n1) at (2,10) {A};
@@ -812,15 +938,15 @@ cross/.default={8pt}}
   \tikzset{every node/.style={}}
     \draw[->] (\from) -- node[above] {} (\to);
     }
-    \foreach \from/\to in {n1/n2,n4/n5,n3/n4}
+    \foreach \from/\to in {n1/n2,n4/n5,n3/n4,n1/n4}
   {
   \tikzset{every node/.style={}}
-    \draw[->] (\from) to[bend left] node[above] {x} (\to);
+    \draw[->] (\from) to[bend left] node[above] {} (\to);
     }
     \foreach \from/\to in {n1/n3,n3/n4,n4/n5}
   {
   \tikzset{every node/.style={}}
-    \draw[->] (\from) to[bend right] node[below] {x} (\to);
+    \draw[->] (\from) to[bend right] node[below] {} (\to);
     }
     \end{tikzpicture}
     }%
@@ -832,59 +958,94 @@ cross/.default={8pt}}
      \end{frame}
 
      \begin{frame}{pNovo+ Algorithmus \dashAndSpace Evaluierung}
+     \onslide<1->{
+        \begin{minipage}[c]{0.2\textwidth}
+        \centering
+        \includegraphics[scale=0.1]{./Presentation_Images/EvaluationIcon.png}
+        \end{minipage}
+        }%
+        \onslide<1->{
+        \begin{minipage}[c]{0.775\textwidth}
       \begin{itemize}
-       \item<1-> Erfolgreiche Sequenzierungen: $81,2\%$
-       \item<2-> Zum Vergleich: Konkurrenzalgorithmen: $71.8\%$
-       \vspace*{1cm}
-       \item<3-> pNovo+ brauchbares Tool
+       \item<1-> 8677 Datensätze
+       \item<2-> Erfolgreiche Sequenzierungen: \textcolor{green}{$81,2\%$}
+       \item<3-> Konkurrenzalgorithmus: \textcolor{orange}{$71.8\%$}
+       \end{itemize}
+       \begin{itemize}
+       \item<4-> pNovo+ \textcolor{purple}{besser als die Konkurrenz!}
+       \item<5-> Side Note: pNovo+ ist \textcolor{purple}{frei verfügbar}
       \end{itemize}
+      \end{minipage}
+      }
      \end{frame}
 
-    \section{Open pNovo Algorithmus}
-    \begin{frame}{Open pNovo Algorithmus \dashAndSpace Hintergrund}
+    \section{Open-pNovo Algorithmus}
+    \begin{frame}{Open-pNovo Algorithmus \dashAndSpace Hintergrund}
      \begin{itemize}
       \item<1-> Peptide sind nicht zwingend stabil
       \item<2-> Wechselwirkungen können die Sequenz abändern
+      \item<3-> Posttranslationale Proteinmodifikationenen (PTM)
       % Beispiel einer Wechselwirkung zeigen
-      \item<3-> De-Novo-Algorithmen an sich kein Problem
-      \item<4-> Sogenannte: Posttranslationale Proteinmodifikationenen (PTM)
+      \item<4-> Mit De-Novo-Algorithmen an sich kein Problem
      \end{itemize}
     \end{frame}
 
-    \begin{frame}{Open pNovo Algorithmus \dashAndSpace PTM}
+    \begin{frame}{Open-pNovo Algorithmus \dashAndSpace PTM}
      \begin{itemize}
       \item<1-> Bildung von nicht proteinogenen AS möglich
       \item<2-> AS, die normalerweise nicht in Peptiden vorkommen
-      \item<3-> Spektrogrammen zeigt solche AS
+      \item<3-> Spektrogramm zeigt solche AS
       \item<4-> Änderungen können von pNovo+ nicht erkannt werden
+      \end{itemize}
+      \begin{itemize}
       \item<5-> pNovo+ erzeugt zwangsweise Fehler
      \end{itemize}
     \end{frame}
 
-      \begin{frame}{Open pNovo Algorithmus \dashAndSpace RankBoost}
+      \begin{frame}{Open-pNovo Algorithmus \dashAndSpace RankBoost}
      \begin{itemize}
       \item<1-> Neue Scoring Funktion: RankBoost
       \item<2-> Machine Learning Algorithmus aus 2003
-      \item<3-> Präferenzen in Datensätzen zu erkennen
-      \item<4-> Filterung der nicht gültigen AS
+      \item<3-> Erweiterung des AdaBoost Algorithmus
+      \item<4-> Präferenzen in Datensätzen zu erkennen
+      \end{itemize}
+      \begin{itemize}
+      \item<5-> Filterung der nicht gültigen AS
      \end{itemize}
     \end{frame}
 
-      \begin{frame}{Open pNovo Algorithmus \dashAndSpace Evaluierung von Open-pNovo}
+      \begin{frame}{Open-pNovo Algorithmus \dashAndSpace Evaluierung von Open-pNovo}
+      \onslide<1->{
+        \begin{minipage}[c]{0.2\textwidth}
+        \centering
+        \includegraphics[scale=0.1]{./Presentation_Images/TestingIcon.png}
+        \end{minipage}
+        }%
+        \onslide<1->{
+        \begin{minipage}[c]{0.775\textwidth}
      \begin{itemize}
-      \item<1-> ...
-     \end{itemize}
+      \item<1-> 20259 Datensätze
+      \item<2-> Erfolgreiche Sequenzierungen: \textcolor{green}{$76,3\%$}
+      \item<3-> pNovo+: \textcolor{green}{$68,5\%$}
+      \item<4-> Zwei Konkurrenzalgorithmen: \textcolor{orange}{$65,8\%$} sowie \textcolor{orange}{$39,9\%$}
+      \end{itemize}
+      \begin{itemize}
+       \item<5-> Open-pNovo ebenfalls \textcolor{purple}{besser als die Konkurrenz!}
+       \end{itemize}
+       \end{minipage}
+       }
     \end{frame}
 
 
     \section{Zusammenfassung}
    \begin{frame}{Zusammenfassung}
      \begin{itemize}
-      \item<1-> Ansatz von pNovo+ und Open-pNovo
+     \item<1-> De-Novo-Sequenzierung leichter durchführbar
+     \item<2-> Beide Algorithmen liefern \textcolor{purple}{erstklassige} Ergebnisse
+     \item<3-> pNovo+ Ansatz mit Spektrumsgraphen ist wirkungsvoll
+      \item<4-> Open-pNovo erkennt zuverlässig Proben mit PTMs
      \end{itemize}
     \end{frame}
-
-
 
 \end{document}
 %%%%% %%%%% %%%%% %%%%% %%%%% %%%%% %%%%% %%%%%              %%%%% %%%%% %%%%% %%%%% %%%%% %%%%% %%%%% %%%%%
