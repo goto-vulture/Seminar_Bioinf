@@ -26,6 +26,8 @@ cross/.default={8pt}}
 \usepackage{booktabs} % \midrule
 \usepackage{makecell} % \makecell
 \usepackage{tabulary}
+\usepackage[first=0, last=10]{lcg} % Random numbers
+\newcommand{\random}{\rand\arabic{rand}}
 
 
 
@@ -68,23 +70,130 @@ cross/.default={8pt}}
 
     \section{Hintergrund}
         \begin{frame}{Hintergrund}
-        \onslide<1->{
-            \begin{minipage}[c]{0.2\textwidth}
-            \includegraphics[scale=0.065]{./Presentation_Images/Glycine-neutral-Ipttt-conformer-3D-bs-17.png}
-      \end{minipage}
-            }%
-            \onslide<1->{
-            \begin{minipage}[c]{0.775\textwidth}
-                \begin{itemize}
-                  \item<1-> Peptide: Kette von Aminosäuren (AS)
-                  \item<2-> 20 relevante AS
-                  \item<3-> Reihenfolge von AS ist weitestgehend beliebig
-                  \item<4-> $f(x)=20^x$\space\space\space$x:$ $Anzahl$ $an$ $AS$
-                \end{itemize}
-                % Bild von Grundaufbau einer AS
-                \end{minipage}
-            }
+        \newcommand{\AARadius}{8pt}
+        \newcommand{\AATikzPictureScale}{0.625}
+        \newcommand{\AAMinipageSize}{0.31}
+
+        \begin{minipage}[t]{\AAMinipageSize\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=\AATikzPictureScale]
+        \node  (0) at (1, 1.25) {};
+        \node  (1) at (1, 0) {};
+        \node  (2) at (2, -1) {};
+        \node  (3) at (2, 0.25) {};
+        \node  (4) at (2.75, 0) {};
+        \node  (5) at (3.25, 0.5) {};
+        \node  (6) at (2.5, 1) {};
+        \node  (7) at (2, 2) {};
+
+        \foreach \i in {0,...,7}
+        {
+          \filldraw [shade, shading=radial, inner color=white, outer color=red] (\i) circle (\AARadius);
+        }
+                \filldraw [shade, shading=radial, inner color=white, outer color=black] (0, 0) circle (\AARadius);
+        \end{tikzpicture}
+        Aminosäure (AA)
+        \end{minipage}
+\hfill
+        \begin{minipage}[t]{\AAMinipageSize\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=\AATikzPictureScale]
+        \node  (0) at (0.75, 0.25) {};
+        \node  (1) at (0.75, 1.25) {};
+        \node  (2) at (2, 0.25) {};
+        \node  (3) at (1.5, 0.75) {};
+        \node  (4) at (2.75, 1) {};
+        \node  (5) at (2, 1.75) {};
+        \node  (6) at (1.5, -0.5) {};
+        \node  (7) at (3.25, 2) {};
+        \node  (8) at (2.75, 0.25) {};
+
+        \draw[ultra thick, -]  (0.center) to [bend left]  (1.center);
+        \draw[ultra thick, -]  (1.center) to [bend left]  (3.center);
+        \draw[ultra thick, -]  (3.center) to [bend left]  (5.center);
+        \draw[ultra thick, -]  (6.center) to [bend left]  (2.center);
+        \draw[ultra thick, -]  (2.center) to [bend left]  (8.center);
+        \draw[ultra thick, -]  (7.center) to [bend left]  (4.center);
+        \draw[ultra thick, -]  (4.center) to [bend left]  (8.center);
+
+        \foreach \i in {0,...,8}
+        {
+          \filldraw [shade, shading=radial, inner color=white, outer color=red] (\i) circle (\AARadius);
+        }
+        \filldraw [shade, shading=radial, inner color=white, outer color=black] (0, 0) circle (\AARadius);
+        \end{tikzpicture}
+        \newline % Ein manuelles \newline ist hier erforderlich !
+        Peptid
+        \end{minipage}
+        \hfill
+        \begin{minipage}[t]{\AAMinipageSize\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=\AATikzPictureScale]
+        \node  (0) at (1.25, -0.5) {};
+        \node  (1) at (0.5, 1) {};
+        \node  (2) at (1.5, 1.25) {};
+        \node  (3) at (1.25, 0.75) {};
+        \node  (4) at (2, -0.5) {};
+        \node  (5) at (3, 0.75) {};
+        \node  (6) at (2, 0.75) {};
+        \node  (7) at (3.25, 2) {};
+        \node  (8) at (2.75, 1.25) {};
+        \node  (9) at (2.25, 1.5) {};
+        \node  (10) at (2, 2) {};
+        \node  (11) at (1, 1.5) {};
+        \node  (12) at (0.75, 2.25) {};
+        \node  (13) at (1.5, 3) {};
+        \node  (14) at (1.5, 0) {};
+        \node  (15) at (2.5, 2.5) {};
+        \node  (16) at (2.5, 0.25) {};
+        \node  (17) at (1.5, 2.25) {};
+
+        \draw[ultra thick, -] (0.center) to [bend left]  (1.center);
+        \draw[ultra thick, -] (1.center) to [bend left]  (3.center);
+        \draw[ultra thick, -] (3.center) to [bend left]  (14.center);
+        \draw[ultra thick, -] (14.center) to [bend left]  (4.center);
+        \draw[ultra thick, -] (6.center) to [bend left]  (5.center);
+        \draw[ultra thick, -] (5.center) to [bend left]  (2.center);
+        \draw[ultra thick, -] (2.center) to [bend left]  (9.center);
+        \draw[ultra thick, -] (9.center) to [bend left]  (8.center);
+        \draw[ultra thick, -] (8.center) to [bend left]  (7.center);
+        \draw[ultra thick, -] (10.center) to [bend left]  (11.center);
+        \draw[ultra thick, -] (11.center) to [bend left]  (12.center);
+        \draw[ultra thick, -] (12.center) to [bend left]  (13.center);
+        \draw[ultra thick, -] (4.center) to [bend left]  (16.center);
+        \draw[ultra thick, -] (16.center) to [bend left]  (6.center);
+        \draw[ultra thick, -] (15.center) to [bend left]  (17.center);
+        \draw[ultra thick, -] (17.center) to [bend left]  (10.center);
+        \draw[ultra thick, -] (15.center) to [bend left]  (7.center);
+
+        \foreach \i in {0,...,17}
+        {
+          \filldraw [shade, shading=radial, inner color=white, outer color=red] (\i) circle (\AARadius);
+        }
+        \filldraw [shade, shading=radial, inner color=white, outer color=black] (0, 0) circle (\AARadius);
+\end{tikzpicture}
+        Protein
+        \end{minipage}
+
+%         \onslide<1->{
+%             \begin{minipage}[c]{0.2\textwidth}
+%             \includegraphics[scale=0.065]{./Presentation_Images/Glycine-neutral-Ipttt-conformer-3D-bs-17.png}
+%       \end{minipage}
+%             }%
+%             \onslide<1->{
+%             \begin{minipage}[c]{0.775\textwidth}
+%                 \begin{itemize}
+%                   \item<1-> Peptide: Kette von Aminosäuren (AS)
+%                   \item<2-> 20 relevante AS
+%                   \item<3-> Reihenfolge von AS ist weitestgehend beliebig
+%                   \item<4-> $f(x)=20^x$\space\space\space$x:$ $Anzahl$ $an$ $AS$
+%                 \end{itemize}
+%                 % Bild von Grundaufbau einer AS
+%                 \end{minipage}
+%             }
         \end{frame}
+
+
         \begin{frame}{Anzahl an Kombinationen}
          \onslide<1->{
          \begin{itemize}
@@ -107,6 +216,46 @@ cross/.default={8pt}}
 
          }%
         \end{frame}
+        \begin{frame}{TEST}
+        \onslide<1->{
+         \centering
+         % Siehe: https://imathworks.com/tex/tex-latex-tikz-why-is-dimension-too-large/
+         % Bei Problemen mit "dimension is too large" errors
+         \begin{tikzpicture}[scale=0.02, x=0.550cm, y=0.0075cm, baseline=(current bounding box.center)]
+         \draw [<->,thick] (0,30000) node (yaxis) [above] {\yAxisUnit}
+         |- (625,0) node (xaxis) [right] {\xAxisUnit};
+\draw[thick] (149.04489, 0.0) -- (149.04489, 15549.466);
+\draw[thick] (167.05548, 0.0) -- (167.05548, 30403.949);
+\draw[thick] (173.28503, 0.0) -- (173.28503, 5523.645);
+\draw[thick] (193.11723, 0.0) -- (193.11723, 5522.963);
+\draw[thick] (203.12581, 0.0) -- (203.12581, 5886.653);
+%\draw[thick] (208.95285, 0.0) -- (208.95285, 47414.977);
+\draw[thick] (213.81911, 0.0) -- (213.81911, 13479.453);
+\draw[thick] (225.04166, 0.0) -- (225.04166, 8771.008);
+\draw[thick] (231.63631, 0.0) -- (231.63631, 5783.753);
+\draw[thick] (238.23830, 0.0) -- (238.23830, 5310.973);
+\draw[thick] (318.92282, 0.0) -- (318.92282, 11948.519);
+% Originial
+% \draw[thick] (341.01804, 0.0) -- (341.01804, 28799.889);
+% Angepasst fuer Praesentationsfolien
+\draw[thick] (341.01804, 0.0) -- (341.01804, 15799.889);
+\draw[thick] (358.97638, 0.0) -- (358.97638, 10126.957);
+%\draw[thick] (359.02826, 0.0) -- (359.02826, 286235.844);
+%\draw[thick] (429.08765, 0.0) -- (429.08765, 59781.848);
+% Originial
+% \draw[thick] (604.45569, 0.0) -- (604.45569, 5915.098);
+% \draw[thick] (686.75085, 0.0) -- (686.75085, 6172.900);
+% \draw[thick] (1064.11682, 0.0) -- (1064.11682, 5931.172);
+% \draw[thick] (1223.03772, 0.0) -- (1223.03772, 5612.658);
+% Angepasst fuer Praesentationsfolien
+\draw[thick] (404.45569, 0.0) -- (404.45569, 5915.098);
+\draw[thick] (486.75085, 0.0) -- (486.75085, 6172.900);
+\draw[thick] (564.11682, 0.0) -- (564.11682, 5931.172);
+\draw[thick] (603.03772, 0.0) -- (603.03772, 5612.658);
+   \end{tikzpicture}%
+         }%
+        \end{frame}
+
 
 
         \begin{frame}{Biomedizinische Fragestellung}
