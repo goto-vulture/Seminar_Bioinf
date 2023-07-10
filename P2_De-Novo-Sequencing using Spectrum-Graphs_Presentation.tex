@@ -47,8 +47,7 @@ cross/.default={8pt}}
 
 \title{De-Novo-Sequencing using Spectrum-Graphs, enabling Open Searches}
 \author{Dominik Habermann}
-\date{\today}
-
+\date{14. Juli 2023}
 \institute{Ruhr Universität Bochum}
 
 
@@ -68,12 +67,14 @@ cross/.default={8pt}}
     \tableofcontents
     \end{frame}
 
-    \section{Hintergrund}
+    \section{Aminosäure Sequenzierung}
         \begin{frame}{Hintergrund}
         \newcommand{\AARadius}{8pt}
         \newcommand{\AATikzPictureScale}{0.625}
         \newcommand{\AAMinipageSize}{0.31}
 
+        %%%%% %%%%% BEGIN AA Schema %%%%% %%%%% %%%%%
+        \onslide<1->{
         \begin{minipage}[t]{\AAMinipageSize\textwidth}
         \centering
         \begin{tikzpicture}[scale=\AATikzPictureScale]
@@ -90,11 +91,16 @@ cross/.default={8pt}}
         {
           \filldraw [shade, shading=radial, inner color=white, outer color=red] (\i) circle (\AARadius);
         }
-                \filldraw [shade, shading=radial, inner color=white, outer color=black] (0, 0) circle (\AARadius);
+        % Debug Kreis
+        % \filldraw [shade, shading=radial, inner color=white, outer color=black] (0, 0) circle (\AARadius);
         \end{tikzpicture}
         Aminosäure (AA)
         \end{minipage}
-\hfill
+        }%
+        %%%%% %%%%% END AA Schema %%%%% %%%%% %%%%%
+        \hfill
+        %%%%% %%%%% BEGIN Peptide Schema %%%%% %%%%% %%%%%
+        \onslide<2->{
         \begin{minipage}[t]{\AAMinipageSize\textwidth}
         \centering
         \begin{tikzpicture}[scale=\AATikzPictureScale]
@@ -120,12 +126,17 @@ cross/.default={8pt}}
         {
           \filldraw [shade, shading=radial, inner color=white, outer color=red] (\i) circle (\AARadius);
         }
-        \filldraw [shade, shading=radial, inner color=white, outer color=black] (0, 0) circle (\AARadius);
+        % Debug Kreis
+        % \filldraw [shade, shading=radial, inner color=white, outer color=black] (0, 0) circle (\AARadius);
         \end{tikzpicture}
         \newline % Ein manuelles \newline ist hier erforderlich !
         Peptid
         \end{minipage}
+        }%
+        %%%%% %%%%% END Peptide Schema %%%%% %%%%% %%%%%
         \hfill
+        %%%%% %%%%% BEGIN Protein Schema %%%%% %%%%% %%%%%
+        \onslide<3->{
         \begin{minipage}[t]{\AAMinipageSize\textwidth}
         \centering
         \begin{tikzpicture}[scale=\AATikzPictureScale]
@@ -170,10 +181,22 @@ cross/.default={8pt}}
         {
           \filldraw [shade, shading=radial, inner color=white, outer color=red] (\i) circle (\AARadius);
         }
-        \filldraw [shade, shading=radial, inner color=white, outer color=black] (0, 0) circle (\AARadius);
-\end{tikzpicture}
+        % Debug Kreis
+        % \filldraw [shade, shading=radial, inner color=white, outer color=black] (0, 0) circle (\AARadius);
+        \end{tikzpicture}
         Protein
         \end{minipage}
+        }%
+        %%%%% %%%%% END Protein Schema %%%%% %%%%% %%%%%
+
+        \onslide<4->{
+        \vspace*{0.75cm}
+        \begin{itemize}
+            \item Peptid $\widehat{=}$ Kurze Ketten an AA
+            \item Protein $\widehat{=}$ Verkettung von Peptiden
+        \end{itemize}
+        }%
+        \end{frame}
 
 %         \onslide<1->{
 %             \begin{minipage}[c]{0.2\textwidth}
@@ -191,7 +214,7 @@ cross/.default={8pt}}
 %                 % Bild von Grundaufbau einer AS
 %                 \end{minipage}
 %             }
-        \end{frame}
+
 
 
         \begin{frame}{Anzahl an Kombinationen}
