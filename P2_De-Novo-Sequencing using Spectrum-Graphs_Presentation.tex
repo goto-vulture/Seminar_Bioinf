@@ -202,11 +202,11 @@ cross/.default={8pt}}
         \begin{frame}{AA Sequenzierung}
         \begin{itemize}
         \item<1-> Ziel: Bestimmung der AA-Sequenz von Peptiden
-        \begin{itemize}
-        \item<2-> Hilfsmittel: Massenspektrometrie (MS)
-        \item<2-> MS kann chemische Strukturen bestimmen
-        \item<2-> Rückschluss auf die AA-Sequenz
-        \end{itemize}
+%         \begin{itemize}
+%         \item<2-> Hilfsmittel: Massenspektrometrie (MS)
+%         \item<2-> MS kann chemische Strukturen bestimmen
+%         \item<2-> Rückschluss auf die AA-Sequenz
+%         \end{itemize}
         \vspace*{0.5cm}
         \item<3-> Warum ist die AA-Sequenz relevant?
         \end{itemize}
@@ -223,7 +223,7 @@ cross/.default={8pt}}
          \item<2-> Fähigkeiten
          \item<2-> Notwendigen Umgebungsbedingungen (Temperatur, pH-Wert, etc.)
         \end{itemize}
-        \item<3-> ...
+        \item<3-> $\Rightarrow$ ...
         \end{itemize}
         \end{frame}
 
@@ -231,12 +231,13 @@ cross/.default={8pt}}
 
         \begin{frame}{AA Sequenzierung \dashAndSpace Relevanz}
         \begin{itemize}
-        \item<1-> Biomedizinisch relevant:
+        \item<1-> Biomedizinische Relevanz:
         \begin{itemize}
          \item<1-> Katalogisierung von Proteinen
-         \item<1-> Wechselwirkungen von Proteinen
          \item<1-> Analyse von Enzymen
+         \item<1-> Toxikologie von Proteinen
         \end{itemize}
+        \vspace*{0.5cm}
         \item<2-> Zuverlässige Bestimmung \emph{kurzkettiger} Peptide möglich?
         \end{itemize}
         \end{frame}
@@ -261,36 +262,79 @@ cross/.default={8pt}}
 
 
 
-        \begin{frame}{Anzahl an Kombinationen}
+        \begin{frame}{AA Sequenzierung \dashAndSpace Suchraum}
+        \newcommand{\numAA}{20}
          \onslide<1->{
          \begin{itemize}
-          \item<1-> Bereits bei wenigen AS: Kaum händelbare Anzahl an Kombinationen
+          \item<1-> \numAA \space relevante AA
+          \item<1-> Weitestgehend beliebig kombinierbar
+          \item<1-> Bereits bei wenigen AA: Kaum händelbarer Suchraum
          \end{itemize}
          }%
          \onslide<2->{
          \centering
-         \begin{tikzpicture}[scale=0.75]
+         \begin{tikzpicture}[scale=0.65]
          \begin{axis} [axis lines=center,xlabel=$x$,
-    ylabel={$f(x)=20^x$}]
-            \addplot [domain=0:5, smooth, thick] { 20^x };
+    ylabel={$f(x)=\numAA^x$}]
+            \addplot [domain=0:5, smooth, thick] { \numAA^x };
          \end{axis}
          \end{tikzpicture}
          }%
          \onslide<3->{
          \begin{itemize}
-          \item<3-> Zum Vergleich: Proteine bis zu mehreren zehntausend AS
+          \item<3-> Zum Vergleich: Proteine bis zu mehreren \emph{zehntausend} AA
          \end{itemize}
-
          }%
         \end{frame}
-        \begin{frame}{TEST}
-        \onslide<1->{
+
+
+         \begin{frame}{AA Sequenzierung \dashAndSpace Hilfsmittel Massenspektrometrie}
+         \begin{itemize}
+          \item<1-> $\Rightarrow$ Intelligentes Sequenzierungsverfahren notwendig
+         \end{itemize}
+        \begin{itemize}
+        \item<2-> Hilfsmittel: Massenspektrometrie (MS)
+        \item<2-> MS kann chemische Strukturen bestimmen
+        \item<2-> Rückschluss auf die AA-Sequenz möglich
+        \end{itemize}
+         \end{frame}
+
+
+
+        \begin{frame}{AA Sequenzierung \dashAndSpace Hilfsmittel MS}
+        \begin{itemize}
+         \item<1-> MS erzeugt MS-Spektren
+        \end{itemize}
+
+        \onslide<2->{
          \centering
          % Siehe: https://imathworks.com/tex/tex-latex-tikz-why-is-dimension-too-large/
          % Bei Problemen mit "dimension is too large" errors
-         \begin{tikzpicture}[scale=0.02, x=0.550cm, y=0.0075cm, baseline=(current bounding box.center)]
-         \draw [<->,thick] (0,30000) node (yaxis) [above] {\yAxisUnit}
-         |- (625,0) node (xaxis) [right] {\xAxisUnit};
+         \begin{tikzpicture}[scale=0.02, x=0.550cm, y=0.0045cm, baseline=(current bounding box.center)]
+
+         % JA es muessen die x-Werte (m/z) Werte auf den Peaks geschrieben werden !
+         %\node (0) at (149.04489, 15549.466) [above] {\tiny 149.04};
+         \node (0) at (135.04489, 16049.466) [above] {\tiny 149.04};
+         \draw[green] (149.04489, 15549.466) -- (135.04489, 16549.466);
+
+         \node (1) at (167.05548, 30403.949) [above] {\tiny 167.05};
+         \node (2) at (213.81911, 13479.453) [above] {\tiny 213.81};
+         \node (3) at (341.01804, 28799.889) [above] {\tiny 341.01};
+
+         %\node (4) at (359.02826, 24235.844) [above] {\tiny 359.02};
+         \node (4) at (375.02826, 24635.844) [above] {\tiny 359.02};
+         \draw[green] (359.02826, 24235.844) -- (375.02826, 25235.844);
+
+         %\node (5) at (404.45569, 5915.098) [above] {\tiny 404.45};
+         \node (5) at (395.45569, 5915.098) [above] {\tiny 404.45};
+         \draw[green] (404.45569, 5915.098) -- (395.45569, 6615.098);
+
+         \node (6) at (429.08765, 59781.848) [above] {\tiny 429.08};
+         \node (7) at (486.75085, 6172.900) [above] {\tiny 486.75};
+         \node (8) at (603.03772, 5612.658) [above] {\tiny 603.03};
+
+         \draw [<->,thick] (0,60000) node (yaxis) [above] {\small Rel. abundance}
+         |- (650,0) node (xaxis) [right] {\small \xAxisUnit};
 \draw[thick] (149.04489, 0.0) -- (149.04489, 15549.466);
 \draw[thick] (167.05548, 0.0) -- (167.05548, 30403.949);
 \draw[thick] (173.28503, 0.0) -- (173.28503, 5523.645);
@@ -303,12 +347,14 @@ cross/.default={8pt}}
 \draw[thick] (238.23830, 0.0) -- (238.23830, 5310.973);
 \draw[thick] (318.92282, 0.0) -- (318.92282, 11948.519);
 % Originial
-% \draw[thick] (341.01804, 0.0) -- (341.01804, 28799.889);
+\draw[thick] (341.01804, 0.0) -- (341.01804, 28799.889);
 % Angepasst fuer Praesentationsfolien
-\draw[thick] (341.01804, 0.0) -- (341.01804, 15799.889);
+%\draw[thick] (341.01804, 0.0) -- (341.01804, 15799.889);
 \draw[thick] (358.97638, 0.0) -- (358.97638, 10126.957);
+% Original
 %\draw[thick] (359.02826, 0.0) -- (359.02826, 286235.844);
-%\draw[thick] (429.08765, 0.0) -- (429.08765, 59781.848);
+\draw[thick] (359.02826, 0.0) -- (359.02826, 24235.844);
+\draw[thick] (429.08765, 0.0) -- (429.08765, 59781.848);
 % Originial
 % \draw[thick] (604.45569, 0.0) -- (604.45569, 5915.098);
 % \draw[thick] (686.75085, 0.0) -- (686.75085, 6172.900);
@@ -321,64 +367,68 @@ cross/.default={8pt}}
 \draw[thick] (603.03772, 0.0) -- (603.03772, 5612.658);
    \end{tikzpicture}%
          }%
+         \begin{itemize}
+          \item<3-> Vereinfachte Darstellung von realen Messwerten
+         \end{itemize}
         \end{frame}
 
 
 
-        \begin{frame}{Biomedizinische Fragestellung}
-        \onslide<1->{
-         \begin{minipage}[c]{0.2\textwidth}
-         \includegraphics[scale=0.25]{./Presentation_Images/vecteezy_question-mark-with-3d-vector-icon-cartoon-minimal-style_16626300.png}
-   \end{minipage}
-         }%
-        \onslide<1->{
-        \begin{minipage}[c]{0.775\textwidth}
-        \begin{itemize}
-        \item<1-> Zuverlässige Bestimmung \emph{kurzkettiger} Peptide möglich?
-        \item<2-> Biomedizinisch relevant:
-        \begin{itemize}
-         \item<3-> Katalogisierung von Proteinen
-         \item<4-> Wechselwirkungen von Proteinen
-         \item<5-> Analyse von Enzymen
-        \end{itemize}
-        \end{itemize}
-        \end{minipage}
-        }
-        \end{frame}
+%         \begin{frame}{Biomedizinische Fragestellung}
+%         \onslide<1->{
+%          \begin{minipage}[c]{0.2\textwidth}
+%          \includegraphics[scale=0.25]{./Presentation_Images/vecteezy_question-mark-with-3d-vector-icon-cartoon-minimal-style_16626300.png}
+%    \end{minipage}
+%          }%
+%         \onslide<1->{
+%         \begin{minipage}[c]{0.775\textwidth}
+%         \begin{itemize}
+%         \item<1-> Zuverlässige Bestimmung \emph{kurzkettiger} Peptide möglich?
+%         \item<2-> Biomedizinisch relevant:
+%         \begin{itemize}
+%          \item<3-> Katalogisierung von Proteinen
+%          \item<4-> Wechselwirkungen von Proteinen
+%          \item<5-> Analyse von Enzymen
+%         \end{itemize}
+%         \end{itemize}
+%         \end{minipage}
+%         }
+%         \end{frame}
 
 
 
-    \section{AS Sequenzierung}
-    \begin{frame}{AS Sequenzierung}
-     \onslide<1->{
-     \begin{itemize}
-      \item<1-> AS Sequenzierung: Bestimmung der AS-Sequenz
-      \item<2-> Hilfsmittel: Massenspektrometrie (MS)
-      \item<3-> MS kann chemische Strukturen bestimmen
-      \item<4-> Rückschluss auf die AS-Sequenz
-     \end{itemize}
-     }%
-    \end{frame}
-
-    \begin{frame}{Beispiel Spektrogramm}
-    \onslide<1->{
-        \begin{itemize}
-         \item<1-> Ergebnisse einer MS: Spektrogramm
-        \end{itemize}
-    }%
-    \onslide<2->{
-    \centering
-    \includegraphics[scale=0.110]{./Resources/Simulated_Mass_Spectrum.png}
-    }%
-    \end{frame}
+%     \section{AS Sequenzierung}
+%     \begin{frame}{AS Sequenzierung}
+%      \onslide<1->{
+%      \begin{itemize}
+%       \item<1-> AS Sequenzierung: Bestimmung der AS-Sequenz
+%       \item<2-> Hilfsmittel: Massenspektrometrie (MS)
+%       \item<3-> MS kann chemische Strukturen bestimmen
+%       \item<4-> Rückschluss auf die AS-Sequenz
+%      \end{itemize}
+%      }%
+%     \end{frame}
+%
+%     \begin{frame}{Beispiel Spektrogramm}
+%     \onslide<1->{
+%         \begin{itemize}
+%          \item<1-> Ergebnisse einer MS: Spektrogramm
+%         \end{itemize}
+%     }%
+%     \onslide<2->{
+%     \centering
+%     \includegraphics[scale=0.110]{./Resources/Simulated_Mass_Spectrum.png}
+%     }%
+%     \end{frame}
 
 
 
     \section{De-Novo-Sequenzierung}
+    \newcommand{\AASequenzierungName}{Suche in Sequenzdatenbank}
     \begin{frame}{Sequenzierung und De-Novo-Sequenzierung}
      \onslide<1->{
      \begin{itemize}
-      \item<1-> Beide Verfahren bestimmen die AS-Sequenz
+      \item<1-> Beide Verfahren bestimmen die AA-Sequenz
      \end{itemize}
      \vspace*{0.5cm}
      }%
@@ -386,7 +436,7 @@ cross/.default={8pt}}
      \only<2>{
      \centering
      \begin{tabulary}{0.95\textwidth}{c|c}
-     AS Sequenzierung & De-Novo-Sequenzierung \\
+     \AASequenzierungName & De-Novo-Sequenzierung \\
      \midrule
      Datenbanken als Hilfsmittel & \\
       & \\
@@ -397,7 +447,7 @@ cross/.default={8pt}}
      \only<3>{
      \centering
      \begin{tabulary}{0.95\textwidth}{c|c}
-     AS Sequenzierung & De-Novo-Sequenzierung \\
+     \AASequenzierungName & De-Novo-Sequenzierung \\
      \midrule
      Datenbanken als Hilfsmittel & \\
       & \\
@@ -408,7 +458,7 @@ cross/.default={8pt}}
      \only<4>{
      \centering
      \begin{tabulary}{0.95\textwidth}{c|c}
-     AS Sequenzierung & De-Novo-Sequenzierung \\
+     \AASequenzierungName & De-Novo-Sequenzierung \\
      \midrule
      Datenbanken als Hilfsmittel & Ohne weitere Hilfsmittel\\
       & \\
@@ -419,7 +469,7 @@ cross/.default={8pt}}
      \only<5>{
      \centering
      \begin{tabulary}{0.95\textwidth}{c|c}
-     AS Sequenzierung & De-Novo-Sequenzierung \\
+     \AASequenzierungName & De-Novo-Sequenzierung \\
      \midrule
      Datenbanken als Hilfsmittel & Ohne weitere Hilfsmittel\\
       & \\
@@ -430,7 +480,7 @@ cross/.default={8pt}}
      \only<6>{
      \centering
      \begin{tabulary}{0.95\textwidth}{c|c}
-     AS Sequenzierung & De-Novo-Sequenzierung \\
+     \AASequenzierungName & De-Novo-Sequenzierung \\
      \midrule
      Datenbanken als Hilfsmittel & Ohne weitere Hilfsmittel\\
       & \\
@@ -450,50 +500,121 @@ cross/.default={8pt}}
      \item<1-> Zusätzliche Informationen notwendig
      \item<2-> Verwendung einer 2. MS
      \item<3-> Verfahren: Tandem-Massenspektrometrie MS2
-     % einfacher Graph, der den Ablauf zeigt
      \end{itemize}
      }%
    \end{frame}
 
-    \begin{frame}{De-Novo-Sequenzierung \dashAndSpace 1. MS}
-    \begin{itemize}
-      \item<1-> Ionen aus \massCharge Bereich auswählbar machen
-      \item<2-> Quasi eine Filterung
-      \item<3-> Ausgewählte Ionen werden für 2. MS verwendet
-    \end{itemize}
-    \end{frame}
-
-    \begin{frame}{De-Novo-Sequenzierung \dashAndSpace 2. MS}
-    \begin{itemize}
-      \item<1-> Ionen aus 1. MS \gerquot{fragmentieren}:
-      \begin{itemize}
-       \item<2-> Energiezuführung
-       \item<3-> Ionen zerfallen
-       \item<4-> Ergebnis: \gerquot{Fragment-Ionen}
-      \end{itemize}
-      \item<5-> Verschiedene Fragmentierungsmethoden mit spezifischen Fragmenten
-      \item<6-> 2. MS wird auf Fragment-Ionen angewendet
-    \end{itemize}
-    \end{frame}
 
     \begin{frame}{De-Novo-Sequenzierung \dashAndSpace MS2}
+    \centering
+    \begin{tikzpicture}[scale=1.25]
+		\node  (0) at (0.75, 0) {};
+		\node  (1) at (0.75, 0.5) {};
+		\node  (2) at (6.75, 0) {};
+		\node  (3) at (6.75, 0.5) {};
+		\node  (4) at (1.75, -0.5) {};
+		\node  (5) at (2.25, -0.5) {};
+		\node  (6) at (1.75, -1) {};
+		\node  (7) at (2.25, -1) {};
+		\node  (8) at (3.75, -1.5) {};
+		\node  (9) at (4.25, -1.5) {};
+		\node  (10) at (3.75, -2) {};
+		\node  (11) at (4.25, -2) {};
+		\node  (12) at (5.75, -2.5) {};
+		\node  (13) at (6.25, -2.5) {};
+		\node  (14) at (5.75, -3) {};
+		\node  (15) at (6.25, -3) {};
+		\node  (16) at (-0.25, 0.25) {MS1};
+		\node  (17) at (-0.25, -0.75) {MS2};
+		\node  (18) at (-0.25, -1.75) {MS2};
+		\node  (19) at (-0.25, -2.75) {MS2};
+		\node  (20) at (-0.75, -0.25) {};
+		\node  (21) at (-0.75, -1.25) {};
+		\node  (22) at (-0.75, -2.25) {};
+		\node  (23) at (-0.75, -3.25) {};
+		\node  (24) at (7, -2.25) {};
+		\node  (25) at (7, -3.25) {};
+		\node  (26) at (-0.75, 0.75) {};
+		\node  (27) at (7, -1.25) {};
+		\node  (28) at (7, -0.25) {};
+		\node  (29) at (7, 0.75) {};
+
+		\draw (1.center) to (3.center);
+		\draw (0.center) to (2.center);
+		\draw (3.center) to (2.center);
+		\draw (1.center) to (0.center);
+		\draw (4.center) to (5.center);
+		\draw (4.center) to (6.center);
+		\draw (6.center) to (7.center);
+		\draw (5.center) to (7.center);
+		\draw (8.center) to (9.center);
+		\draw (8.center) to (10.center);
+		\draw (10.center) to (11.center);
+		\draw (9.center) to (11.center);
+		\draw (12.center) to (13.center);
+		\draw (12.center) to (14.center);
+		\draw (14.center) to (15.center);
+		\draw (13.center) to (15.center);
+		\draw (22.center) to (23.center);
+		\draw (23.center) to (25.center);
+		\draw (22.center) to (24.center);
+		\draw (24.center) to (25.center);
+		\draw (22.center) to (21.center);
+		\draw (21.center) to (20.center);
+		\draw (20.center) to (26.center);
+		\draw (26.center) to (29.center);
+		\draw (29.center) to (28.center);
+		\draw (28.center) to (27.center);
+		\draw (27.center) to (24.center);
+		\draw (27.center) to (21.center);
+		\draw (20.center) to (28.center);
+    \end{tikzpicture}
+
     \begin{itemize}
-      \item<1-> Höhere Genauigkeit durch Filterung nach 1. MS
-      \item<2-> Bessere Selektivität beim 2. MS
-      \item<3-> Ionen zerfallen spezifisch
-      \item<4-> $\rightarrow$ Rekonstruktion der ursprünglichen Ionen möglich
-      \vspace*{0.5cm}
-      \item<5-> MS2 Ergebnisse haben eine höhere Qualität
+      \item<2-> MS1 quasi eine Filterung
     \end{itemize}
     \end{frame}
+%
+%     \begin{frame}{De-Novo-Sequenzierung \dashAndSpace 1. MS}
+%     \begin{itemize}
+%       \item<1-> Ionen aus \massCharge Bereich auswählbar machen
+%       \item<2-> Quasi eine Filterung
+%       \item<3-> Ausgewählte Ionen werden für 2. MS verwendet
+%     \end{itemize}
+%     \end{frame}
+%
+%     \begin{frame}{De-Novo-Sequenzierung \dashAndSpace 2. MS}
+%     \begin{itemize}
+%       \item<1-> Ionen aus 1. MS \gerquot{fragmentieren}:
+%       \begin{itemize}
+%        \item<2-> Energiezuführung
+%        \item<3-> Ionen zerfallen
+%        \item<4-> Ergebnis: \gerquot{Fragment-Ionen}
+%       \end{itemize}
+%       \item<5-> Verschiedene Fragmentierungsmethoden mit spezifischen Fragmenten
+%       \item<6-> 2. MS wird auf Fragment-Ionen angewendet
+%     \end{itemize}
+%     \end{frame}
+%
+%     \begin{frame}{De-Novo-Sequenzierung \dashAndSpace MS2}
+%     \begin{itemize}
+%       \item<1-> Höhere Genauigkeit durch Filterung nach 1. MS
+%       \item<2-> Bessere Selektivität beim 2. MS
+%       \item<3-> Ionen zerfallen spezifisch
+%       \item<4-> $\rightarrow$ Rekonstruktion der ursprünglichen Ionen möglich
+%       \vspace*{0.5cm}
+%       \item<5-> MS2 Ergebnisse haben eine höhere Qualität
+%     \end{itemize}
+%     \end{frame}
 
     \section{pNovo+ Algorithmus}
     \begin{frame}{pNovo+ Algorithmus \dashAndSpace Übersicht}
     \begin{itemize}
-    \item<1-> Algorithmus für die De-Novo-Sequenzierung
-    \item<2-> Auswertung von MS2 Spektrogrammen
-    \item<3-> Rekonstruktion der AS-Sequenz
-    \item<4-> Hilfsmittel: Spektrums-Graph
+    \item<1-> Erweiterung von pNovo
+    \item<2-> Algorithmus für die De-Novo-Sequenzierung
+    \item<3-> Auswertung von MS2-Spektren
+    \item<4-> Rekonstruktion der AA-Sequenz
+    \item<5-> Hilfsmittel: Spektrum-Graph
     \end{itemize}
     \end{frame}
 
@@ -506,10 +627,10 @@ cross/.default={8pt}}
     \end{frame}
 
 
-    \newcommand{\minWidth}{4.5cm}
+    \newcommand{\minWidth}{5.0cm}
     \newcommand{\minHeight}{1.0cm}
     \newcommand{\minWidthOverview}{2.3cm}
-    \newcommand{\minHeightOverview}{0.4cm}
+    \newcommand{\minHeightOverview}{0.325cm}
     \newcommand{\xStartOverview}{10}
     \newcommand{\yStartOverview}{15}
     \newcommand{\currElementOpacity}{1}
@@ -521,10 +642,12 @@ cross/.default={8pt}}
         \node[rectangle,draw,text=black, fill=orange, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r1) at (0,0) {Hintergrundrauschen\\ verringern};
         \node[rectangle,draw,text=black, fill=yellow, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r2) at (0,-1.75) {Entfernung falscher\\Peaks};
           \node[rectangle,draw,text=black, fill=green, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r3) at (0,-3.5) {Entfernung irrelevanter\\ Peaks};
-          \node[rectangle,draw,text=black, fill=magenta, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r4) at (0,-5.25) {Zusammenfassen};
+          \node[rectangle,draw,text=black, fill=cyan, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r4) at (0,-5.25) {Normierung auf +1\\Ladung};
+          \node[rectangle,draw,text=black, fill=magenta, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r5) at (0,-7) {Zusammenfassen};
           \draw[->, ultra thick, opacity=0] (r1) -- (r2);
           \draw[->, ultra thick, opacity=0] (r2) -- (r3);
           \draw[->, ultra thick, opacity=0] (r3) -- (r4);
+          \draw[->, ultra thick, opacity=0] (r4) -- (r5);
          \end{tikzpicture}
          }%
 
@@ -534,36 +657,57 @@ cross/.default={8pt}}
         \node[rectangle,draw,text=black, fill=orange, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r1) at (0,0) {Hintergrundrauschen\\ verringern};
         \node[rectangle,draw,text=black, fill=yellow, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r2) at (0,-1.75) {Entfernung falscher\\Peaks};
           \node[rectangle,draw,text=black, fill=green, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r3) at (0,-3.5) {Entfernung irrelevanter\\ Peaks};
-          \node[rectangle,draw,text=black, fill=magenta, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r4) at (0,-5.25) {Zusammenfassen};
+          \node[rectangle,draw,text=black, fill=cyan, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r4) at (0,-5.25) {Normierung auf +1\\Ladung};
+          \node[rectangle,draw,text=black, fill=magenta, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r5) at (0,-7) {Zusammenfassen};
           \draw[->, ultra thick, opacity=1] (r1) -- (r2);
           \draw[->, ultra thick, opacity=0] (r2) -- (r3);
           \draw[->, ultra thick, opacity=0] (r3) -- (r4);
+          \draw[->, ultra thick, opacity=0] (r4) -- (r5);
          \end{tikzpicture}
          }%
 
          \only<3>{
               \centering
-         \begin{tikzpicture}
+\begin{tikzpicture}
         \node[rectangle,draw,text=black, fill=orange, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r1) at (0,0) {Hintergrundrauschen\\ verringern};
         \node[rectangle,draw,text=black, fill=yellow, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r2) at (0,-1.75) {Entfernung falscher\\Peaks};
           \node[rectangle,draw,text=black, fill=green, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r3) at (0,-3.5) {Entfernung irrelevanter\\ Peaks};
-          \node[rectangle,draw,text=black, fill=magenta, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r4) at (0,-5.25) {Zusammenfassen};
+          \node[rectangle,draw,text=black, fill=cyan, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r4) at (0,-5.25) {Normierung auf +1\\Ladung};
+          \node[rectangle,draw,text=black, fill=magenta, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r5) at (0,-7) {Zusammenfassen};
           \draw[->, ultra thick, opacity=1] (r1) -- (r2);
           \draw[->, ultra thick, opacity=1] (r2) -- (r3);
           \draw[->, ultra thick, opacity=0] (r3) -- (r4);
+          \draw[->, ultra thick, opacity=0] (r4) -- (r5);
          \end{tikzpicture}
          }%
 
          \only<4>{
               \centering
-         \begin{tikzpicture}
+\begin{tikzpicture}
         \node[rectangle,draw,text=black, fill=orange, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r1) at (0,0) {Hintergrundrauschen\\ verringern};
         \node[rectangle,draw,text=black, fill=yellow, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r2) at (0,-1.75) {Entfernung falscher\\Peaks};
           \node[rectangle,draw,text=black, fill=green, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r3) at (0,-3.5) {Entfernung irrelevanter\\ Peaks};
-          \node[rectangle,draw,text=black, fill=magenta, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r4) at (0,-5.25) {Zusammenfassen};
+          \node[rectangle,draw,text=black, fill=cyan, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r4) at (0,-5.25) {Normierung auf +1\\Ladung};
+          \node[rectangle,draw,text=black, fill=magenta, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r5) at (0,-7) {Zusammenfassen};
           \draw[->, ultra thick, opacity=1] (r1) -- (r2);
           \draw[->, ultra thick, opacity=1] (r2) -- (r3);
           \draw[->, ultra thick, opacity=1] (r3) -- (r4);
+          \draw[->, ultra thick, opacity=0] (r4) -- (r5);
+         \end{tikzpicture}
+         }%
+
+         \only<5>{
+              \centering
+\begin{tikzpicture}
+        \node[rectangle,draw,text=black, fill=orange, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r1) at (0,0) {Hintergrundrauschen\\ verringern};
+        \node[rectangle,draw,text=black, fill=yellow, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r2) at (0,-1.75) {Entfernung falscher\\Peaks};
+          \node[rectangle,draw,text=black, fill=green, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r3) at (0,-3.5) {Entfernung irrelevanter\\ Peaks};
+          \node[rectangle,draw,text=black, fill=cyan, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r4) at (0,-5.25) {Normierung auf +1\\Ladung};
+          \node[rectangle,draw,text=black, fill=magenta, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r5) at (0,-7) {Zusammenfassen};
+          \draw[->, ultra thick, opacity=1] (r1) -- (r2);
+          \draw[->, ultra thick, opacity=1] (r2) -- (r3);
+          \draw[->, ultra thick, opacity=1] (r3) -- (r4);
+          \draw[->, ultra thick, opacity=1] (r4) -- (r5);
          \end{tikzpicture}
          }%
     \end{frame}
@@ -587,10 +731,12 @@ cross/.default={8pt}}
         \node[rectangle,draw,text=black, fill=orange,opacity=\currElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r1) at (\xStartOverview,\yStartOverview) {Hintergrundrauschen};
         \node[rectangle,draw,text=black, fill=yellow,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r2) at (\xStartOverview,\yStartOverview-0.75) {Falsche Peaks};
           \node[rectangle,draw,text=black, fill=green, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r3) at (\xStartOverview,\yStartOverview-1.5) {Irrelevante Peaks};
-          \node[rectangle,draw,text=black, fill=magenta, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r4) at (\xStartOverview,\yStartOverview-2.25) {Zusammenfassen};
+          \node[rectangle,draw,text=black, fill=cyan, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r4) at (\xStartOverview,\yStartOverview-2.25) {$+1$ Normierung};
+          \node[rectangle,draw,text=black, fill=magenta, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r5) at (\xStartOverview,\yStartOverview-3) {Zusammenfassen};
           \draw[->, ultra thick] (r1) -- (r2);
           \draw[->, ultra thick] (r2) -- (r3);
           \draw[->, ultra thick] (r3) -- (r4);
+          \draw[->, ultra thick] (r4) -- (r5);
          \end{tikzpicture}
     \end{minipage}
     }
@@ -733,10 +879,12 @@ cross/.default={8pt}}
         \node[rectangle,draw,text=black, fill=orange,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r1) at (\xStartOverview,\yStartOverview) {Hintergrundrauschen};
         \node[rectangle,draw,text=black, fill=yellow,opacity=\currElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r2) at (\xStartOverview,\yStartOverview-0.75) {Falsche Peaks};
           \node[rectangle,draw,text=black, fill=green, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r3) at (\xStartOverview,\yStartOverview-1.5) {Irrelevante Peaks};
-          \node[rectangle,draw,text=black, fill=magenta, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r4) at (\xStartOverview,\yStartOverview-2.25) {Zusammenfassen};
+          \node[rectangle,draw,text=black, fill=cyan, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r4) at (\xStartOverview,\yStartOverview-2.25) {$+1$ Normierung};
+          \node[rectangle,draw,text=black, fill=magenta, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r5) at (\xStartOverview,\yStartOverview-3) {Zusammenfassen};
           \draw[->, ultra thick] (r1) -- (r2);
           \draw[->, ultra thick] (r2) -- (r3);
           \draw[->, ultra thick] (r3) -- (r4);
+          \draw[->, ultra thick] (r4) -- (r5);
          \end{tikzpicture}
     \end{minipage}
     }
@@ -854,10 +1002,12 @@ cross/.default={8pt}}
         \node[rectangle,draw,text=black, fill=orange,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r1) at (\xStartOverview,\yStartOverview) {Hintergrundrauschen};
         \node[rectangle,draw,text=black, fill=yellow,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r2) at (\xStartOverview,\yStartOverview-0.75) {Falsche Peaks};
           \node[rectangle,draw,text=black, fill=green, opacity=\currElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r3) at (\xStartOverview,\yStartOverview-1.5) {Irrelevante Peaks};
-          \node[rectangle,draw,text=black, fill=magenta, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r4) at (\xStartOverview,\yStartOverview-2.25) {Zusammenfassen};
+          \node[rectangle,draw,text=black, fill=cyan, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r4) at (\xStartOverview,\yStartOverview-2.25) {$+1$ Normierung};
+          \node[rectangle,draw,text=black, fill=magenta, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r5) at (\xStartOverview,\yStartOverview-3) {Zusammenfassen};
           \draw[->, ultra thick] (r1) -- (r2);
           \draw[->, ultra thick] (r2) -- (r3);
           \draw[->, ultra thick] (r3) -- (r4);
+          \draw[->, ultra thick] (r4) -- (r5);
          \end{tikzpicture}
     \end{minipage}
     }
@@ -943,6 +1093,107 @@ cross/.default={8pt}}
     \end{frame}
     % END Irr
 
+    % BEGIN Normierung
+    \begin{frame}{pNovo+ Algorithmus \dashAndSpace Datenaufbereitung}
+    \onslide<1->{
+    \begin{minipage}[c]{0.775\textwidth}
+    \centering
+    \begin{itemize}
+    \item<1-> Peaks auf Ladung $+1$ normieren
+    \end{itemize}
+    \end{minipage}
+    }
+    \onslide<1->{
+    \begin{minipage}[c]{0.2\textwidth}
+  \centering
+     \begin{tikzpicture}[font=\tiny]
+         %\node[rectangle] at (0,0) {};
+        \node[rectangle,draw,text=black, fill=orange,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r1) at (\xStartOverview,\yStartOverview) {Hintergrundrauschen};
+        \node[rectangle,draw,text=black, fill=yellow,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r2) at (\xStartOverview,\yStartOverview-0.75) {Falsche Peaks};
+          \node[rectangle,draw,text=black, fill=green, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r3) at (\xStartOverview,\yStartOverview-1.5) {Irrelevante Peaks};
+          \node[rectangle,draw,text=black, fill=cyan, opacity=\currElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r4) at (\xStartOverview,\yStartOverview-2.25) {$+1$ Normierung};
+          \node[rectangle,draw,text=black, fill=magenta, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r5) at (\xStartOverview,\yStartOverview-3) {Zusammenfassen};
+          \draw[->, ultra thick] (r1) -- (r2);
+          \draw[->, ultra thick] (r2) -- (r3);
+          \draw[->, ultra thick] (r3) -- (r4);
+          \draw[->, ultra thick] (r4) -- (r5);
+         \end{tikzpicture}
+    \end{minipage}
+    }
+         \onslide<2-> {
+        \begin{minipage}[t]{.45\linewidth}
+      \centering
+      \begin{tikzpicture}[scale=\tikzScale, baseline=(current bounding box.center)]
+         \draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit}
+         |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
+%\draw[thick] (0.382, 0.0) -- (0.382, {ln(1.7)});
+%\draw[thick] (0.476, 0.0) -- (0.476, {ln(2.7)});
+%\draw[thick] (0.456, 0.0) -- (0.456, {ln(1.8)});
+%\draw[thick] (0.6859999999999999, 0.0) -- (0.6859999999999999, {ln(2.7)});
+%\draw[thick] (0.6839999999999999, 0.0) -- (0.6839999999999999, {ln(1.8)});
+\draw[thick] (1.452, 0.0) -- (1.452, {ln(1.3)});
+\draw[thick] (1.426, 0.0) -- (1.426, {ln(1.9)});
+\draw[thick] (1.548, 0.0) -- (1.548, {ln(1.9)});
+\draw[thick] (1.6740000000000002, 0.0) -- (1.6740000000000002, {ln(1.5)});
+\draw[thick] (1.788, 0.0) -- (1.788, {ln(2.5)});
+\draw[thick] (2.488, 0.0) -- (2.488, {ln(2.9)});
+\draw[thick] (2.504, 0.0) -- (2.504, {ln(2.0)});
+\draw[thick] (2.682, 0.0) -- (2.682, {ln(2.0)});
+\draw[thick] (2.702, 0.0) -- (2.702, {ln(2.5)});
+\draw[thick] (3.46, 0.0) -- (3.46, {ln(2.3)});
+\draw[thick] (3.516, 0.0) -- (3.516, {ln(1.1)});
+\draw[thick] (3.584, 0.0) -- (3.584, {ln(1.8)});
+\draw[thick] (3.652, 0.0) -- (3.652, {ln(2.0)});
+\draw[thick] (3.838, 0.0) -- (3.838, {ln(1.5)});
+\draw[thick] (3.8819999999999997, 0.0) -- (3.8819999999999997, {ln(2.6)});
+%\draw[thick] (4.38, 0.0) -- (4.38, {ln(1.1)});
+%\draw[thick] (4.456, 0.0) -- (4.456, {ln(2.2)});
+%\draw[thick] (4.644, 0.0) -- (4.644, {ln(2.6)});
+%\draw[thick] (4.675999999999999, 0.0) -- (4.675999999999999, {ln(2.5)});
+%\draw[thick] (4.898000000000001, 0.0) -- (4.898000000000001, {ln(1.2)});
+   \end{tikzpicture}%
+   \end{minipage}%
+     }%
+     \onslide<3-> {
+     \textbf{$\rightarrow$}
+     }%
+     \onslide<4->{
+        \begin{minipage}[t]{.45\linewidth}
+      \centering
+      \begin{tikzpicture}[scale=\tikzScale, baseline=(current bounding box.center)]
+         \draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit}
+         |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
+%\draw[thick] (0.382, 0.0) -- (0.382, {ln(1.7)});
+%\draw[thick] (0.476, 0.0) -- (0.476, {ln(2.7)});
+%\draw[thick] (0.456, 0.0) -- (0.456, {ln(1.8)});
+%\draw[thick] (0.6859999999999999, 0.0) -- (0.6859999999999999, {ln(2.7)});
+%\draw[thick] (0.6839999999999999, 0.0) -- (0.6839999999999999, {ln(1.8)});
+\draw[thick] (1.452, 0.0) -- (1.452, {ln(1.3)});
+\draw[thick] (1.426, 0.0) -- (1.426, {ln(1.9)});
+\draw[thick] (1.548, 0.0) -- (1.548, {ln(1.9)});
+\draw[thick] (1.6740000000000002, 0.0) -- (1.6740000000000002, {ln(1.5)});
+\draw[thick] (1.788, 0.0) -- (1.788, {ln(2.5)});
+\draw[thick] (2.488, 0.0) -- (2.488, {ln(2.9)});
+\draw[thick] (2.504, 0.0) -- (2.504, {ln(2.0)});
+\draw[thick] (2.682, 0.0) -- (2.682, {ln(2.0)});
+\draw[thick] (2.702, 0.0) -- (2.702, {ln(2.5)});
+\draw[thick] (3.46, 0.0) -- (3.46, {ln(2.3)});
+\draw[thick] (3.516, 0.0) -- (3.516, {ln(1.1)});
+\draw[thick] (3.584, 0.0) -- (3.584, {ln(1.8)});
+\draw[thick] (3.652, 0.0) -- (3.652, {ln(2.0)});
+\draw[thick] (3.838, 0.0) -- (3.838, {ln(1.5)});
+\draw[thick] (3.8819999999999997, 0.0) -- (3.8819999999999997, {ln(2.6)});
+%\draw[thick] (4.38, 0.0) -- (4.38, {ln(1.1)});
+%\draw[thick] (4.456, 0.0) -- (4.456, {ln(2.2)});
+%\draw[thick] (4.644, 0.0) -- (4.644, {ln(2.6)});
+%\draw[thick] (4.675999999999999, 0.0) -- (4.675999999999999, {ln(2.5)});
+%\draw[thick] (4.898000000000001, 0.0) -- (4.898000000000001, {ln(1.2)});
+   \end{tikzpicture}%
+   \end{minipage}%
+     }%
+    \end{frame}
+    % END Normierung
+
     % BEGIN Merge
     \begin{frame}{pNovo+ Algorithmus \dashAndSpace Datenaufbereitung}
     \onslide<1->{
@@ -963,10 +1214,12 @@ cross/.default={8pt}}
         \node[rectangle,draw,text=black, fill=orange,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r1) at (\xStartOverview,\yStartOverview) {Hintergrundrauschen};
         \node[rectangle,draw,text=black, fill=yellow,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r2) at (\xStartOverview,\yStartOverview-0.75) {Falsche Peaks};
           \node[rectangle,draw,text=black, fill=green, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r3) at (\xStartOverview,\yStartOverview-1.5) {Irrelevante Peaks};
-          \node[rectangle,draw,text=black, fill=magenta, opacity=\currElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r4) at (\xStartOverview,\yStartOverview-2.25) {Zusammenfassen};
+          \node[rectangle,draw,text=black, fill=cyan, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r4) at (\xStartOverview,\yStartOverview-2.25) {$+1$ Normierung};
+          \node[rectangle,draw,text=black, fill=magenta, opacity=\currElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r5) at (\xStartOverview,\yStartOverview-3) {Zusammenfassen};
           \draw[->, ultra thick] (r1) -- (r2);
           \draw[->, ultra thick] (r2) -- (r3);
           \draw[->, ultra thick] (r3) -- (r4);
+          \draw[->, ultra thick] (r4) -- (r5);
          \end{tikzpicture}
     \end{minipage}
     }
@@ -1262,6 +1515,34 @@ cross/.default={8pt}}
       \item<4-> Open-pNovo erkennt zuverlässig Proben mit PTMs
      \end{itemize}
     \end{frame}
+
+    %%%%% %%%%% %%%%% %%%%% %%%%% BEGIN Ende %%%%% %%%%% %%%%% %%%%% %%%%%
+    \begin{frame}{The End}
+        \onslide<1->{
+            \begin{flushleft}
+                \begin{large}
+                    \texttt{Danke für die Aufmerksamkeit :)}
+                \end{large}
+            \end{flushleft}
+            \vspace*{0.2cm}
+            \begin{flushright}
+                \begin{Large}
+                    \texttt{Fragen?}
+                \end{Large}
+            \end{flushright}
+        }%
+        \onslide<2->{
+            \begin{center}
+                \includegraphics[width=0.03\linewidth, angle=-15]{./Presentation_Images/vecteezy_question-mark-with-3d-vector-icon-cartoon-minimal-style_16626300.png}
+                \includegraphics[width=0.04\linewidth]{./Presentation_Images/vecteezy_question-mark-with-3d-vector-icon-cartoon-minimal-style_16626300.png}
+                \includegraphics[width=0.03\linewidth, angle=+15]{./Presentation_Images/vecteezy_question-mark-with-3d-vector-icon-cartoon-minimal-style_16626300.png}
+                \\
+                \vspace*{0.10cm}
+                \includegraphics[width=0.2\linewidth]{./Presentation_Images/NewTux.png}
+            }%
+        \end{center}
+    \end{frame}
+    %%%%% %%%%% %%%%% %%%%% %%%%% BEGIN Ende %%%%% %%%%% %%%%% %%%%% %%%%%
 
 \end{document}
 %%%%% %%%%% %%%%% %%%%% %%%%% %%%%% %%%%% %%%%%              %%%%% %%%%% %%%%% %%%%% %%%%% %%%%% %%%%% %%%%%
