@@ -42,6 +42,12 @@ cross/.default={8pt}}
 \newcommand{\yAxisHeight}{3}
 \newcommand{\xAxisLength}{5}
 \newcommand{\axisColorOffset}{0.15}
+\newcommand\modulo[2]{\@tempcnta=#1
+        \divide\@tempcnta by #2
+        \multiply\@tempcnta by #2
+        \multiply\@tempcnta by -1
+        \advance\@tempcnta by #1\relax
+        \the\@tempcnta}
 
 
 
@@ -177,9 +183,10 @@ cross/.default={8pt}}
         \draw[ultra thick, -] (17.center) to [bend left]  (10.center);
         \draw[ultra thick, -] (15.center) to [bend left]  (7.center);
 
+        \newcommand{\circleColor}{red}
         \foreach \i in {0,...,17}
         {
-          \filldraw [shade, shading=radial, inner color=white, outer color=red] (\i) circle (\AARadius);
+          \filldraw [shade, shading=radial, inner color=white, outer color=\circleColor] (\i) circle (\AARadius);
         }
         % Debug Kreis
         % \filldraw [shade, shading=radial, inner color=white, outer color=black] (0, 0) circle (\AARadius);
@@ -302,9 +309,12 @@ cross/.default={8pt}}
 
 
         \begin{frame}{AA Sequenzierung \dashAndSpace Hilfsmittel MS}
+        \newcommand{\movLineColor}{green}
         \begin{itemize}
          \item<1-> MS erzeugt MS-Spektren
+         \item<2-> Beispiel: vereinfachte Darstellung von realen Messwerten
         \end{itemize}
+        \vspace*{0.2cm}
 
         \onslide<2->{
          \centering
@@ -315,25 +325,35 @@ cross/.default={8pt}}
          % JA es muessen die x-Werte (m/z) Werte auf den Peaks geschrieben werden !
          %\node (0) at (149.04489, 15549.466) [above] {\tiny 149.04};
          \node (0) at (135.04489, 16049.466) [above] {\tiny 149.04};
-         \draw[green] (149.04489, 15549.466) -- (135.04489, 16549.466);
+         \draw[\movLineColor] (149.04489, 15549.466) -- (135.04489, 16549.466);
 
          \node (1) at (167.05548, 30403.949) [above] {\tiny 167.05};
          \node (2) at (213.81911, 13479.453) [above] {\tiny 213.81};
-         \node (3) at (341.01804, 28799.889) [above] {\tiny 341.01};
 
-         %\node (4) at (359.02826, 24235.844) [above] {\tiny 359.02};
-         \node (4) at (375.02826, 24635.844) [above] {\tiny 359.02};
-         \draw[green] (359.02826, 24235.844) -- (375.02826, 25235.844);
+         %\node (3) at (318.92282, 11948.519) [above] {\tiny 318.92};
+         \node (3) at (300.92282, 11948.519) [above] {\tiny 318.92};
+         \draw[\movLineColor] (318.92282, 11948.519) -- (300.92282, 12848.519);
 
-         %\node (5) at (404.45569, 5915.098) [above] {\tiny 404.45};
-         \node (5) at (395.45569, 5915.098) [above] {\tiny 404.45};
-         \draw[green] (404.45569, 5915.098) -- (395.45569, 6615.098);
+         \node (4) at (341.01804, 28799.889) [above] {\tiny 341.01};
 
-         \node (6) at (429.08765, 59781.848) [above] {\tiny 429.08};
-         \node (7) at (486.75085, 6172.900) [above] {\tiny 486.75};
-         \node (8) at (603.03772, 5612.658) [above] {\tiny 603.03};
+         %\node (5) at (359.02826, 24235.844) [above] {\tiny 359.02};
+         \node (5) at (375.02826, 24635.844) [above] {\tiny 359.02};
+         \draw[\movLineColor] (359.02826, 24235.844) -- (375.02826, 25235.844);
 
-         \draw [<->,thick] (0,60000) node (yaxis) [above] {\small Rel. abundance}
+         %\node (6) at (404.45569, 5915.098) [above] {\tiny 404.45};
+         \node (6) at (395.45569, 5915.098) [above] {\tiny 404.45};
+         \draw[\movLineColor] (404.45569, 5915.098) -- (395.45569, 6615.098);
+
+         \node (7) at (429.08765, 59781.848) [above] {\tiny 429.08};
+         \node (8) at (486.75085, 6172.900) [above] {\tiny 486.75};
+
+         % \node (9) at (564.11682, 5931.172) [above] {\tiny 564.11};
+         \node (10) at (545.11682, 6631.172) [above] {\tiny 564.11};
+         \draw[\movLineColor] (564.11682, 5931.172) -- (545.11682, 7531.172);
+
+         \node (11) at (603.03772, 5612.658) [above] {\tiny 603.03};
+
+         \draw [<->,thick] (0,60000) node (yaxis) [above] {\small \yAxisUnit}
          |- (650,0) node (xaxis) [right] {\small \xAxisUnit};
 \draw[thick] (149.04489, 0.0) -- (149.04489, 15549.466);
 \draw[thick] (167.05548, 0.0) -- (167.05548, 30403.949);
@@ -367,9 +387,6 @@ cross/.default={8pt}}
 \draw[thick] (603.03772, 0.0) -- (603.03772, 5612.658);
    \end{tikzpicture}%
          }%
-         \begin{itemize}
-          \item<3-> Vereinfachte Darstellung von realen Messwerten
-         \end{itemize}
         \end{frame}
 
 
@@ -506,72 +523,121 @@ cross/.default={8pt}}
 
 
     \begin{frame}{De-Novo-Sequenzierung \dashAndSpace MS2}
+    \newcommand{\rectangleFirstColor}{orange}
+    \newcommand{\rectangleSecondColor}{blue}
+    \newcommand{\rectangleThirdColor}{green}
     \centering
-    \begin{tikzpicture}[scale=1.25]
-		\node  (0) at (0.75, 0) {};
-		\node  (1) at (0.75, 0.5) {};
-		\node  (2) at (6.75, 0) {};
-		\node  (3) at (6.75, 0.5) {};
-		\node  (4) at (1.75, -0.5) {};
-		\node  (5) at (2.25, -0.5) {};
-		\node  (6) at (1.75, -1) {};
-		\node  (7) at (2.25, -1) {};
-		\node  (8) at (3.75, -1.5) {};
-		\node  (9) at (4.25, -1.5) {};
-		\node  (10) at (3.75, -2) {};
-		\node  (11) at (4.25, -2) {};
-		\node  (12) at (5.75, -2.5) {};
-		\node  (13) at (6.25, -2.5) {};
-		\node  (14) at (5.75, -3) {};
-		\node  (15) at (6.25, -3) {};
-		\node  (16) at (-0.25, 0.25) {MS1};
-		\node  (17) at (-0.25, -0.75) {MS2};
-		\node  (18) at (-0.25, -1.75) {MS2};
-		\node  (19) at (-0.25, -2.75) {MS2};
-		\node  (20) at (-0.75, -0.25) {};
-		\node  (21) at (-0.75, -1.25) {};
-		\node  (22) at (-0.75, -2.25) {};
-		\node  (23) at (-0.75, -3.25) {};
-		\node  (24) at (7, -2.25) {};
-		\node  (25) at (7, -3.25) {};
-		\node  (26) at (-0.75, 0.75) {};
-		\node  (27) at (7, -1.25) {};
-		\node  (28) at (7, -0.25) {};
-		\node  (29) at (7, 0.75) {};
+    \begin{tikzpicture}[scale=1.1]
+        \node  (0) at (0.5, 0.5) {};
+        \node  (1) at (0.5, 1) {};
+        \node  (2) at (6.75, 0.5) {};
+        \node  (3) at (6.75, 1) {};
+        \node  (4) at (1.75, -0.5) {};
+        \node  (5) at (2.25, -0.5) {};
+        \node  (6) at (1.75, -1) {};
+        \node  (7) at (2.25, -1) {};
+        \node  (8) at (3.75, -1.5) {};
+        \node  (9) at (4.25, -1.5) {};
+        \node  (10) at (3.75, -2) {};
+        \node  (11) at (4.25, -2) {};
+        \node  (12) at (5.75, -2.5) {};
+        \node  (13) at (6.25, -2.5) {};
+        \node  (14) at (5.75, -3) {};
+        \node  (15) at (6.25, -3) {};
+        \node  (16) at (-0.25, 0.5) {MS1};
+        \node  (17) at (-0.25, -0.75) {MS2};
+        \node  (18) at (-0.25, -1.75) {MS2};
+        \node  (19) at (-0.25, -2.75) {MS2};
+        \node  (20) at (-0.75, -0.25) {};
+        \node  (21) at (-0.75, -1.25) {};
+        \node  (22) at (-0.75, -2.25) {};
+        \node  (23) at (-0.75, -3.25) {};
+        \node  (24) at (7, -2.25) {};
+        \node  (25) at (7, -3.25) {};
+        \node  (26) at (-0.75, 1.25) {};
+        \node  (27) at (7, -1.25) {};
+        \node  (28) at (7, -0.25) {};
+        \node  (29) at (7, 1.25) {};
+        \node  (30) at (0.25, 1.25) {};
+        \node  (31) at (0.25, -3.25) {};
+        \node  (32) at (0.5, 0) {};
+        \node  (33) at (6.75, 0) {};
+        \node  (34) at (3.5, 0.25) {};
+        \node  (35) at (3.5, 0.25) {\footnotesize $m/z$};
+        \node  (36) at (1.5, 1) {};
+        \node  (37) at (2.5, 1) {};
+        \node  (38) at (2.5, 0.5) {};
+        \node  (39) at (1.5, 0.5) {};
+        \node  (40) at (3.5, 1) {};
+        \node  (41) at (4.5, 1) {};
+        \node  (42) at (4.5, 0.5) {};
+        \node  (43) at (3.5, 0.5) {};
+        \node  (44) at (6.5, 1) {};
+        \node  (45) at (6.5, 0.5) {};magenta
+        \node  (46) at (5.5, 0.5) {};
+        \node  (47) at (5.5, 1) {};
 
-		\draw (1.center) to (3.center);
-		\draw (0.center) to (2.center);
-		\draw (3.center) to (2.center);
-		\draw (1.center) to (0.center);
-		\draw (4.center) to (5.center);
-		\draw (4.center) to (6.center);
-		\draw (6.center) to (7.center);
-		\draw (5.center) to (7.center);
-		\draw (8.center) to (9.center);
-		\draw (8.center) to (10.center);
-		\draw (10.center) to (11.center);
-		\draw (9.center) to (11.center);
-		\draw (12.center) to (13.center);
-		\draw (12.center) to (14.center);
-		\draw (14.center) to (15.center);
-		\draw (13.center) to (15.center);
-		\draw (22.center) to (23.center);
-		\draw (23.center) to (25.center);
-		\draw (22.center) to (24.center);
-		\draw (24.center) to (25.center);
-		\draw (22.center) to (21.center);
-		\draw (21.center) to (20.center);
-		\draw (20.center) to (26.center);
-		\draw (26.center) to (29.center);
-		\draw (29.center) to (28.center);
-		\draw (28.center) to (27.center);
-		\draw (27.center) to (24.center);
-		\draw (27.center) to (21.center);
-		\draw (20.center) to (28.center);
+        % 1. Bereich im MS1 Rechteck
+        \shade [left color=white,right color=\rectangleFirstColor] (36.center) rectangle (2, 0.5);
+        \shade [left color=\rectangleFirstColor,right color=white] (2, 1) rectangle (38.center);
+
+        % 2. Bereich im MS1 Rechteck
+        \shade [left color=white,right color=\rectangleSecondColor] (40.center) rectangle (4, 0.5);
+        \shade [left color=\rectangleSecondColor,right color=white] (4, 1) rectangle (42.center);
+
+        % 3. Bereich im MS1 Rechteck
+        \shade [left color=white,right color=\rectangleThirdColor] (47.center) rectangle (6, 0.5);
+        \shade [left color=\rectangleThirdColor,right color=white] (6, 1) rectangle (45.center);
+
+
+        % 1. MS2 Rechteck
+        \shade [left color=white,right color=\rectangleFirstColor] (4.center) rectangle (2, -1);
+        \shade [left color=\rectangleFirstColor,right color=white] (2, -0.5) rectangle (7.center);
+
+        % 2. MS2 Rechteck
+        \shade [left color=white,right color=\rectangleSecondColor] (8.center) rectangle (4, -2);
+        \shade [left color=\rectangleSecondColor,right color=white] (4, -1.5) rectangle (11.center);
+
+        % 3. MS2 Rechteck
+        \shade [left color=white,right color=\rectangleThirdColor] (12.center) rectangle (6, -3);
+        \shade [left color=\rectangleThirdColor,right color=white] (6, -2.5) rectangle (15.center);
+
+        \draw (1.center) to (3.center);
+        \draw (0.center) to (2.center);
+        \draw (3.center) to (2.center);
+        \draw (1.center) to (0.center);
+        \draw (4.center) to (5.center);
+        \draw (4.center) to (6.center);
+        \draw (6.center) to (7.center);
+        \draw (5.center) to (7.center);
+        \draw (8.center) to (9.center);
+        \draw (8.center) to (10.center);
+        \draw (10.center) to (11.center);
+        \draw (9.center) to (11.center);
+        \draw (12.center) to (13.center);
+        \draw (12.center) to (14.center);
+        \draw (14.center) to (15.center);
+        \draw (13.center) to (15.center);
+        \draw (22.center) to (23.center);
+        \draw (23.center) to (25.center);
+        \draw (22.center) to (24.center);
+        \draw (24.center) to (25.center);
+        \draw (22.center) to (21.center);
+        \draw (21.center) to (20.center);
+        \draw (20.center) to (26.center);
+        \draw (26.center) to (29.center);
+        \draw (29.center) to (28.center);
+        \draw (28.center) to (27.center);
+        \draw (27.center) to (24.center);
+        \draw (27.center) to (21.center);
+        \draw (20.center) to (28.center);
+        \draw (30.center) to (31.center);
+        \draw[<->, thick] (32.center) to (33.center);
     \end{tikzpicture}
 
     \begin{itemize}
       \item<2-> MS1 quasi eine Filterung
+      \item<2-> MS2 wird gezielt auf $m/z$ Intervalle angewendet
     \end{itemize}
     \end{frame}
 %
