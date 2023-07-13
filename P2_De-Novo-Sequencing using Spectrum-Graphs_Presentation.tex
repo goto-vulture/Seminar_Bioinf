@@ -693,7 +693,7 @@ cross/.default={8pt}}
     \end{frame}
 
 
-    \newcommand{\minWidth}{5.0cm}
+    \newcommand{\minWidth}{5.6cm}
     \newcommand{\minHeight}{1.0cm}
     \newcommand{\minWidthOverview}{2.3cm}
     \newcommand{\minHeightOverview}{0.325cm}
@@ -701,6 +701,9 @@ cross/.default={8pt}}
     \newcommand{\yStartOverview}{15}
     \newcommand{\currElementOpacity}{1}
     \newcommand{\otherElementOpacity}{0.35}
+    \newcommand{\stepSize}{1.6}
+    \newcommand{\stepSizeOverview}{0.7}
+
     \newcommand{\colorStepOne}{orange}
     \newcommand{\colorStepTwo}{yellow}
     \newcommand{\colorStepThree}{green}
@@ -712,45 +715,45 @@ cross/.default={8pt}}
          \centering
          \begin{tikzpicture}
          \only<1>{
-        \node[rectangle,draw,text=black, fill=\colorStepOne, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r1) at (0,0) {Hintergrundrauschen\\ verringern};
-        \node[rectangle,draw,text=black, fill=\colorStepTwo, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r2) at (0,-1.75) {Entfernung falscher\\Peaks};
-          \node[rectangle,draw,text=black, fill=\colorStepThree, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r3) at (0,-3.5) {Entfernung irrelevanter\\ Peaks};
-          \node[rectangle,draw,text=black, fill=\colorStepFour, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r4) at (0,-5.25) {Normierung auf +1\\Ladung};
-          \node[rectangle,draw,text=black, fill=\colorStepFive, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r5) at (0,-7) {Zusammenfassen};
+        \node[rectangle,draw,text=black, fill=\colorStepOne, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r1) at (0,\stepSize * 0 * -1) {Hintergrundrauschen\\ verringern};
+        \node[rectangle,draw,text=black, fill=\colorStepTwo, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r2) at (0,\stepSize * 1 * -1) {Entfernung falscher Peaks};
+          \node[rectangle,draw,text=black, fill=\colorStepThree, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r3) at (0,\stepSize * 2 * -1) {Entfernung irrelevanter Peaks};
+          \node[rectangle,draw,text=black, fill=\colorStepFour, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r4) at (0,\stepSize * 3 * -1) {Normierung auf +1 Ladung};
+          \node[rectangle,draw,text=black, fill=\colorStepFive, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r5) at (0,\stepSize * 4 * -1) {Zusammenfassen};
           }%
           \only<2>{
-          \node[rectangle,draw,text=black, fill=\colorStepOne, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r1) at (0,0) {Hintergrundrauschen\\ verringern};
-        \node[rectangle,draw,text=black, fill=\colorStepTwo, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r2) at (0,-1.75) {Entfernung falscher\\Peaks};
-          \node[rectangle,draw,text=black, fill=\colorStepThree, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r3) at (0,-3.5) {Entfernung irrelevanter\\ Peaks};
-          \node[rectangle,draw,text=black, fill=\colorStepFour, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r4) at (0,-5.25) {Normierung auf +1\\Ladung};
-          \node[rectangle,draw,text=black, fill=\colorStepFive, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r5) at (0,-7) {Zusammenfassen};
+          \node[rectangle,draw,text=black, fill=\colorStepOne, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r1) at (0,\stepSize * 0 * -1) {Hintergrundrauschen\\ verringern};
+        \node[rectangle,draw,text=black, fill=\colorStepTwo, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r2) at (0,\stepSize * 1 * -1) {Entfernung falscher Peaks};
+          \node[rectangle,draw,text=black, fill=\colorStepThree, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r3) at (0,\stepSize * 2 * -1) {Entfernung irrelevanter Peaks};
+          \node[rectangle,draw,text=black, fill=\colorStepFour, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r4) at (0,\stepSize * 3 * -1) {Normierung auf +1 Ladung};
+          \node[rectangle,draw,text=black, fill=\colorStepFive, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r5) at (0,\stepSize * 4 * -1) {Zusammenfassen};
           \draw[->, ultra thick, opacity=1] (r1) -- (r2);
           }%
           \only<3>{
-        \node[rectangle,draw,text=black, fill=\colorStepOne, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r1) at (0,0) {Hintergrundrauschen\\ verringern};
-        \node[rectangle,draw,text=black, fill=\colorStepTwo, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r2) at (0,-1.75) {Entfernung falscher\\Peaks};
-          \node[rectangle,draw,text=black, fill=\colorStepThree, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r3) at (0,-3.5) {Entfernung irrelevanter\\ Peaks};
-          \node[rectangle,draw,text=black, fill=\colorStepFour, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r4) at (0,-5.25) {Normierung auf +1\\Ladung};
-          \node[rectangle,draw,text=black, fill=\colorStepFive, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r5) at (0,-7) {Zusammenfassen};
+        \node[rectangle,draw,text=black, fill=\colorStepOne, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r1) at (0,\stepSize * 0 * -1) {Hintergrundrauschen\\ verringern};
+        \node[rectangle,draw,text=black, fill=\colorStepTwo, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r2) at (0,\stepSize * 1 * -1) {Entfernung falscher Peaks};
+          \node[rectangle,draw,text=black, fill=\colorStepThree, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r3) at (0,\stepSize * 2 * -1) {Entfernung irrelevanter Peaks};
+          \node[rectangle,draw,text=black, fill=\colorStepFour, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r4) at (0,\stepSize * 3 * -1) {Normierung auf +1 Ladung};
+          \node[rectangle,draw,text=black, fill=\colorStepFive, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r5) at (0,\stepSize * 4 * -1) {Zusammenfassen};
           \draw[->, ultra thick, opacity=1] (r1) -- (r2);
           \draw[->, ultra thick, opacity=1] (r2) -- (r3);
           }%
           \only<4>{
-        \node[rectangle,draw,text=black, fill=\colorStepOne, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r1) at (0,0) {Hintergrundrauschen\\ verringern};
-        \node[rectangle,draw,text=black, fill=\colorStepTwo, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r2) at (0,-1.75) {Entfernung falscher\\Peaks};
-          \node[rectangle,draw,text=black, fill=\colorStepThree, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r3) at (0,-3.5) {Entfernung irrelevanter\\ Peaks};
-          \node[rectangle,draw,text=black, fill=\colorStepFour, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r4) at (0,-5.25) {Normierung auf +1\\Ladung};
-          \node[rectangle,draw,text=black, fill=\colorStepFive, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r5) at (0,-7) {Zusammenfassen};
+        \node[rectangle,draw,text=black, fill=\colorStepOne, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r1) at (0,\stepSize * 0 * -1) {Hintergrundrauschen\\ verringern};
+        \node[rectangle,draw,text=black, fill=\colorStepTwo, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r2) at (0,\stepSize * 1 * -1) {Entfernung falscher Peaks};
+          \node[rectangle,draw,text=black, fill=\colorStepThree, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r3) at (0,\stepSize * 2 * -1) {Entfernung irrelevanter Peaks};
+          \node[rectangle,draw,text=black, fill=\colorStepFour, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r4) at (0,\stepSize * 3 * -1) {Normierung auf +1 Ladung};
+          \node[rectangle,draw,text=black, fill=\colorStepFive, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=0] (r5) at (0,\stepSize * 4 * -1) {Zusammenfassen};
           \draw[->, ultra thick, opacity=1] (r1) -- (r2);
           \draw[->, ultra thick, opacity=1] (r2) -- (r3);
           \draw[->, ultra thick, opacity=1] (r3) -- (r4);
           }%
           \only<5>{
-        \node[rectangle,draw,text=black, fill=\colorStepOne, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r1) at (0,0) {Hintergrundrauschen\\ verringern};
-        \node[rectangle,draw,text=black, fill=\colorStepTwo, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r2) at (0,-1.75) {Entfernung falscher\\Peaks};
-          \node[rectangle,draw,text=black, fill=\colorStepThree, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r3) at (0,-3.5) {Entfernung irrelevanter\\ Peaks};
-          \node[rectangle,draw,text=black, fill=\colorStepFour, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r4) at (0,-5.25) {Normierung auf +1\\Ladung};
-          \node[rectangle,draw,text=black, fill=\colorStepFive, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r5) at (0,-7) {Zusammenfassen};
+        \node[rectangle,draw,text=black, fill=\colorStepOne, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r1) at (0,\stepSize * 0 * -1) {Hintergrundrauschen\\ verringern};
+        \node[rectangle,draw,text=black, fill=\colorStepTwo, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r2) at (0,\stepSize * 1 * -1) {Entfernung falscher Peaks};
+          \node[rectangle,draw,text=black, fill=\colorStepThree, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r3) at (0,\stepSize * 2 * -1) {Entfernung irrelevanter Peaks};
+          \node[rectangle,draw,text=black, fill=\colorStepFour, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r4) at (0,\stepSize * 3 * -1) {Normierung auf +1 Ladung};
+          \node[rectangle,draw,text=black, fill=\colorStepFive, minimum width=\minWidth, minimum height=\minHeight, align=center, opacity=1] (r5) at (0,\stepSize * 4 * -1) {Zusammenfassen};
           \draw[->, ultra thick, opacity=1] (r1) -- (r2);
           \draw[->, ultra thick, opacity=1] (r2) -- (r3);
           \draw[->, ultra thick, opacity=1] (r3) -- (r4);
@@ -777,11 +780,11 @@ cross/.default={8pt}}
       \centering
         \begin{tikzpicture}[font=\tiny]
             %\node[rectangle] at (0,0) {};
-            \node[rectangle,draw,text=black, fill=\colorStepOne,opacity=\currElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r1) at (\xStartOverview,\yStartOverview) {Hintergrundrauschen};
-            \node[rectangle,draw,text=black, fill=\colorStepTwo,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r2) at (\xStartOverview,\yStartOverview-0.75) {Falsche Peaks};
-            \node[rectangle,draw,text=black, fill=\colorStepThree, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r3) at (\xStartOverview,\yStartOverview-1.5) {Irrelevante Peaks};
-            \node[rectangle,draw,text=black, fill=\colorStepFour, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r4) at (\xStartOverview,\yStartOverview-2.25) {$+1$ Normierung};
-            \node[rectangle,draw,text=black, fill=\colorStepFive, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r5) at (\xStartOverview,\yStartOverview-3) {Zusammenfassen};
+            \node[rectangle,draw,text=black, fill=\colorStepOne,opacity=\currElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r1) at (\xStartOverview,\yStartOverview - \stepSizeOverview * 0) {Hintergrundrauschen};
+            \node[rectangle,draw,text=black, fill=\colorStepTwo,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r2) at (\xStartOverview,\yStartOverview - \stepSizeOverview * 1) {Falsche Peaks};
+            \node[rectangle,draw,text=black, fill=\colorStepThree, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r3) at (\xStartOverview,\yStartOverview - \stepSizeOverview * 2) {Irrelevante Peaks};
+            \node[rectangle,draw,text=black, fill=\colorStepFour, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r4) at (\xStartOverview,\yStartOverview - \stepSizeOverview * 3) {$+1$ Normierung};
+            \node[rectangle,draw,text=black, fill=\colorStepFive, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r5) at (\xStartOverview,\yStartOverview - \stepSizeOverview * 4) {Zusammenfassen};
             \draw[->, ultra thick] (r1) -- (r2);
             \draw[->, ultra thick] (r2) -- (r3);
             \draw[->, ultra thick] (r3) -- (r4);
@@ -793,8 +796,6 @@ cross/.default={8pt}}
    \begin{minipage}[l]{0.45\textwidth}
       \centering
       \begin{tikzpicture}[scale=\tikzScale, baseline=(current bounding box.center)]
-         \draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit}
-         |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
 \draw[thick] (0.2, 0.0) -- (0.2, 2.3);
 \draw[thick] (0.382, 0.0) -- (0.382, 1.7);
 \draw[thick] (0.476, 0.0) -- (0.476, 2.7);
@@ -842,6 +843,8 @@ cross/.default={8pt}}
 \draw[thick] (4.644, 0.0) -- (4.644, 2.6);
 \draw[thick] (4.675999999999999, 0.0) -- (4.675999999999999, 2.5);
 \draw[thick] (4.898000000000001, 0.0) -- (4.898000000000001, 1.2);
+
+\draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit} |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
    \end{tikzpicture}%
    \end{minipage}%
    }
@@ -852,8 +855,6 @@ cross/.default={8pt}}
    \begin{minipage}[r]{0.45\textwidth}
       \centering
       \begin{tikzpicture}[scale=\tikzScale, baseline=(current bounding box.center)]
-      \draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit}
-      |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
 \draw[thick] (0.2, 0.0) -- (0.2, {ln(2.3)});
 \draw[thick] (0.382, 0.0) -- (0.382, {ln(1.7)});
 \draw[thick] (0.476, 0.0) -- (0.476, {ln(2.7)});
@@ -901,6 +902,8 @@ cross/.default={8pt}}
 \draw[thick] (4.644, 0.0) -- (4.644, {ln(2.6)});
 \draw[thick] (4.675999999999999, 0.0) -- (4.675999999999999, {ln(2.5)});
 \draw[thick] (4.898000000000001, 0.0) -- (4.898000000000001, {ln(1.2)});
+
+\draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit} |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
       \end{tikzpicture}
       \end{minipage}
      }%
@@ -933,11 +936,11 @@ cross/.default={8pt}}
   \centering
      \begin{tikzpicture}[font=\tiny]
          %\node[rectangle] at (0,0) {};
-        \node[rectangle,draw,text=black, fill=\colorStepOne,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r1) at (\xStartOverview,\yStartOverview) {Hintergrundrauschen};
-        \node[rectangle,draw,text=black, fill=\colorStepTwo,opacity=\currElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r2) at (\xStartOverview,\yStartOverview-0.75) {Falsche Peaks};
-          \node[rectangle,draw,text=black, fill=\colorStepThree, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r3) at (\xStartOverview,\yStartOverview-1.5) {Irrelevante Peaks};
-          \node[rectangle,draw,text=black, fill=\colorStepFour, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r4) at (\xStartOverview,\yStartOverview-2.25) {$+1$ Normierung};
-          \node[rectangle,draw,text=black, fill=\colorStepFive, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r5) at (\xStartOverview,\yStartOverview-3) {Zusammenfassen};
+            \node[rectangle,draw,text=black, fill=\colorStepOne,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r1) at (\xStartOverview,\yStartOverview - \stepSizeOverview * 0) {Hintergrundrauschen};
+            \node[rectangle,draw,text=black, fill=\colorStepTwo,opacity=\currElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r2) at (\xStartOverview,\yStartOverview - \stepSizeOverview * 1) {Falsche Peaks};
+            \node[rectangle,draw,text=black, fill=\colorStepThree, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r3) at (\xStartOverview,\yStartOverview - \stepSizeOverview * 2) {Irrelevante Peaks};
+            \node[rectangle,draw,text=black, fill=\colorStepFour, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r4) at (\xStartOverview,\yStartOverview - \stepSizeOverview * 3) {$+1$ Normierung};
+            \node[rectangle,draw,text=black, fill=\colorStepFive, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r5) at (\xStartOverview,\yStartOverview - \stepSizeOverview * 4) {Zusammenfassen};
           \draw[->, ultra thick] (r1) -- (r2);
           \draw[->, ultra thick] (r2) -- (r3);
           \draw[->, ultra thick] (r3) -- (r4);
@@ -949,8 +952,6 @@ cross/.default={8pt}}
        \begin{minipage}[t]{.45\linewidth}
       \centering
       \begin{tikzpicture}[scale=\tikzScale, baseline=(current bounding box.center)]
-         \draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit}
-         |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
 \draw[thick] (0.2, 0.0) -- (0.2, {ln(2.3)});
 \draw[color=\colorPeakWithChargeDistance,thick] (0.382, 0.0) -- (0.382, {ln(1.7)});
 \draw[color=\colorPeakWithChargeDistance,thick] (0.476, 0.0) -- (0.476, {ln(2.7)});
@@ -998,6 +999,8 @@ cross/.default={8pt}}
 \draw[color=\colorPeakWithChargeDistance,thick] (4.644, 0.0) -- (4.644, {ln(2.6)});
 \draw[color=\colorPeakWithChargeDistance,thick] (4.675999999999999, 0.0) -- (4.675999999999999, {ln(2.5)});
 \draw[color=\colorMonoisotopicMassPeak,thick] (4.898000000000001, 0.0) -- (4.898000000000001, {ln(1.2)});
+
+\draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit} |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
    \end{tikzpicture}%
    \end{minipage}%
    % Hier NICHT anwenden!
@@ -1010,8 +1013,6 @@ cross/.default={8pt}}
    \begin{minipage}[t]{.45\linewidth}
       \centering
       \begin{tikzpicture}[scale=\tikzScale, baseline=(current bounding box.center), spy using outlines={rectangle, magnification=2, size=1.5cm, connect spies}]
-      \draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit}
-      |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
 \draw[color=\colorPeakWithChargeDistance,thick] (0.382, 0.0) -- (0.382, {ln(1.7)});
 \draw[color=\colorPeakWithChargeDistance,thick] (0.476, 0.0) -- (0.476, {ln(2.7)});
 \draw[color=\colorPeakWithChargeDistance,thick] (0.456, 0.0) -- (0.456, {ln(1.8)});
@@ -1019,7 +1020,7 @@ cross/.default={8pt}}
 \draw[color=\colorMonoisotopicMassPeak,thick] (0.6839999999999999, 0.0) -- (0.6839999999999999, {ln(1.8)});
 
 \only<5>{
-\draw[color=\colorPeakWithChargeDistance,thick] (1.452, 0.0) -- (1.452, {ln(1.3)}); % NEIN hier fehlt KEIN Node!
+\draw[color=\colorPeakWithChargeDistance,thick] (1.452, 0.0) -- (1.452, {ln(1.3)});
 \draw[color=\colorPeakWithChargeDistance,thick] (1.426, 0.0) -- (1.426, {ln(1.9)});
 \draw[color=\colorPeakWithChargeDistance,thick] (1.548, 0.0) -- (1.548, {ln(1.9)});
 \draw[color=\colorPeakWithChargeDistance,thick] (1.6740000000000002, 0.0) -- (1.6740000000000002, {ln(1.5)});
@@ -1055,6 +1056,8 @@ cross/.default={8pt}}
 \only<6>{
 \spy [red] on (1.175,0.6) in node [left] at (6,2.25);
 }%
+
+\draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit} |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
       \end{tikzpicture}
       \end{minipage}
       \hfill
@@ -1078,11 +1081,11 @@ cross/.default={8pt}}
   \centering
      \begin{tikzpicture}[font=\tiny]
          %\node[rectangle] at (0,0) {};
-        \node[rectangle,draw,text=black, fill=\colorStepOne,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r1) at (\xStartOverview,\yStartOverview) {Hintergrundrauschen};
-        \node[rectangle,draw,text=black, fill=\colorStepTwo,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r2) at (\xStartOverview,\yStartOverview-0.75) {Falsche Peaks};
-          \node[rectangle,draw,text=black, fill=\colorStepThree, opacity=\currElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r3) at (\xStartOverview,\yStartOverview-1.5) {Irrelevante Peaks};
-          \node[rectangle,draw,text=black, fill=\colorStepFour, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r4) at (\xStartOverview,\yStartOverview-2.25) {$+1$ Normierung};
-          \node[rectangle,draw,text=black, fill=\colorStepFive, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r5) at (\xStartOverview,\yStartOverview-3) {Zusammenfassen};
+            \node[rectangle,draw,text=black, fill=\colorStepOne,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r1) at (\xStartOverview,\yStartOverview - \stepSizeOverview * 0) {Hintergrundrauschen};
+            \node[rectangle,draw,text=black, fill=\colorStepTwo,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r2) at (\xStartOverview,\yStartOverview - \stepSizeOverview * 1) {Falsche Peaks};
+            \node[rectangle,draw,text=black, fill=\colorStepThree, opacity=\currElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r3) at (\xStartOverview,\yStartOverview - \stepSizeOverview * 2) {Irrelevante Peaks};
+            \node[rectangle,draw,text=black, fill=\colorStepFour, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r4) at (\xStartOverview,\yStartOverview - \stepSizeOverview * 3) {$+1$ Normierung};
+            \node[rectangle,draw,text=black, fill=\colorStepFive, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r5) at (\xStartOverview,\yStartOverview - \stepSizeOverview * 4) {Zusammenfassen};
           \draw[->, ultra thick] (r1) -- (r2);
           \draw[->, ultra thick] (r2) -- (r3);
           \draw[->, ultra thick] (r3) -- (r4);
@@ -1094,8 +1097,6 @@ cross/.default={8pt}}
         \begin{minipage}[t]{.45\linewidth}
       \centering
       \begin{tikzpicture}[scale=\tikzScale, baseline=(current bounding box.center)]
-         \draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit}
-         |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
 \draw[thick] (0.382, 0.0) -- (0.382, {ln(1.7)});
 \draw[thick] (0.476, 0.0) -- (0.476, {ln(2.7)});
 \draw[thick] (0.456, 0.0) -- (0.456, {ln(1.8)});
@@ -1125,6 +1126,8 @@ cross/.default={8pt}}
 \fill[red!25!,opacity=.25] (0,0) rectangle (1,\yAxisHeight-\axisColorOffset);
          \fill[red!25!,opacity=.25] (\xAxisLength-1,0) rectangle (\xAxisLength-\axisColorOffset,\yAxisHeight-\axisColorOffset);
          \fill[green!25!,opacity=.25] (1,0) rectangle (\xAxisLength-1,\yAxisHeight-\axisColorOffset);
+         \draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit} |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
+
    \end{tikzpicture}%
    \end{minipage}%
      }%
@@ -1135,8 +1138,6 @@ cross/.default={8pt}}
         \begin{minipage}[t]{.45\linewidth}
       \centering
       \begin{tikzpicture}[scale=\tikzScale, baseline=(current bounding box.center)]
-         \draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit}
-         |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
 %\draw[thick] (0.382, 0.0) -- (0.382, {ln(1.7)});
 %\draw[thick] (0.476, 0.0) -- (0.476, {ln(2.7)});
 %\draw[thick] (0.456, 0.0) -- (0.456, {ln(1.8)});
@@ -1166,19 +1167,23 @@ cross/.default={8pt}}
 \fill[red!25!,opacity=.25] (0,0) rectangle (1,\yAxisHeight-\axisColorOffset);
          \fill[red!25!,opacity=.25] (\xAxisLength-1,0) rectangle (\xAxisLength-\axisColorOffset,\yAxisHeight-\axisColorOffset);
          \fill[green!25!,opacity=.25] (1,0) rectangle (\xAxisLength-1,\yAxisHeight-\axisColorOffset);
+
+         \draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit} |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
    \end{tikzpicture}%
    \end{minipage}%
      }%
     \end{frame}
     % END Irrelevanter Bereich
 
-    % BEGIN Normierung
+    % BEGIN +1 Normierung
+    \newcommand{\normierungOffset}{0.35}
     \begin{frame}{pNovo+ Algorithmus \dashAndSpace Datenaufbereitung}
     \onslide<1->{
     \begin{minipage}[c]{0.775\textwidth}
     \centering
     \begin{itemize}
-    \item<1-> Peaks auf Ladung $+1$ normieren
+    \item<1-> Peaks auf Charge state $+1$ normieren
+    \item<2-> $\Rightarrow$ Verschiebung nach rechts auf $m/z$ Achse
     \end{itemize}
     \end{minipage}
     }
@@ -1187,11 +1192,11 @@ cross/.default={8pt}}
   \centering
      \begin{tikzpicture}[font=\tiny]
          %\node[rectangle] at (0,0) {};
-        \node[rectangle,draw,text=black, fill=\colorStepOne,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r1) at (\xStartOverview,\yStartOverview) {Hintergrundrauschen};
-        \node[rectangle,draw,text=black, fill=\colorStepTwo,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r2) at (\xStartOverview,\yStartOverview-0.75) {Falsche Peaks};
-          \node[rectangle,draw,text=black, fill=\colorStepThree, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r3) at (\xStartOverview,\yStartOverview-1.5) {Irrelevante Peaks};
-          \node[rectangle,draw,text=black, fill=\colorStepFour, opacity=\currElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r4) at (\xStartOverview,\yStartOverview-2.25) {$+1$ Normierung};
-          \node[rectangle,draw,text=black, fill=\colorStepFive, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r5) at (\xStartOverview,\yStartOverview-3) {Zusammenfassen};
+            \node[rectangle,draw,text=black, fill=\colorStepOne,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r1) at (\xStartOverview,\yStartOverview - \stepSizeOverview * 0) {Hintergrundrauschen};
+            \node[rectangle,draw,text=black, fill=\colorStepTwo,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r2) at (\xStartOverview,\yStartOverview - \stepSizeOverview * 1) {Falsche Peaks};
+            \node[rectangle,draw,text=black, fill=\colorStepThree, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r3) at (\xStartOverview,\yStartOverview - \stepSizeOverview * 2) {Irrelevante Peaks};
+            \node[rectangle,draw,text=black, fill=\colorStepFour, opacity=\currElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r4) at (\xStartOverview,\yStartOverview - \stepSizeOverview * 3) {$+1$ Normierung};
+            \node[rectangle,draw,text=black, fill=\colorStepFive, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r5) at (\xStartOverview,\yStartOverview - \stepSizeOverview * 4) {Zusammenfassen};
           \draw[->, ultra thick] (r1) -- (r2);
           \draw[->, ultra thick] (r2) -- (r3);
           \draw[->, ultra thick] (r3) -- (r4);
@@ -1203,33 +1208,52 @@ cross/.default={8pt}}
         \begin{minipage}[t]{.45\linewidth}
       \centering
       \begin{tikzpicture}[scale=\tikzScale, baseline=(current bounding box.center)]
-         \draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit}
-         |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
-%\draw[thick] (0.382, 0.0) -- (0.382, {ln(1.7)});
-%\draw[thick] (0.476, 0.0) -- (0.476, {ln(2.7)});
-%\draw[thick] (0.456, 0.0) -- (0.456, {ln(1.8)});
-%\draw[thick] (0.6859999999999999, 0.0) -- (0.6859999999999999, {ln(2.7)});
-%\draw[thick] (0.6839999999999999, 0.0) -- (0.6839999999999999, {ln(1.8)});
-\draw[thick] (1.452, 0.0) -- (1.452, {ln(1.3)});
-\draw[thick] (1.426, 0.0) -- (1.426, {ln(1.9)});
-\draw[thick] (1.548, 0.0) -- (1.548, {ln(1.9)});
-\draw[thick] (1.6740000000000002, 0.0) -- (1.6740000000000002, {ln(1.5)});
-\draw[thick] (1.788, 0.0) -- (1.788, {ln(2.5)});
-\draw[thick] (2.488, 0.0) -- (2.488, {ln(2.9)});
-\draw[thick] (2.504, 0.0) -- (2.504, {ln(2.0)});
-\draw[thick] (2.682, 0.0) -- (2.682, {ln(2.0)});
-\draw[thick] (2.702, 0.0) -- (2.702, {ln(2.5)});
-\draw[thick] (3.46, 0.0) -- (3.46, {ln(2.3)});
-\draw[thick] (3.516, 0.0) -- (3.516, {ln(1.1)});
-\draw[thick] (3.584, 0.0) -- (3.584, {ln(1.8)});
-\draw[thick] (3.652, 0.0) -- (3.652, {ln(2.0)});
-\draw[thick] (3.838, 0.0) -- (3.838, {ln(1.5)});
-\draw[thick] (3.8819999999999997, 0.0) -- (3.8819999999999997, {ln(2.6)});
-%\draw[thick] (4.38, 0.0) -- (4.38, {ln(1.1)});
-%\draw[thick] (4.456, 0.0) -- (4.456, {ln(2.2)});
-%\draw[thick] (4.644, 0.0) -- (4.644, {ln(2.6)});
-%\draw[thick] (4.675999999999999, 0.0) -- (4.675999999999999, {ln(2.5)});
-%\draw[thick] (4.898000000000001, 0.0) -- (4.898000000000001, {ln(1.2)});
+         % Alte Werte
+% %\draw[thick] (0.382, 0.0) -- (0.382, {ln(1.7)});
+% %\draw[thick] (0.476, 0.0) -- (0.476, {ln(2.7)});
+% %\draw[thick] (0.456, 0.0) -- (0.456, {ln(1.8)});
+% %\draw[thick] (0.6859999999999999, 0.0) -- (0.6859999999999999, {ln(2.7)});
+% %\draw[thick] (0.6839999999999999, 0.0) -- (0.6839999999999999, {ln(1.8)});
+% \draw[thick] (1.452, 0.0) -- (1.452, {ln(1.3)});
+% \draw[thick] (1.426, 0.0) -- (1.426, {ln(1.9)});
+% \draw[thick] (1.548, 0.0) -- (1.548, {ln(1.9)});
+% \draw[thick] (1.6740000000000002, 0.0) -- (1.6740000000000002, {ln(1.5)});
+% \draw[thick] (1.788, 0.0) -- (1.788, {ln(2.5)});
+% \draw[thick] (2.488, 0.0) -- (2.488, {ln(2.9)});
+% \draw[thick] (2.504, 0.0) -- (2.504, {ln(2.0)});
+% \draw[thick] (2.682, 0.0) -- (2.682, {ln(2.0)});
+% \draw[thick] (2.702, 0.0) -- (2.702, {ln(2.5)});
+% \draw[thick] (3.46, 0.0) -- (3.46, {ln(2.3)});
+% \draw[thick] (3.516, 0.0) -- (3.516, {ln(1.1)});
+% \draw[thick] (3.584, 0.0) -- (3.584, {ln(1.8)});
+% \draw[thick] (3.652, 0.0) -- (3.652, {ln(2.0)});
+% \draw[thick] (3.838, 0.0) -- (3.838, {ln(1.5)});
+% \draw[thick] (3.8819999999999997, 0.0) -- (3.8819999999999997, {ln(2.6)});
+% %\draw[thick] (4.38, 0.0) -- (4.38, {ln(1.1)});
+% %\draw[thick] (4.456, 0.0) -- (4.456, {ln(2.2)});
+% %\draw[thick] (4.644, 0.0) -- (4.644, {ln(2.6)});
+% %\draw[thick] (4.675999999999999, 0.0) -- (4.675999999999999, {ln(2.5)});
+% %\draw[thick] (4.898000000000001, 0.0) -- (4.898000000000001, {ln(1.2)});
+
+\draw[color=\colorPeakWithChargeDistance,thick] (1.452, 0.0) -- (1.452, {ln(1.3)});
+\draw[color=\colorPeakWithChargeDistance,thick] (1.426, 0.0) -- (1.426, {ln(1.9)});
+\draw[color=\colorPeakWithChargeDistance,thick] (1.548, 0.0) -- (1.548, {ln(1.9)});
+\draw[color=\colorPeakWithChargeDistance,thick] (1.6740000000000002, 0.0) -- (1.6740000000000002, {ln(1.5)});
+\draw[color=\colorMonoisotopicMassPeak,thick] (1.788, 0.0) -- (1.788, {ln(2.5)});
+
+\draw[color=\colorPeakWithChargeDistance,thick] (2.488, 0.0) -- (2.488, {ln(2.9)});
+\draw[color=\colorPeakWithChargeDistance,thick] (2.504, 0.0) -- (2.504, {ln(2.0)});
+\draw[color=\colorPeakWithChargeDistance,thick] (2.682, 0.0) -- (2.682, {ln(2.0)});
+\draw[color=\colorMonoisotopicMassPeak,thick] (2.702, 0.0) -- (2.702, {ln(2.5)});
+
+\draw[color=\colorPeakWithChargeDistance,thick] (3.46, 0.0) -- (3.46, {ln(2.3)});
+\draw[color=\colorPeakWithChargeDistance,thick] (3.516, 0.0) -- (3.516, {ln(1.1)});
+\draw[color=\colorPeakWithChargeDistance,thick] (3.584, 0.0) -- (3.584, {ln(1.8)});
+\draw[color=\colorPeakWithChargeDistance,thick] (3.652, 0.0) -- (3.652, {ln(2.0)});
+\draw[color=\colorPeakWithChargeDistance,thick] (3.838, 0.0) -- (3.838, {ln(1.5)});
+\draw[color=\colorMonoisotopicMassPeak,thick] (3.8819999999999997, 0.0) -- (3.8819999999999997, {ln(2.6)});
+
+\draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit} |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
    \end{tikzpicture}%
    \end{minipage}%
      }%
@@ -1240,40 +1264,37 @@ cross/.default={8pt}}
         \begin{minipage}[t]{.45\linewidth}
       \centering
       \begin{tikzpicture}[scale=\tikzScale, baseline=(current bounding box.center)]
-         \draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit}
-         |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
-%\draw[thick] (0.382, 0.0) -- (0.382, {ln(1.7)});
-%\draw[thick] (0.476, 0.0) -- (0.476, {ln(2.7)});
-%\draw[thick] (0.456, 0.0) -- (0.456, {ln(1.8)});
-%\draw[thick] (0.6859999999999999, 0.0) -- (0.6859999999999999, {ln(2.7)});
-%\draw[thick] (0.6839999999999999, 0.0) -- (0.6839999999999999, {ln(1.8)});
-\draw[thick] (1.452, 0.0) -- (1.452, {ln(1.3)});
-\draw[thick] (1.426, 0.0) -- (1.426, {ln(1.9)});
-\draw[thick] (1.548, 0.0) -- (1.548, {ln(1.9)});
-\draw[thick] (1.6740000000000002, 0.0) -- (1.6740000000000002, {ln(1.5)});
-\draw[thick] (1.788, 0.0) -- (1.788, {ln(2.5)});
-\draw[thick] (2.488, 0.0) -- (2.488, {ln(2.9)});
-\draw[thick] (2.504, 0.0) -- (2.504, {ln(2.0)});
-\draw[thick] (2.682, 0.0) -- (2.682, {ln(2.0)});
-\draw[thick] (2.702, 0.0) -- (2.702, {ln(2.5)});
-\draw[thick] (3.46, 0.0) -- (3.46, {ln(2.3)});
-\draw[thick] (3.516, 0.0) -- (3.516, {ln(1.1)});
-\draw[thick] (3.584, 0.0) -- (3.584, {ln(1.8)});
-\draw[thick] (3.652, 0.0) -- (3.652, {ln(2.0)});
-\draw[thick] (3.838, 0.0) -- (3.838, {ln(1.5)});
-\draw[thick] (3.8819999999999997, 0.0) -- (3.8819999999999997, {ln(2.6)});
-%\draw[thick] (4.38, 0.0) -- (4.38, {ln(1.1)});
-%\draw[thick] (4.456, 0.0) -- (4.456, {ln(2.2)});
-%\draw[thick] (4.644, 0.0) -- (4.644, {ln(2.6)});
-%\draw[thick] (4.675999999999999, 0.0) -- (4.675999999999999, {ln(2.5)});
-%\draw[thick] (4.898000000000001, 0.0) -- (4.898000000000001, {ln(1.2)});
+\draw[color=\colorPeakWithChargeDistance,thick] (1.452 + \normierungOffset, 0.0) -- (1.452 + \normierungOffset, {ln(1.3)});
+\draw[color=\colorPeakWithChargeDistance,thick] (1.426 + \normierungOffset, 0.0) -- (1.426 + \normierungOffset, {ln(1.9)});
+\draw[color=\colorPeakWithChargeDistance,thick] (1.548 + \normierungOffset, 0.0) -- (1.548 + \normierungOffset, {ln(1.9)});
+\draw[color=\colorPeakWithChargeDistance,thick] (1.6740000000000002 + \normierungOffset, 0.0) -- (1.6740000000000002 + \normierungOffset, {ln(1.5)});
+\draw[color=\colorMonoisotopicMassPeak,thick] (1.788, 0.0) -- (1.788, {ln(2.5)});
+
+\draw[color=\colorPeakWithChargeDistance,thick] (2.488 + \normierungOffset, 0.0) -- (2.488 + \normierungOffset, {ln(2.9)});
+\draw[color=\colorPeakWithChargeDistance,thick] (2.504 + \normierungOffset, 0.0) -- (2.504 + \normierungOffset, {ln(2.0)});
+\draw[color=\colorPeakWithChargeDistance,thick] (2.682 + \normierungOffset, 0.0) -- (2.682 + \normierungOffset, {ln(2.0)});
+\draw[color=\colorMonoisotopicMassPeak,thick] (2.702, 0.0) -- (2.702, {ln(2.5)});
+
+\draw[color=\colorPeakWithChargeDistance,thick] (3.46 + \normierungOffset, 0.0) -- (3.46 + \normierungOffset, {ln(2.3)});
+\draw[color=\colorPeakWithChargeDistance,thick] (3.516 + \normierungOffset, 0.0) -- (3.516 + \normierungOffset, {ln(1.1)});
+\draw[color=\colorPeakWithChargeDistance,thick] (3.584 + \normierungOffset, 0.0) -- (3.584 + \normierungOffset, {ln(1.8)});
+\draw[color=\colorPeakWithChargeDistance,thick] (3.652 + \normierungOffset, 0.0) -- (3.652 + \normierungOffset, {ln(2.0)});
+\draw[color=\colorPeakWithChargeDistance,thick] (3.838 + \normierungOffset, 0.0) -- (3.838 + \normierungOffset, {ln(1.5)});
+\draw[color=\colorMonoisotopicMassPeak,thick] (3.8819999999999997, 0.0) -- (3.8819999999999997, {ln(2.6)});
+
+\draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit} |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
    \end{tikzpicture}%
    \end{minipage}%
      }%
     \end{frame}
-    % END Normierung
+    % END +1 Normierung
 
     % BEGIN Merge
+    \newcommand{\mergeColorOne}{orange}
+    \newcommand{\mergeColorTwo}{olive}
+    \newcommand{\mergeColorThree}{green}
+    \newcommand{\mergeColorFour}{cyan}
+    \newcommand{\mergeColorNotMerged}{black}
     \begin{frame}{pNovo+ Algorithmus \dashAndSpace Datenaufbereitung}
     \onslide<1->{
     \begin{minipage}[c]{0.775\textwidth}
@@ -1290,11 +1311,11 @@ cross/.default={8pt}}
   \centering
      \begin{tikzpicture}[font=\tiny]
          %\node[rectangle] at (0,0) {};
-        \node[rectangle,draw,text=black, fill=\colorStepOne,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r1) at (\xStartOverview,\yStartOverview) {Hintergrundrauschen};
-        \node[rectangle,draw,text=black, fill=\colorStepTwo,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r2) at (\xStartOverview,\yStartOverview-0.75) {Falsche Peaks};
-          \node[rectangle,draw,text=black, fill=\colorStepThree, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r3) at (\xStartOverview,\yStartOverview-1.5) {Irrelevante Peaks};
-          \node[rectangle,draw,text=black, fill=\colorStepFour, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r4) at (\xStartOverview,\yStartOverview-2.25) {$+1$ Normierung};
-          \node[rectangle,draw,text=black, fill=\colorStepFive, opacity=\currElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r5) at (\xStartOverview,\yStartOverview-3) {Zusammenfassen};
+            \node[rectangle,draw,text=black, fill=\colorStepOne,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r1) at (\xStartOverview,\yStartOverview - \stepSizeOverview * 0) {Hintergrundrauschen};
+            \node[rectangle,draw,text=black, fill=\colorStepTwo,opacity=\otherElementOpacity, minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r2) at (\xStartOverview,\yStartOverview - \stepSizeOverview * 1) {Falsche Peaks};
+            \node[rectangle,draw,text=black, fill=\colorStepThree, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r3) at (\xStartOverview,\yStartOverview - \stepSizeOverview * 2) {Irrelevante Peaks};
+            \node[rectangle,draw,text=black, fill=\colorStepFour, opacity=\otherElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r4) at (\xStartOverview,\yStartOverview - \stepSizeOverview * 3) {$+1$ Normierung};
+            \node[rectangle,draw,text=black, fill=\colorStepFive, opacity=\currElementOpacity,minimum width=\minWidthOverview, minimum height=\minHeightOverview, align=center] (r5) at (\xStartOverview,\yStartOverview - \stepSizeOverview * 4) {Zusammenfassen};
           \draw[->, ultra thick] (r1) -- (r2);
           \draw[->, ultra thick] (r2) -- (r3);
           \draw[->, ultra thick] (r3) -- (r4);
@@ -1306,37 +1327,51 @@ cross/.default={8pt}}
         \begin{minipage}[t]{.45\linewidth}
       \centering
       \begin{tikzpicture}[scale=\tikzScale, baseline=(current bounding box.center)]
-         \draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit}
-         |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
-% \draw[thick] (0.382, 0.0) -- (0.382, {ln(1.7)});
-% \draw[thick] (0.476, 0.0) -- (0.476, {ln(2.7)});
-% \draw[thick] (0.456, 0.0) -- (0.456, {ln(1.8)});
-% \draw[thick] (0.6859999999999999, 0.0) -- (0.6859999999999999, {ln(2.7)});
-% \draw[thick] (0.6839999999999999, 0.0) -- (0.6839999999999999, {ln(1.8)});
-\draw[color=red,thick] (1.452, 0.0) -- (1.452, {ln(1.3)});
-\draw[color=red,thick] (1.426, 0.0) -- (1.426, {ln(1.9)});
-\draw[thick] (1.548, 0.0) -- (1.548, {ln(1.9)});
-\draw[thick] (1.6740000000000002, 0.0) -- (1.6740000000000002, {ln(1.5)});
-\draw[thick] (1.788, 0.0) -- (1.788, {ln(2.5)});
-\draw[color=red,thick] (2.488, 0.0) -- (2.488, {ln(2.9)});
-\draw[color=red,thick] (2.504, 0.0) -- (2.504, {ln(2.0)});
-\draw[color=red,thick] (2.682, 0.0) -- (2.682, {ln(2.0)});
-\draw[color=red,thick] (2.702, 0.0) -- (2.702, {ln(2.5)});
-\draw[thick] (3.46, 0.0) -- (3.46, {ln(2.3)});
-\draw[thick] (3.516, 0.0) -- (3.516, {ln(1.1)});
-\draw[thick] (3.584, 0.0) -- (3.584, {ln(1.8)});
-\draw[thick] (3.652, 0.0) -- (3.652, {ln(2.0)});
-\draw[color=red,thick] (3.838, 0.0) -- (3.838, {ln(1.5)});
-\draw[color=red,thick] (3.8819999999999997, 0.0) -- (3.8819999999999997, {ln(2.6)});
-% \draw[thick] (4.38, 0.0) -- (4.38, {ln(1.1)});
-% \draw[thick] (4.456, 0.0) -- (4.456, {ln(2.2)});
-% \draw[thick] (4.644, 0.0) -- (4.644, {ln(2.6)});
-% \draw[thick] (4.675999999999999, 0.0) -- (4.675999999999999, {ln(2.5)});
-% \draw[thick] (4.898000000000001, 0.0) -- (4.898000000000001, {ln(1.2)});
+% % \draw[thick] (0.382, 0.0) -- (0.382, {ln(1.7)});
+% % \draw[thick] (0.476, 0.0) -- (0.476, {ln(2.7)});
+% % \draw[thick] (0.456, 0.0) -- (0.456, {ln(1.8)});
+% % \draw[thick] (0.6859999999999999, 0.0) -- (0.6859999999999999, {ln(2.7)});
+% % \draw[thick] (0.6839999999999999, 0.0) -- (0.6839999999999999, {ln(1.8)});
+% \draw[color=red,thick] (1.452, 0.0) -- (1.452, {ln(1.3)});
+% \draw[color=red,thick] (1.426, 0.0) -- (1.426, {ln(1.9)});
+% \draw[thick] (1.548, 0.0) -- (1.548, {ln(1.9)});
+% \draw[thick] (1.6740000000000002, 0.0) -- (1.6740000000000002, {ln(1.5)});
+% \draw[thick] (1.788, 0.0) -- (1.788, {ln(2.5)});
+% \draw[color=red,thick] (2.488, 0.0) -- (2.488, {ln(2.9)});
+% \draw[color=red,thick] (2.504, 0.0) -- (2.504, {ln(2.0)});
+% \draw[color=red,thick] (2.682, 0.0) -- (2.682, {ln(2.0)});
+% \draw[color=red,thick] (2.702, 0.0) -- (2.702, {ln(2.5)});
+% \draw[thick] (3.46, 0.0) -- (3.46, {ln(2.3)});
+% \draw[thick] (3.516, 0.0) -- (3.516, {ln(1.1)});
+% \draw[thick] (3.584, 0.0) -- (3.584, {ln(1.8)});
+% \draw[thick] (3.652, 0.0) -- (3.652, {ln(2.0)});
+% \draw[color=red,thick] (3.838, 0.0) -- (3.838, {ln(1.5)});
+% \draw[color=red,thick] (3.8819999999999997, 0.0) -- (3.8819999999999997, {ln(2.6)});
+% % \draw[thick] (4.38, 0.0) -- (4.38, {ln(1.1)});
+% % \draw[thick] (4.456, 0.0) -- (4.456, {ln(2.2)});
+% % \draw[thick] (4.644, 0.0) -- (4.644, {ln(2.6)});
+% % \draw[thick] (4.675999999999999, 0.0) -- (4.675999999999999, {ln(2.5)});
+% % \draw[thick] (4.898000000000001, 0.0) -- (4.898000000000001, {ln(1.2)});
 
-%\fill[red!25!,opacity=.25] (0,0) rectangle (1,\yAxisHeight-\axisColorOffset);
-%         \fill[red!25!,opacity=.25] (\xAxisLength-1,0) rectangle (\xAxisLength-\axisColorOffset,\yAxisHeight-\axisColorOffset);
-%         \fill[green!25!,opacity=.25] (1,0) rectangle (\xAxisLength-1,\yAxisHeight-\axisColorOffset);
+\draw[color=\mergeColorOne,thick] (1.452 + \normierungOffset, 0.0) -- (1.452 + \normierungOffset, {ln(1.3)});
+\draw[color=\mergeColorOne,thick] (1.426 + \normierungOffset, 0.0) -- (1.426 + \normierungOffset, {ln(1.9)});
+\draw[color=\mergeColorTwo,thick] (1.548 + \normierungOffset, 0.0) -- (1.548 + \normierungOffset, {ln(1.9)});
+\draw[color=\mergeColorTwo,thick] (1.6740000000000002 + \normierungOffset, 0.0) -- (1.6740000000000002 + \normierungOffset, {ln(1.5)});
+\draw[color=\mergeColorOne,thick] (1.788, 0.0) -- (1.788, {ln(2.5)});
+
+\draw[color=\mergeColorThree,thick] (2.488 + \normierungOffset, 0.0) -- (2.488 + \normierungOffset, {ln(2.9)});
+\draw[color=\mergeColorThree,thick] (2.504 + \normierungOffset, 0.0) -- (2.504 + \normierungOffset, {ln(2.0)});
+\draw[color=\mergeColorNotMerged,thick] (2.682 + \normierungOffset, 0.0) -- (2.682 + \normierungOffset, {ln(2.0)});
+\draw[color=\mergeColorNotMerged,thick] (2.702, 0.0) -- (2.702, {ln(2.5)});
+
+\draw[color=\mergeColorFour,thick] (3.46 + \normierungOffset, 0.0) -- (3.46 + \normierungOffset, {ln(2.3)});
+\draw[color=\mergeColorFour,thick] (3.516 + \normierungOffset, 0.0) -- (3.516 + \normierungOffset, {ln(1.1)});
+\draw[color=\mergeColorFour,thick] (3.584 + \normierungOffset, 0.0) -- (3.584 + \normierungOffset, {ln(1.8)});
+\draw[color=\mergeColorFour,thick] (3.652 + \normierungOffset, 0.0) -- (3.652 + \normierungOffset, {ln(2.0)});
+\draw[color=\mergeColorNotMerged,thick] (3.838 + \normierungOffset, 0.0) -- (3.838 + \normierungOffset, {ln(1.5)});
+\draw[color=\mergeColorFour,thick] (3.8819999999999997, 0.0) -- (3.8819999999999997, {ln(2.6)});
+
+\draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit} |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
    \end{tikzpicture}%
    \end{minipage}%
      }%
@@ -1347,36 +1382,55 @@ cross/.default={8pt}}
         \begin{minipage}[t]{.45\linewidth}
       \centering
       \begin{tikzpicture}[scale=\tikzScale, baseline=(current bounding box.center)]
-      \draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit}
-      |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
-%\draw[color=red,thick] (1.452, 0.0) -- (1.452, {ln(1.3)});
-%\draw[color=red,thick] (1.426, 0.0) -- (1.426, {ln(1.9)});
-\draw[color=red,ultra thick] ({(1.452+1.426)/2}, 0.0) -- ({(1.452+1.426)/2}, {(ln(1.3)+ln(1.9))/2});
+% %\draw[color=red,thick] (1.452, 0.0) -- (1.452, {ln(1.3)});
+% %\draw[color=red,thick] (1.426, 0.0) -- (1.426, {ln(1.9)});
+% \draw[color=red,ultra thick] ({(1.452+1.426)/2}, 0.0) -- ({(1.452+1.426)/2}, {(ln(1.3)+ln(1.9))/2});
+%
+% \draw[thick] (1.548, 0.0) -- (1.548, {ln(1.9)});
+% \draw[thick] (1.6740000000000002, 0.0) -- (1.6740000000000002, {ln(1.5)});
+% \draw[thick] (1.788, 0.0) -- (1.788, {ln(2.5)});
+%
+% %\draw[color=red,thick] (2.488, 0.0) -- (2.488, {ln(2.9)});
+% %\draw[color=red,thick] (2.504, 0.0) -- (2.504, {ln(2.0)});
+% \draw[color=red,ultra thick] ({(2.488+2.504)/2}, 0.0) -- ({(2.488+2.504)/2}, {(ln(2.9)+ln(2.0))/2});
+%
+% %\draw[color=red,thick] (2.682, 0.0) -- (2.682, {ln(2.0)});
+% %\draw[color=red,thick] (2.702, 0.0) -- (2.702, {ln(2.5)});
+% \draw[color=red,ultra thick] ({(2.682+2.702)/2}, 0.0) -- ({(2.682+2.702)/2}, {(ln(2.0+ln(2.5))/2});
+%
+% \draw[thick] (3.46, 0.0) -- (3.46, {ln(2.3)});
+% \draw[thick] (3.516, 0.0) -- (3.516, {ln(1.1)});
+% \draw[thick] (3.584, 0.0) -- (3.584, {ln(1.8)});
+% \draw[thick] (3.652, 0.0) -- (3.652, {ln(2.0)});
+%
+% %\draw[color=red,thick] (3.838, 0.0) -- (3.838, {ln(1.5)});
+% %\draw[color=red,thick] (3.8819999999999997, 0.0) -- (3.8819999999999997,{ln(2.6)});
+% \draw[color=red,ultra thick] ({(3.838+3.8819999999999997)/2}, 0.0) -- ({(3.838+3.8819999999999997)/2}, {(ln(1.5)+ln(2.6))/2});
 
-\draw[thick] (1.548, 0.0) -- (1.548, {ln(1.9)});
-\draw[thick] (1.6740000000000002, 0.0) -- (1.6740000000000002, {ln(1.5)});
-\draw[thick] (1.788, 0.0) -- (1.788, {ln(2.5)});
+%       \draw[color=\colorPeakWithChargeDistance,thick] (1.452 + \normierungOffset, 0.0) -- (1.452 + \normierungOffset, {ln(1.3)});
+% \draw[color=\colorPeakWithChargeDistance,thick] (1.426 + \normierungOffset, 0.0) -- (1.426 + \normierungOffset, {ln(1.9)});
+\draw[color=\mergeColorOne,ultra thick] ({(1.426 + 1.452 + \normierungOffset * 2) / 2}, 0.0) -- ({(1.426 + 1.452 + \normierungOffset * 2) / 2}, {(ln(1.3) + ln(1.9)) / 2});
+% \draw[color=\colorPeakWithChargeDistance,thick] (1.548 + \normierungOffset, 0.0) -- (1.548 + \normierungOffset, {ln(1.9)});
+% \draw[color=\colorPeakWithChargeDistance,thick] (1.6740000000000002 + \normierungOffset, 0.0) -- (1.6740000000000002 + \normierungOffset, {ln(1.5)});
+% \draw[color=\colorMonoisotopicMassPeak,thick] (1.788, 0.0) -- (1.788, {ln(2.5)});
+\draw[color=\mergeColorTwo,ultra thick] ({(1.548 + 1.6740000000000002 + 1.788 + \normierungOffset * 3) / 3}, 0.0) -- ({(1.548 + 1.6740000000000002 + 1.788 + \normierungOffset * 3) / 3}, {(ln(1.9) + ln(1.5) + ln(2.5)) / 3});
 
-%\draw[color=red,thick] (2.488, 0.0) -- (2.488, {ln(2.9)});
-%\draw[color=red,thick] (2.504, 0.0) -- (2.504, {ln(2.0)});
-\draw[color=red,ultra thick] ({(2.488+2.504)/2}, 0.0) -- ({(2.488+2.504)/2}, {(ln(2.9)+ln(2.0))/2});
 
-%\draw[color=red,thick] (2.682, 0.0) -- (2.682, {ln(2.0)});
-%\draw[color=red,thick] (2.702, 0.0) -- (2.702, {ln(2.5)});
-\draw[color=red,ultra thick] ({(2.682+2.702)/2}, 0.0) -- ({(2.682+2.702)/2}, {(ln(2.0+ln(2.5))/2});
+% \draw[color=\colorPeakWithChargeDistance,thick] (2.488 + \normierungOffset, 0.0) -- (2.488 + \normierungOffset, {ln(2.9)});
+% \draw[color=\colorPeakWithChargeDistance,thick] (2.504 + \normierungOffset, 0.0) -- (2.504 + \normierungOffset, {ln(2.0)});
+\draw[color=\mergeColorThree,ultra thick] ({2.488 + 2.504 + \normierungOffset * 2) / 2}, 0.0) -- ({2.488 + 2.504 + \normierungOffset * 2) / 2}, {(ln(2.9) + ln(2.0)) / 2});
+\draw[color=\mergeColorNotMerged,thick] (2.682 + \normierungOffset, 0.0) -- (2.682 + \normierungOffset, {ln(2.0)});
+\draw[color=\mergeColorNotMerged,thick] (2.702, 0.0) -- (2.702, {ln(2.5)});
 
-\draw[thick] (3.46, 0.0) -- (3.46, {ln(2.3)});
-\draw[thick] (3.516, 0.0) -- (3.516, {ln(1.1)});
-\draw[thick] (3.584, 0.0) -- (3.584, {ln(1.8)});
-\draw[thick] (3.652, 0.0) -- (3.652, {ln(2.0)});
+% \draw[color=black,thick] (3.46 + \normierungOffset, 0.0) -- (3.46 + \normierungOffset, {ln(2.3)});
+% \draw[color=\colorPeakWithChargeDistance,thick] (3.516 + \normierungOffset, 0.0) -- (3.516 + \normierungOffset, {ln(1.1)});
+% \draw[color=\colorPeakWithChargeDistance,thick] (3.584 + \normierungOffset, 0.0) -- (3.584 + \normierungOffset, {ln(1.8)});
+% \draw[color=\colorPeakWithChargeDistance,thick] (3.652 + \normierungOffset, 0.0) -- (3.652 + \normierungOffset, {ln(2.0)});
+\draw[color=\mergeColorFour,ultra thick] ({(3.46 + 3.516 + 3.584 + 3.652 + 3.8819999999999997 + \normierungOffset * 5) / 5}, 0.0) -- ({(3.46 + 3.516 + 3.584 + 3.652 + 3.8819999999999997 + \normierungOffset * 5) / 5}, {(ln(2.3) + ln(1.1) + ln(1.8) + ln(2.0) + ln(1.5)) / 5});
+\draw[color=\mergeColorNotMerged,thick] (3.838 + \normierungOffset, 0.0) -- (3.838 + \normierungOffset, {ln(1.5)});
+% \draw[color=\colorMonoisotopicMassPeak,thick] (3.8819999999999997, 0.0) -- (3.8819999999999997, {ln(2.6)});
 
-%\draw[color=red,thick] (3.838, 0.0) -- (3.838, {ln(1.5)});
-%\draw[color=red,thick] (3.8819999999999997, 0.0) -- (3.8819999999999997,{ln(2.6)});
-\draw[color=red,ultra thick] ({(3.838+3.8819999999999997)/2}, 0.0) -- ({(3.838+3.8819999999999997)/2}, {(ln(1.5)+ln(2.6))/2});
-
-%\fill[red!25!,opacity=.25] (0,0) rectangle (1,\yAxisHeight-\axisColorOffset);
-%         \fill[red!25!,opacity=.25] (\xAxisLength-1,0) rectangle (\xAxisLength-\axisColorOffset,\yAxisHeight-\axisColorOffset);
-%         \fill[green!25!,opacity=.25] (1,0) rectangle (\xAxisLength-1,\yAxisHeight-\axisColorOffset);
+\draw [<->,thick] (0,\yAxisHeight) node (yaxis) [above] {\yAxisUnit} |- (\xAxisLength,0) node (xaxis) [right] {\xAxisUnit};
       \end{tikzpicture}
       \end{minipage}
      }%
@@ -1414,7 +1468,7 @@ cross/.default={8pt}}
             \begin{minipage}[c]{0.775\textwidth}
     \begin{itemize}
      \item<1-> Verwendung vorverarbeiteter MS2 Spektren
-     \item<2-> Peaks $\widehat{=}$ Knoten
+     \item<2-> Peaks $\widehat{=}$ Knotenpaar
      \item<3-> Knoten bekommen eine \gerquot{Masse}
      \item<4-> Masse $\widehat{=}$ \massCharge Wert
      \item<5-> Startknoten (Masse = 0)
